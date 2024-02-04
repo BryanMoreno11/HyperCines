@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="login.component.css">
+</head>
+
+<body>
+    <div class="container-form register">
+        <div class="information">
+            <div class="info-childs">
+                <h2>Bienvenido</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, magnam laborum? Earum saepe illo ex quisquam, quidem delectus officiis enim at iusto in. Veniam optio iusto perspiciatis, in est ipsam.</p>
+                <input type="button" (click)="ocultarRegister()" value="Entrar" id="sign-in">
+            </div>
+        </div>
+        <div class="form-information">
+            <div class="form-information-childs">
+                <h2>Crear una cuenta</h2>
+                <div class="icons">
+                    <i class='bx bxl-google'></i>
+                    <i class='bx bxl-facebook-circle'></i>
+                </div>
+                <p>o usa tu email</p>
+                <form class="form">
+                    <label>
+                        <i class='bx bx-user' ></i>
+                        <input type="text" placeholder="Nombres">
+                    </label>
+                    <label>
+                        <i class='bx bx-user' ></i>
+                        <input type="text" placeholder="Apellidos">
+                    </label>
+                    <label>
+                        <i class='bx bxs-id-card'></i>
+                        <input type="text" placeholder="Cedula">
+                    </label>
+                    <label>
+                        <i class='bx bx-mobile'></i>
+                        <input type="text" placeholder="Telefono">
+                    </label>
+                    <label>
+                        <i class='bx bx-envelope' ></i>
+                        <input type="text" placeholder="ejemplo@correo.com">
+                    </label>
+                    <label>
+                        <i class='bx bx-building-house' ></i>
+                        <input type="text" placeholder="Dirección">
+                    </label>
+                    <label>
+                        <i class='bx bx-lock-alt' ></i>
+                        <input type="password" placeholder="Contrasenia">
+                    </label>
+                    <input type="submit" value="Registrarse">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-form login hide">
+        <div class="information">
+            <div class="info-childs">
+                <h2>De vuelta</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, magnam laborum? Earum saepe illo ex quisquam, quidem delectus officiis enim at iusto in. Veniam optio iusto perspiciatis, in est ipsam.</p>
+                <input type="button" (click)="ocultarLogin()" value="Registrarse" id="sign-up">
+            </div>
+        </div>
+        <div class="form-information">
+            <div class="form-information-childs">
+                <h2>Inicia sesion</h2>
+                <div class="icons">
+                    <i class='bx bxl-google'></i>
+                    <i class='bx bxl-facebook-circle'></i>
+                </div>
+                <p>o usa tu email</p>
+                <form class="form">
+                    <label>
+                        <i class='bx bx-envelope' ></i>
+                        <input type="text" placeholder="ejemplo@correo.com">
+                    </label>
+                    <label>
+                        <i class='bx bx-lock-alt' ></i>
+                        <input type="password" placeholder="Contrasenia">
+                    </label>
+                    <input type="submit" value="Registrarse">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+
+</html>

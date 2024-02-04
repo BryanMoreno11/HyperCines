@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="cine">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hipercine</title>
+    <link rel="stylesheet" href="cine.css">
+</head>
+
+<body ng-controller="cineController">
+    <header class="header">
+        <div class="menu container">
+            <a href="#" class="logo">Hipercine</a>
+            <input type="checkbox" id="menu" />
+            <label for="menu">
+        <img src="../../Imagenes/menu.png" class="menu-icono" alt="menu">
+    </label>
+            <nav class="navbar">
+                <ul>
+                    <li> <a href="../cine/cine.html">Inicio</a></li>
+                    <li> <a href="../estrenos/proxiestrenos.html">Proximos Estrenos</a></li>
+                    <li> <a href="#">Nosotros</a></li>
+                </ul>
+
+            </nav>
+            <a href='../login/login.component.html' ; class="btn-1"> Login</a>
+        </div>
+    </header>
+
+    <section class="combobox">
+        <h2>Ciudad y Complejo</h2>
+        <select ng-model="ciudad" ng-change="changeCiudad()" name="ciudad" id="selectCiudad">
+            <option value="{{ciudad.nombre}}" ng-repeat="ciudad in ciudades">{{ciudad.nombre}}</option>
+        </select>
+
+        <select name="complejo" id="selectComplejo" ng-model="complejo" ng-change="changeComplejo()">
+            <option value="{{complejo.nombre_complejo}}" ng-repeat="complejo in complejos">{{complejo.nombre_complejo}}</option>
+        </select>
+
+    </section>
+    <section class="movies container">
+        <h2>Peliculas de Estreno</h2>
+        <hr>
+        <div class="box-container-1">
+            <div class="box-1" ng-repeat="pelicula in peliculas">
+                <div class="release">Estreno</div>
+                <div class="content">
+                    <img ng-attr-id="{{'linkImagen1'+pelicula.id_pelicula}}" ng-attr-src="{{pelicula.imagen_portada}}" alt="">
+                    <h1 ng-attr-id="{{'nombrePelicula1'+pelicula.id_pelicula}}">{{pelicula.nombre_pelicula}}</h1>
+                    <script ng-attr-id="{{'precioEntrada1'+pelicula.id_pelicula}}" type="text/plain">10</script>
+                    <a href="#" class="btn-comprar" ng-click="getValores('nombrePelicula1'+pelicula.id_pelicula, 'precioEntrada1'+pelicula.id_pelicula, 'linkImagen1'+pelicula.id_pelicula)">Comprar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer container">
+        <h3>Hipercine</h3>
+        <ul>
+            <li><a href="../cine/cine.html">Inicio</a></li>
+            <li><a href="../estrenos/proxiestrenos.html">Proximos Estrenos</a></li>
+            <li><a href="../login/login.component.html">Inicio de Sesion</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="cine.js"></script>
+</body>
+
+</html>

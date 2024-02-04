@@ -1,0 +1,10 @@
+const { Router } = require("express");
+const router = new Router();
+var { getComplejo, getComplejos, getComplejosFiltro, updateComplejo, deleteComplejo, createComplejo } = require("../../Logica de negocio/controllers/complejoController");
+router.get("/complejos", getComplejos);
+router.get("/complejos/:ciudad", getComplejosFiltro);
+router.get("/complejo/:id", getComplejo);
+router.post("/complejo", createComplejo);
+router.put("/complejo/:id", updateComplejo);
+router.delete("/complejo/:id", deleteComplejo);
+module.exports = router;

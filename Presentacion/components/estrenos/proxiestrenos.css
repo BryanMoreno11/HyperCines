@@ -1,0 +1,324 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+  body{
+    background-color: #ffffff;
+    font-family: 'Bebas Neue', sans-serif;
+    color: #030303;
+  }
+  
+  .container{
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .header{
+    background-image: url(../../Imagenes/toy.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 70vh;
+    align-items: center;
+  }
+
+  .menu{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo{
+    font-size: 35px;
+    color: #ffffff;
+  }
+
+  .menu .navbar ul li{
+    position: relative;
+    float: left;
+  }
+
+  .menu .navbar ul li a{
+    font-size: 22px;
+    padding: 20px;
+    color: #ffffff;
+    display: block;
+  }
+
+  .menu .navbar ul li a:hover{
+    color: #ff2f28;
+  }
+
+  #menu{
+    display: none;
+  }
+
+  .menu-icono{
+    width: 25px;
+  }
+
+  .menu label{
+    cursor: pointer;
+    display: none;
+  }
+
+  .header-content{
+    display: flex;
+    width: 100%;
+  }
+
+  .header-1{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-self: flex-end;
+  }
+
+  .header-1 img{
+    width: 300px;
+  }
+
+  .header-2{
+    width: 50%;
+    margin-top: 80px;
+    text-align: end;
+  }
+
+  .header-2 h1{
+    color: #ffffff72;
+    font-size: 80px;
+    line-height: 80px;
+  }
+
+  .header-2 img{
+    width: 70px;
+  }
+
+  .btn-1{
+    display: inline-block;
+    padding: 7px 20px;
+    background-color: #ff2f28;
+    color: #ffffff;
+    font-size: 20px;
+  }
+
+  .btn-2{
+    width: 110px;
+    display: inline-block;
+    padding: 7px 20px;
+    background-color: #ff2f28;
+    font-size: 20px;
+    margin-top: 30px;
+    color: #ffffff;
+  }
+
+  /*todo lo de arriba se uso para la parte del header*/
+  
+  .movies{
+    padding: 50px 0 0 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h2{
+    font-size: 35px;
+    margin-bottom: 20px;
+  }
+
+  hr{
+    border: 1px solid #ff2f28;
+    width: 50%;
+    margin-bottom: 40px;
+  }
+
+  .box-container-1,
+  .box-container-2,
+  .box-container-3{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px, 1fr));
+    gap: 40px;
+  }
+ /*todo lo del box se hace para acomodar las peliculas*/
+  .box-1,
+  .box-2,
+  .box-3{
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  
+
+  .load-more{
+    margin-top: 40px;
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 15px;
+    border: 1px solid #ff2f28;
+    color: #ff2f28;
+    font-size: 16px;
+    cursor:pointer;
+    align-self: flex-end;
+  }
+
+  .load-more:hover{
+    background-color: #ff2f28;
+    color: #ffffff;
+  }
+
+  .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 50px 5px rgba(0, 0, 0, 0.7); /* Añade un sombreado oscuro en todo el contorno */
+}
+
+.content img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 20px; /* Añade esquinas redondeadas a las imágenes dentro de .box */
+}
+
+  .content h3{
+    font-size: 20px;
+    margin-bottom: 10px;
+
+  }
+
+  .content{
+    color: #030303;
+    font-size: 20px;
+    text-align: center;
+  }
+
+.box-1:hover,
+.box-2:hover,
+.box-3:hover {
+  transform: scale(1.05); /* Ajusta el valor para el ancho aumentado al pasar el ratón */
+}
+
+  /*todo esto es para hacer el footer que va en la parte de abajo*/
+  .footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 0;
+    margin-top: 100px;
+    border-top: 1px solid #ff2f283d;
+  }
+
+  .footer ul{
+    display: flex;
+
+  }
+
+  .footer h3{
+    font-size: 30px;
+  }
+
+  .footer a{
+    color: #030303;
+    font-size: 20px;
+    margin-right: 20px;
+    display: block;
+  }
+
+  .footer a:hover{
+    color: #ff2f28;
+  }
+  
+  .btn-comprar {
+    display: inline-block;
+    width: 100%; 
+    padding: 10px 0; 
+    background-color: #ffffff; 
+    color: #3498db; 
+    text-decoration: none;
+    font-size: 16px;
+    border: 2px solid #3498db; 
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.btn-comprar:hover {
+    background-color: #f1c40f; 
+    color: #ffffff; 
+    border: 2px solid #f1c40f; 
+}
+
+  @media (max-width:991px){
+    .menu{
+        padding: 20px;
+    }
+
+    .menu label{
+        display: initial;
+    }
+
+    .menu .navbar{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #030303;
+        display: none;
+    }
+
+    .menu .navbar ul li{
+        width: 100%;
+    }
+
+    .btn-1{
+        display: none;
+    }
+
+    #menu:checked ~ .navbar{
+        display: initial;
+    }
+
+    .header-content{
+        flex-direction: column;
+        padding: 180px 30px 30px 30px;
+    }
+
+    .header-1{
+        width: 100%;
+        align-items: center;
+    }
+
+    .header-2{
+        width: 100%;
+        text-align: center;
+    }
+
+    .movies{
+        padding: 30px; /* 80px se puede modificar las imagenes de las peliculas en celular*/
+
+    }
+    
+    .footer{
+        margin-top: 30px;
+        padding: 30px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer ul{
+        margin-top: 15px;
+        justify-content: center;
+    }
+
+
+  }

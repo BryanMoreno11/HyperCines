@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="proxiEstreno">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hipercine</title>
+    <link rel="stylesheet" href="proxiestrenos.css">
+</head>
+
+<body ng-controller="proxiEstrenoController">
+
+    <header class="header">
+        <div class="menu container">
+            <a href="#" class="logo">Hipercine</a>
+            <input type="checkbox" id="menu" />
+            <label for="menu">
+        <img src="../../Imagenes/menu.png" class="menu-icono" alt="menu">
+    </label>
+            <nav class="navbar">
+                <ul>
+                    <li> <a href="../cine/cine.html">Inicio</a></li>
+                    <li> <a href="../estrenos/proxiestrenos.html">Proximos Estrenos</a></li>
+                    <li> <a href="#">Nosotros</a></li>
+                </ul>
+
+            </nav>
+            <a href='../login/login.component.html' ; class="btn-1"> Login</a>
+        </div>
+    </header>
+
+    <section class="movies container" id="movies-container" ng-repeat="mes in meses">
+        <h2>{{mes}}</h2>
+        <hr>
+        <div class="box-container-1">
+            <div class="box-1" ng-repeat="pelicula in peliculasEstreno[mes]">
+                <div class="content">
+                    <img src="{{pelicula.imagen_portada}}" alt="">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer container">
+        <h3>Hipercine</h3>
+        <ul>
+            <li><a href="../cine/cine.html">Inicio</a></li>
+            <li><a href="../estrenos/proxiestrenos.html">Proximos Estrenos</a></li>
+            <li><a href="../login/login.component.html">Inicio de Sesion</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="./proxiestrenos.js"></script>
+</body>
+
+</html>
