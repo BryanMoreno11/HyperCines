@@ -12,71 +12,6 @@ async function getPeliculas(req, res) {
     }
 }
 
-async function getPeliculasCartelera(req, res) {
-    const { ciudad } = req.params;
-    const { complejo } = req.params;
-    let peliculas;
-    try {
-        const client = await pool.connect();
-        const result = await client.query("SELECT * FROM vista_pelicula_complejo");
-        client.release();
-        peliculas = result.rows;
-        peliculas = filtrarPeliculasCartelera(peliculas, ciudad, complejo);
-        res.json(peliculas);
-    } catch (err) {
-        res.status(500).json({ error: "Error en el servidor" });
-    }
-}
-
-async function getPeliculasProximoEstreno(req, res) {
-    let peliculas;
-    try {
-        const client = await pool.connect();
-        const result = await client.query("SELECT * FROM vista_pelicula");
-        client.release();
-        peliculas = result.rows;
-        peliculas = filtrarPeliculasProximoEstreno(peliculas);
-        res.json(peliculas);
-    } catch (err) {
-        res.status(500).json({ error: "Error en el servidor" });
-    }
-}
-
-
-function filtrarPeliculasCartelera(peliculas, ciudad, complejo) {
-    let fecha = new Date();
-    peliculas = peliculas.filter(pelicula => {
-        return pelicula.ciudad_nombre == ciudad && pelicula.complejo_nombre == complejo && pelicula.fecha > fecha
-    });
-    peliculas = new Map([...peliculas.map(pelicula => [pelicula.id_pelicula, pelicula])]);
-    peliculas = Array.from(peliculas.values());
-    return peliculas;
-}
-
-function filtrarPeliculasProximoEstreno(peliculas) {
-    let fecha = new Date();
-    peliculas = peliculas.filter(pelicula => {
-        return pelicula.fecha_estreno > fecha;
-    });
-    peliculas = clasificarPeliculasMes(peliculas);
-    return peliculas;
-}
-
-function clasificarPeliculasMes(peliculas) {
-    const mesesDelAnio = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-    let mes_pelicula = {};
-    for (let pelicula of peliculas) {
-        if (mes_pelicula[mesesDelAnio[pelicula.fecha_estreno.getMonth()]]) {
-            mes_pelicula[mesesDelAnio[pelicula.fecha_estreno.getMonth()]].push(pelicula);
-        } else {
-            mes_pelicula[mesesDelAnio[pelicula.fecha_estreno.getMonth()]] = [];
-            mes_pelicula[mesesDelAnio[pelicula.fecha_estreno.getMonth()]].push(pelicula);
-        }
-
-    }
-    return mes_pelicula;
-}
-
 async function getPelicula(req, res) {
     const { id } = req.params;
     const query = 'SELECT * FROM vista_pelicula where id_pelicula=$1'
@@ -152,6 +87,70 @@ async function deletePelicula(req, res) {
     } catch (err) {
         res.status(500).json({ error: "Error en el servidor" });
     }
+}
+
+async function getPeliculasCartelera(req, res) {
+    const { ciudad } = req.params;
+    const { complejo } = req.params;
+    let peliculas;
+    try {
+        const client = await pool.connect();
+        const result = await client.query("SELECT * FROM vista_pelicula_complejo");
+        client.release();
+        peliculas = result.rows;
+        peliculas = filtrarPeliculasCartelera(peliculas, ciudad, complejo);
+        res.json(peliculas);
+    } catch (err) {
+        res.status(500).json({ error: "Error en el servidor" });
+    }
+}
+
+function filtrarPeliculasCartelera(peliculas, ciudad, complejo) {
+    let fecha = new Date();
+    peliculas = peliculas.filter(pelicula => {
+        return pelicula.ciudad_nombre == ciudad && pelicula.complejo_nombre == complejo && pelicula.fecha > fecha
+    });
+    peliculas = new Map([...peliculas.map(pelicula => [pelicula.id_pelicula, pelicula])]);
+    peliculas = Array.from(peliculas.values());
+    return peliculas;
+}
+
+async function getPeliculasProximoEstreno(req, res) {
+    let peliculas;
+    try {
+        const client = await pool.connect();
+        const result = await client.query("SELECT * FROM vista_pelicula");
+        client.release();
+        peliculas = result.rows;
+        peliculas = filtrarPeliculasProximoEstreno(peliculas);
+        res.json(peliculas);
+    } catch (err) {
+        res.status(500).json({ error: "Error en el servidor" });
+    }
+}
+
+function filtrarPeliculasProximoEstreno(peliculas) {
+    let fecha = new Date();
+    peliculas = peliculas.filter(pelicula => {
+        return pelicula.fecha_estreno > fecha;
+    });
+    peliculas = clasificarPeliculasMes(peliculas);
+    return peliculas;
+}
+
+function clasificarPeliculasMes(peliculas) {
+    const mesesDelAnio = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    let mes_pelicula = {};
+    for (let pelicula of peliculas) {
+        if (mes_pelicula[mesesDelAnio[pelicula.fecha_estreno.getMonth()]]) {
+            mes_pelicula[mesesDelAnio[pelicula.fecha_estreno.getMonth()]].push(pelicula);
+        } else {
+            mes_pelicula[mesesDelAnio[pelicula.fecha_estreno.getMonth()]] = [];
+            mes_pelicula[mesesDelAnio[pelicula.fecha_estreno.getMonth()]].push(pelicula);
+        }
+
+    }
+    return mes_pelicula;
 }
 
 module.exports = {

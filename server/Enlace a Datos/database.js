@@ -1,10 +1,14 @@
 const { Pool } = require('pg');
 //cadena de conexión
 const pool = new Pool({
-    host: '127.0.0.1',
-    user: 'postgres',
-    password: 'admin',
+    host: 'ep-soft-flower-a5sc8k15.us-east-2.aws.neon.tech',
     database: 'cine',
-    port: '5432'
+    user: 'BryanMoreno11',
+    password: 'c1E3uFmwqPJV',
+    port: 5432,
+    ssl: {
+        require: true,
+        sslmode: 'require'
+    }
 });
 module.exports = pool;

@@ -32,34 +32,34 @@
                     <i class='bx bxl-facebook-circle'></i>
                 </div>
                 <p>o usa tu email</p>
-                <form class="form">
+                <form class="form" id="registro">
                     <label>
                         <i class='bx bx-user' ></i>
-                        <input type="text" placeholder="Nombres">
+                        <input type="text" placeholder="Nombres" name="nombre" required>
                     </label>
                     <label>
                         <i class='bx bx-user' ></i>
-                        <input type="text" placeholder="Apellidos">
+                        <input type="text" placeholder="Apellidos" name="apellido" required>
                     </label>
                     <label>
                         <i class='bx bxs-id-card'></i>
-                        <input type="text" placeholder="Cedula">
+                        <input type="text" placeholder="Cedula" name="cedula" required pattern="[0-9]+" minlength="10">
                     </label>
                     <label>
                         <i class='bx bx-mobile'></i>
-                        <input type="text" placeholder="Telefono">
+                        <input type="text" placeholder="Telefono" name="telefono"  required pattern="[0-9]+" minlength="10">>
                     </label>
                     <label>
                         <i class='bx bx-envelope' ></i>
-                        <input type="text" placeholder="ejemplo@correo.com">
+                        <input type="text" placeholder="ejemplo@correo.com" name="correo" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                     </label>
                     <label>
                         <i class='bx bx-building-house' ></i>
-                        <input type="text" placeholder="Dirección">
+                        <input type="text" placeholder="Dirección" name="direccion" required>
                     </label>
                     <label>
                         <i class='bx bx-lock-alt' ></i>
-                        <input type="password" placeholder="Contrasenia">
+                        <input type="password" placeholder="Contrasenia" name="password" required>
                     </label>
                     <input type="submit" value="Registrarse">
                 </form>
@@ -84,20 +84,21 @@
                     <i class='bx bxl-facebook-circle'></i>
                 </div>
                 <p>o usa tu email</p>
-                <form class="form">
+                <form class="form" id="login">
                     <label>
                         <i class='bx bx-envelope' ></i>
-                        <input type="text" placeholder="ejemplo@correo.com">
+                        <input type="text" placeholder="ejemplo@correo.com" name="correo"  required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                     </label>
                     <label>
                         <i class='bx bx-lock-alt' ></i>
-                        <input type="password" placeholder="Contrasenia">
+                        <input type="password" placeholder="Contrasenia" name="password" required>
                     </label>
                     <input type="submit" value="Registrarse">
                 </form>
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="login.js"></script>
 </body>
 
