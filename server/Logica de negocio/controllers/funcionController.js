@@ -1,6 +1,81 @@
 process.env.TZ = 'America/Guayaquil';
 const pool = require("../../Enlace a Datos/database");
 
+async function getFunciones(req, res) {
+    try {
+        const client = await pool.connect();
+        const result = await client.query('select id_funcion,id_pelicula, id_sala, fecha, precio, asientos_disponibles,  nombre_pelicula, nombre_sala from vista_funcion');
+        client.release();
+        res.json(result.rows);
+    } catch (err) {
+        res.status(500).json({ error: "Error en el servidor" });
+    }
+}
+
+async function getFuncion(req, res) {
+    const { id } = req.params;
+    const query = 'select id_funcion,id_pelicula, id_sala, fecha, precio, asientos_disponibles,  nombre_pelicula, nombre_sala from vista_funcion where id_funcion=$1'
+    const values = [id];
+    try {
+        const client = await pool.connect();
+        const result = await client.query(query, values);
+        client.release();
+        res.status(200);
+        if (result.rowCount > 0) {
+            res.json(result.rows);
+        } else {
+            res.status(500).json({ message: 'No existe la película' });
+        }
+
+
+    } catch (err) {
+        res.status(500).json({ error: "Error en el servidor" });
+    }
+}
+
+async function createFuncion(req, res) {
+    const { id_funcion, id_pelicula, id_sala, fecha, precio, asientos_disponibles } = req.body;
+    const query = 'INSERT INTO funcion (id_funcion, id_pelicula, id_sala, fecha, precio, asientos_disponibles) VALUES ($1, $2, $3,$4,$5,$6)';
+    const values = [id_funcion, id_pelicula, id_sala, fecha, precio, asientos_disponibles];
+    try {
+        const client = await pool.connect();
+        const result = await client.query(query, values);
+        client.release();
+        if (result.rowCount > 0) {
+            res.status(200).json({ message: 'Se guardó la función' });
+        } else {
+            res.status(400).json({ message: 'No se guardó la función' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: "Error en el servidor", message: err.message });
+    }
+}
+
+async function updatePelicula(req, res) {
+    const { id } = req.params;
+    const { id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis } = req.body;
+    const query = 'UPDATE pelicula  SET id_genero=$2, id_clasificacion=$3, nombre_pelicula=$4, duracion=$5, imagen_miniatura=$6, imagen_portada=$7, trailer=$8, sinopsis=$9 WHERE id_pelicula=$1';
+    const values = [id, id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis];
+    try {
+        const client = await pool.connect();
+        const result = await client.query(query, values);
+        client.release();
+        if (result.rowCount > 0) {
+            res.status(200).json({ message: 'Se actualizó la película' });
+        } else {
+            res.status(400).json({ message: 'No se actualizó la película' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: "Error en el servidor", message: err.message });
+    }
+}
+
+
+
+
+
+
+
 async function obtenerFechasFuncion(req, res) {
     const { id_pelicula, ciudad, complejo } = req.params;
     const query = 'SELECT * FROM vista_funcion WHERE id_pelicula=$1 AND nombre_ciudad=$2 AND nombre_complejo=$3'

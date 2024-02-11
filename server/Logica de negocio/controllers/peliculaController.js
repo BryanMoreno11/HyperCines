@@ -34,9 +34,9 @@ async function getPelicula(req, res) {
 }
 
 async function createPelicula(req, res) {
-    const { id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis } = req.body;
-    const query = 'INSERT INTO pelicula (id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis) VALUES ($1, $2, $3,$4,$5,$6,$7,$8)';
-    const values = [id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis];
+    const { id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis, fecha_estreno } = req.body;
+    const query = 'INSERT INTO pelicula (id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis, fecha_estreno) VALUES ($1, $2, $3,$4,$5,$6,$7,$8,$9)';
+    const values = [id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis, fecha_estreno];
     try {
         const client = await pool.connect();
         const result = await client.query(query, values);
@@ -47,7 +47,7 @@ async function createPelicula(req, res) {
             res.status(400).json({ message: 'No se guardó la película' });
         }
     } catch (err) {
-        res.status(500).json({ error: "Error en el servidor" });
+        res.status(500).json({ error: "Error en el servidor", message: err.message });
     }
 }
 
@@ -66,7 +66,7 @@ async function updatePelicula(req, res) {
             res.status(400).json({ message: 'No se actualizó la película' });
         }
     } catch (err) {
-        res.status(500).json({ error: "Error en el servidor" });
+        res.status(500).json({ error: "Error en el servidor", message: err.message });
     }
 }
 
@@ -83,9 +83,8 @@ async function deletePelicula(req, res) {
         } else {
             res.status(500).json({ message: 'No existe la pelicula' });
         }
-
     } catch (err) {
-        res.status(500).json({ error: "Error en el servidor" });
+        res.status(500).json({ error: 'Error en el servidor' });
     }
 }
 
