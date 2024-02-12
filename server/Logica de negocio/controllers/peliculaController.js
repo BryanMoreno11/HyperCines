@@ -1,5 +1,5 @@
-process.env.TZ = 'America/Guayaquil';
 const pool = require("../../Enlace a Datos/database");
+const moment = require('moment-timezone');
 
 async function getPeliculas(req, res) {
     try {
@@ -53,9 +53,9 @@ async function createPelicula(req, res) {
 
 async function updatePelicula(req, res) {
     const { id } = req.params;
-    const { id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis } = req.body;
-    const query = 'UPDATE pelicula  SET id_genero=$2, id_clasificacion=$3, nombre_pelicula=$4, duracion=$5, imagen_miniatura=$6, imagen_portada=$7, trailer=$8, sinopsis=$9 WHERE id_pelicula=$1';
-    const values = [id, id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis];
+    const { id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis, fecha_estreno } = req.body;
+    const query = 'UPDATE pelicula  SET id_genero=$2, id_clasificacion=$3, nombre_pelicula=$4, duracion=$5, imagen_miniatura=$6, imagen_portada=$7, trailer=$8, sinopsis=$9, fecha_estreno=$10 WHERE id_pelicula=$1';
+    const values = [id, id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis, fecha_estreno];
     try {
         const client = await pool.connect();
         const result = await client.query(query, values);
@@ -106,7 +106,11 @@ async function getPeliculasCartelera(req, res) {
 
 function filtrarPeliculasCartelera(peliculas, ciudad, complejo) {
     let fecha = new Date();
+    fecha.setMinutes(fecha.getMinutes() - fecha.getTimezoneOffset());
     peliculas = peliculas.filter(pelicula => {
+        console.log(pelicula.nombre_pelicula, pelicula.fecha);
+        console.log("fecha actual", fecha);
+
         return pelicula.ciudad_nombre == ciudad && pelicula.complejo_nombre == complejo && pelicula.fecha > fecha
     });
     peliculas = new Map([...peliculas.map(pelicula => [pelicula.id_pelicula, pelicula])]);

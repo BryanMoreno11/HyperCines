@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="editFuncion">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Función</title>
+    <link rel="stylesheet" href="editFuncion.css">
+</head>
+
+<body ng-controller="editFuncionController">
+    <div class="container">
+        <h1>Formulario de Función</h1>
+        <form id="formulario">
+            <div class="form-group">
+                <label for="id_pelicula">Película</label>
+                <select ng-model="funcion.id_pelicula" id="id_pelicula" name="id_pelicula" required>
+                    <option value="">Seleccione una pelicula</option>
+                    <option ng-repeat="pelicula in peliculas" value="{{pelicula.id_pelicula}}">{{pelicula.nombre_pelicula}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="id_sala">Sala</label>
+                <select ng-model="funcion.id_sala" id="id_sala" name="id_sala" required ng-change="changeSala(funcion.id_sala)">
+                    <option value="">Seleccione una sala</option>
+                    <option ng-repeat="sala in salas" value="{{sala.id_sala}}">{{sala.nombre_sala}}/ {{sala.nombre_complejo}}/ {{sala.nombre_ciudad}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fecha_funcion">Fecha de la Función</label>
+                <input ng-model="fecha_funcion" type="datetime-local" id="fecha_funcion" name="fecha" required>
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio</label>
+                <input ng-model="funcion.precio" type="number" id="precio" name="precio" min="1" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="asientos_disponibles">Asientos Disponibles</label>
+                <input ng-model="asientos_disponibles" type="text" id="asientos_disponibles" name="asientos_disponibles" min="0" required disabled>
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="editFuncion.js"></script>
+</body>
+
+</html>

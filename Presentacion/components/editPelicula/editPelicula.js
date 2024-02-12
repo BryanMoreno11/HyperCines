@@ -6,9 +6,7 @@ app.controller("editPeliculaController", function($scope) {
     //variables
     $scope.modificar = false;
     $scope.generos;
-    $scope.genero = "1";
     $scope.clasificaciones;
-    $scope.clasificacion = "1";
     $scope.fecha_estreno = new Date();
     $scope.pelicula;
     let modificar
@@ -25,8 +23,8 @@ app.controller("editPeliculaController", function($scope) {
         modificar = true;
         cargarPelicula($scope.id_pelicula).then(function(response) {
             $scope.pelicula = response[0];
-            $scope.genero = String(response[0].id_genero);
-            $scope.clasificacion = String(response[0].id_clasificacion);
+            $scope.pelicula.id_genero = String($scope.pelicula.id_genero);
+            $scope.pelicula.id_clasificacion = String($scope.pelicula.id_clasificacion);
             $scope.fecha_estreno = new Date(response[0].fecha_estreno);
             $scope.$apply();
         });
@@ -39,6 +37,7 @@ app.controller("editPeliculaController", function($scope) {
     document.getElementById('formulario').addEventListener("submit", e => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target));
+        console.log(data);
         if (modificar == true) {
             modificarPelicula(data, $scope.id_pelicula).then(function(response) {
                 if (response.ok) {

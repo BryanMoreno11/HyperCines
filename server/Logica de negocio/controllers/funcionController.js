@@ -1,12 +1,12 @@
-process.env.TZ = 'America/Guayaquil';
 const pool = require("../../Enlace a Datos/database");
 
 async function getFunciones(req, res) {
     try {
         const client = await pool.connect();
-        const result = await client.query('select id_funcion,id_pelicula, id_sala, fecha, precio, asientos_disponibles,  nombre_pelicula, nombre_sala from vista_funcion');
+        const result = await client.query('select id_funcion,id_pelicula, id_sala, fecha, precio, asientos_disponibles,  nombre_pelicula, nombre_sala, nombre_ciudad,nombre_complejo from vista_funcion');
         client.release();
         res.json(result.rows);
+        console.log(result.rows);
     } catch (err) {
         res.status(500).json({ error: "Error en el servidor" });
     }
@@ -14,7 +14,7 @@ async function getFunciones(req, res) {
 
 async function getFuncion(req, res) {
     const { id } = req.params;
-    const query = 'select id_funcion,id_pelicula, id_sala, fecha, precio, asientos_disponibles,  nombre_pelicula, nombre_sala from vista_funcion where id_funcion=$1'
+    const query = 'SELECT id_funcion,id_pelicula, id_sala, fecha, precio, asientos_disponibles,  nombre_pelicula, nombre_sala, nombre_ciudad from vista_funcion where id_funcion=$1'
     const values = [id];
     try {
         const client = await pool.connect();
@@ -24,19 +24,36 @@ async function getFuncion(req, res) {
         if (result.rowCount > 0) {
             res.json(result.rows);
         } else {
-            res.status(500).json({ message: 'No existe la película' });
+            res.status(500).json({ message: 'No existe la función' });
         }
+    } catch (err) {
+        res.status(500).json({ error: "Error en el servidor" });
+    }
+}
 
-
+async function getFuncionCompleta(req, res) {
+    const { id } = req.params;
+    const query = 'SELECT * from vista_funcion where id_funcion=$1'
+    const values = [id];
+    try {
+        const client = await pool.connect();
+        const result = await client.query(query, values);
+        client.release();
+        res.status(200);
+        if (result.rowCount > 0) {
+            res.json(result.rows);
+        } else {
+            res.status(500).json({ message: 'No existe la función' });
+        }
     } catch (err) {
         res.status(500).json({ error: "Error en el servidor" });
     }
 }
 
 async function createFuncion(req, res) {
-    const { id_funcion, id_pelicula, id_sala, fecha, precio, asientos_disponibles } = req.body;
-    const query = 'INSERT INTO funcion (id_funcion, id_pelicula, id_sala, fecha, precio, asientos_disponibles) VALUES ($1, $2, $3,$4,$5,$6)';
-    const values = [id_funcion, id_pelicula, id_sala, fecha, precio, asientos_disponibles];
+    const { id_pelicula, id_sala, fecha, precio, asientos_disponibles } = req.body;
+    const query = 'INSERT INTO funcion (id_pelicula, id_sala, fecha, precio, asientos_disponibles) VALUES ($1, $2, $3,$4,$5)';
+    const values = [id_pelicula, id_sala, fecha, precio, asientos_disponibles];
     try {
         const client = await pool.connect();
         const result = await client.query(query, values);
@@ -51,30 +68,42 @@ async function createFuncion(req, res) {
     }
 }
 
-async function updatePelicula(req, res) {
+async function updateFuncion(req, res) {
     const { id } = req.params;
-    const { id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis } = req.body;
-    const query = 'UPDATE pelicula  SET id_genero=$2, id_clasificacion=$3, nombre_pelicula=$4, duracion=$5, imagen_miniatura=$6, imagen_portada=$7, trailer=$8, sinopsis=$9 WHERE id_pelicula=$1';
-    const values = [id, id_genero, id_clasificacion, nombre_pelicula, duracion, imagen_miniatura, imagen_portada, trailer, sinopsis];
+    const { id_pelicula, id_sala, fecha, precio, asientos_disponibles } = req.body;
+    const query = 'UPDATE funcion SET id_pelicula=$2, id_sala=$3, fecha=$4, precio=$5, asientos_disponibles=$6 WHERE id_funcion=$1;';
+    const values = [id, id_pelicula, id_sala, fecha, precio, asientos_disponibles];
     try {
         const client = await pool.connect();
         const result = await client.query(query, values);
         client.release();
         if (result.rowCount > 0) {
-            res.status(200).json({ message: 'Se actualizó la película' });
+            res.status(200).json({ message: 'Se actualizó la función' });
         } else {
-            res.status(400).json({ message: 'No se actualizó la película' });
+            res.status(400).json({ message: 'No se actualizó la función' });
         }
     } catch (err) {
         res.status(500).json({ error: "Error en el servidor", message: err.message });
     }
 }
 
-
-
-
-
-
+async function deleteFuncion(req, res) {
+    const { id } = req.params;
+    const query = 'DELETE FROM funcion where id_funcion=$1'
+    const values = [id];
+    try {
+        const client = await pool.connect();
+        const result = await client.query(query, values);
+        client.release();
+        if (result.rowCount > 0) {
+            res.status(200).json({ message: 'funcion eliminada' });
+        } else {
+            res.status(500).json({ message: 'No existe la funcion' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+}
 
 async function obtenerFechasFuncion(req, res) {
     const { id_pelicula, ciudad, complejo } = req.params;
@@ -146,5 +175,11 @@ function obtenerFechasHora(funciones, fecha) {
 
 module.exports = {
     obtenerFechasFuncion,
-    obtenerHorasFuncion
+    obtenerHorasFuncion,
+    getFunciones,
+    getFuncion,
+    getFuncionCompleta,
+    createFuncion,
+    updateFuncion,
+    deleteFuncion
 };

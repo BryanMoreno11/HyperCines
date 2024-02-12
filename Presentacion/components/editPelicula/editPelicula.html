@@ -14,13 +14,15 @@
         <form id="formulario">
             <div class="form-group">
                 <label for="id_genero">Género</label>
-                <select ng-model="genero" id="genero" name="id_genero" ng-change="change()">
+                <select ng-model="pelicula.id_genero" id="genero" name="id_genero" ng-change="change()" required>
+                    <option value="">Seleccione un genero</option>
                     <option  ng-repeat="genero in generos" value="{{genero.id_genero}}" >{{genero.nombre_genero}}</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="id_clasificacion">Clasificación</label>
-                <select ng-model="clasificacion" id="id_clasificacion" name="id_clasificacion">
+                <select ng-model="pelicula.id_clasificacion" id="id_clasificacion" name="id_clasificacion" required>
+                    <option value="">Seleccione una clasificación</option>
                     <option ng-repeat="clasificacion in clasificaciones" value="{{clasificacion.id_clasificacion}}">{{clasificacion.nombre_clasificacion}}</option>
                 </select>
             </div>
