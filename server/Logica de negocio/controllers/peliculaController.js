@@ -1,5 +1,4 @@
 const pool = require("../../Enlace a Datos/database");
-const moment = require('moment-timezone');
 
 async function getPeliculas(req, res) {
     try {
@@ -108,9 +107,6 @@ function filtrarPeliculasCartelera(peliculas, ciudad, complejo) {
     let fecha = new Date();
     fecha.setMinutes(fecha.getMinutes() - fecha.getTimezoneOffset());
     peliculas = peliculas.filter(pelicula => {
-        console.log(pelicula.nombre_pelicula, pelicula.fecha);
-        console.log("fecha actual", fecha);
-
         return pelicula.ciudad_nombre == ciudad && pelicula.complejo_nombre == complejo && pelicula.fecha > fecha
     });
     peliculas = new Map([...peliculas.map(pelicula => [pelicula.id_pelicula, pelicula])]);
@@ -122,7 +118,7 @@ async function getPeliculasProximoEstreno(req, res) {
     let peliculas;
     try {
         const client = await pool.connect();
-        const result = await client.query("SELECT * FROM vista_pelicula");
+        const result = await client.query("SELECT * FROM vista_pelicula ORDER BY fecha_estreno");
         client.release();
         peliculas = result.rows;
         peliculas = filtrarPeliculasProximoEstreno(peliculas);
@@ -134,6 +130,7 @@ async function getPeliculasProximoEstreno(req, res) {
 
 function filtrarPeliculasProximoEstreno(peliculas) {
     let fecha = new Date();
+    fecha.setMinutes(fecha.getMinutes() - fecha.getTimezoneOffset());
     peliculas = peliculas.filter(pelicula => {
         return pelicula.fecha_estreno > fecha;
     });
