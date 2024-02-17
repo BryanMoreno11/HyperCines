@@ -127,6 +127,7 @@ function obtenerFechas(funciones) {
     const mesesDelAnio = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     for (let funcion of funciones) {
+        funcion.fecha.setMinutes(funcion.fecha.getMinutes() + funcion.fecha.getTimezoneOffset());
         if (funcion.fecha > new Date()) {
             let fecha = {
                 fecha: new Date(funcion.fecha.setHours(0, 0, 0, 0)),
@@ -160,14 +161,23 @@ async function obtenerHorasFuncion(req, res) {
 function obtenerFechasHora(funciones, fecha) {
     fecha = new Date(fecha);
     let horas_Funcion = [];
+    horas_Funcion[0] = [];
+    horas_Funcion[1] = [];
     for (let funcion of funciones) {
+        funcion.fecha.setMinutes(funcion.fecha.getMinutes() + funcion.fecha.getTimezoneOffset());
         if (funcion.fecha > new Date() && funcion.fecha.getFullYear() == fecha.getFullYear() && funcion.fecha.getMonth() == fecha.getMonth() &&
             funcion.fecha.getDate() == fecha.getDate()) {
             let hora_funcion = {
                 id_funcion: funcion.id_funcion,
                 hora: `${funcion.fecha.getHours()}:${String(funcion.fecha.getMinutes()).padStart(2,0)}`
             }
-            horas_Funcion.push(hora_funcion);
+            if (funcion.capacidad_sala == 60) {
+                hora_funcion.tipo_sala = "Sala Principal";
+                horas_Funcion[0].push(hora_funcion);
+            } else {
+                hora_funcion.tipo_sala = "Sala VIP";
+                horas_Funcion[1].push(hora_funcion);
+            }
         }
     }
     return horas_Funcion;
