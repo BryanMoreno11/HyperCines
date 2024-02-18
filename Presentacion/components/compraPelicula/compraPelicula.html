@@ -69,12 +69,12 @@
                     </div>
                     <div class="btn-cantidad">
                         <button id="minus-seat">-</button>
-                        <div class="cantidad">0</div>
+                        <div class="cantidad">1</div>
                         <button id="plus-seat">+</button>
                     </div>
                     <div class="price-amount">
                         <p id="priceEntry">x $5.00</p>
-                        <p class="totallyEntry">$15.00</p>
+                        <p class="totallyEntry">$5.00</p>
                     </div>
                 </div>
                 <div class="next-btn">
@@ -103,7 +103,7 @@
                     <div class="screen">PANTALLA</div>
                     <div class="asientos">
                         <div class="fila" ng-repeat="asiento_sala in asientos">
-                            <div class="seat" ng-class="asiento.estado" ng-repeat="asiento in asiento_sala"></div>
+                            <div ng-click="selectSeat($event, asiento.posicion)" ng-attr-id="{{asiento_sala.posicion}}" class="seat" ng-class="asiento.estado" ng-repeat="asiento in asiento_sala"></div>
                         </div>
                     </div>
                 </div>
