@@ -1,4 +1,4 @@
-;
+//variables
 const container = document.querySelector('.container');
 const btnSiguiente = document.getElementById('btn-next');
 const frmDetails = document.querySelector(".entrance-detail");
@@ -10,17 +10,20 @@ const btnNextSeat = document.getElementById("btn-next-seat");
 const btnVolverPay = document.getElementById("btn-volver-pay");
 const cantAsientos = document.querySelector(".cantidad");
 const frmPayMethods = document.querySelector(".pay-methods");
-
 let precioEntrada = document.getElementById('priceEntry').textContent;
 let ticketPrice = document.querySelector(".totallyEntry").textContent;
-
-console.log(precioEntrada);
-console.log(ticketPrice);
-
-
 let cant = 0;
-
+let id_funcion = 1;
+let capacidad;
+//-------------------------------Llamadas-----------------------------------------------
+getCapacidad().then(function(response) {
+    capacidad = response[0].capacidad_sala;
+    console.log(capacidad);
+});
+//-------------------------------Métodos-----------------------------------------------
 btnSiguiente.addEventListener("click", e => {
+    window.alert("Ahora estas en   las entradas");
+    //generarAsientos();
     frmDetails.classList.remove("show");
     frmDetails.classList.add("hide");
     frmSeats.classList.remove("hide");
@@ -42,12 +45,12 @@ btnNextSeat.addEventListener("click", e => {
 });
 
 btnVolverPay.addEventListener("click", e => {
+    window.alert("Ahora estas volviando a  las entradas");
     frmPayMethods.classList.remove("show");
     frmPayMethods.classList.add("hide");
     frmSeats.classList.remove("hide");
     frmSeats.classList.add("show");
 })
-
 
 container.addEventListener('click', (e) => {
     if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
@@ -76,3 +79,45 @@ btnMinus.addEventListener("click", e => {
         cantAsientos.innerHTML = cant;
     }
 });
+//Lógica de los asientos sala--------------------
+var app = angular.module("compra", []);
+app.controller("compraController", function($scope) {
+    //variables
+    $scope.asientos;
+    $scope.capacidad;
+    //Llamadas
+    getCapacidad().then(function(response) {
+        $scope.capacidad = response[0].capacidad_sala;
+        console.log(capacidad);
+    });
+    generarAsientos($scope.capacidad);
+    //Métodos
+    function generarAsientos(capacidad) {
+        let filas = 5;
+        let columnas = 6;
+        let asientos_sala = [];
+        if (capacidad == 60) {
+            filas = 6;
+            columnas = 10;
+        }
+        for (let i = 1; i <= filas; i++) {
+            asientos_sala[i] = [];
+            for (let j = 1; j <= columnas; j++) {
+                asientos_sala[i].push(i + "" + j);
+            }
+        }
+        $scope.asientos = asientos_sala;
+    }
+});
+
+
+
+
+
+
+//-----------------------------------------Backend----------------------------------------------
+async function getCapacidad() {
+    const response = await fetch(`http://localhost:3000/api/reserva/capacidad/${id_funcion}`);
+    const data = await response.json();
+    return data;
+}

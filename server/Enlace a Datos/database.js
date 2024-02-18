@@ -9,7 +9,16 @@ const pool = new Pool({
     ssl: {
         require: true,
         sslmode: 'require',
-        rejectUnauthorized: 'false'
+        rejectUnauthorized: false
+    },
+    reconnect: {
+        onLost: (err) => {
+            console.error('Se perdió la conexión con la base de datos:', err);
+            return true;
+        },
+        initialDelay: 100,
+        maxDelay: 2000,
+        retries: 8
     }
 });
 module.exports = pool;

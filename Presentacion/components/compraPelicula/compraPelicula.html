@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="compra">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100;0,400;0,600;1,600&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body ng-controller="compraController">
     <div class="form-container">
         <section class="background-movie">
             <div class="img-movie">
@@ -101,70 +101,10 @@
                 </div>
                 <div class="container">
                     <div class="screen">PANTALLA</div>
-                    <div class="fila">
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                    </div>
-
-                    <div class="fila">
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                    </div>
-
-                    <div class="fila">
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                    </div>
-
-                    <div class="fila">
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                    </div>
-
-                    <div class="fila">
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                    </div>
-
-                    <div class="fila">
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
+                    <div class="asientos">
+                        <div class="fila" ng-repeat="asiento_sala in asientos">
+                            <div class="seat" ng-repeat="asiento in asiento_sala"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -221,6 +161,7 @@
     </div>
 
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="compraPelicula.js"></script>
 </body>
 
