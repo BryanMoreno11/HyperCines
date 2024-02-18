@@ -1,5 +1,23 @@
 const pool = require("../../Enlace a Datos/database");
 
+async function createDetalleReserva(req, res) {
+    const { id_reserva, posicion_asiento } = req.body;
+    const query = 'INSERT INTO detalle_reserva (id_reserva, posicion_asiento) VALUES ($1, $2)';
+    const values = [id_reserva, posicion_asiento];
+    try {
+        const client = await pool.connect();
+        const result = await client.query(query, values);
+        client.release();
+        if (result.rowCount > 0) {
+            res.status(200).json({ message: 'Se guardó el detalle_reserva' });
+        } else {
+            res.status(400).json({ message: 'No se guardo el detalle_reserva' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: "Error en el servidor", message: err.message });
+    }
+}
+
 async function getAsientosOcupados(req, res) {
     const { id } = req.params;
     const query = 'SELECT * FROM vista_detalle_reserva where id_funcion=$1'
@@ -40,5 +58,6 @@ async function getCapacidadSala(req, res) {
 
 module.exports = {
     getAsientosOcupados,
-    getCapacidadSala
+    getCapacidadSala,
+    createDetalleReserva
 }
