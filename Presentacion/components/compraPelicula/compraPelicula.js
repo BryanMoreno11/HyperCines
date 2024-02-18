@@ -31,11 +31,11 @@ app.controller("compraController", function($scope) {
             filas = 6;
             columnas = 10;
         }
-        for (let i = 1; i <= filas; i++) {
+        for (let i = 0; i < filas; i++) {
             asientos_sala[i] = [];
             for (let j = 1; j <= columnas; j++) {
                 let asiento = {
-                    posicion: (i + "" + j),
+                    posicion: String.fromCharCode((65 + i)) + "" + j,
                     estado: "none"
                 };
                 if (!$scope.asientos_ocupados.message) {
@@ -49,6 +49,7 @@ app.controller("compraController", function($scope) {
             }
         }
         $scope.asientos = asientos_sala;
+        console.log($scope.asientos);
     }
 
     $scope.selectSeat = function(e, posicion) {
