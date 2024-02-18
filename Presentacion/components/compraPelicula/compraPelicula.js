@@ -53,7 +53,7 @@ app.controller("compraController", function($scope) {
 
     $scope.selectSeat = function(e, posicion) {
         let selectedSeats = document.querySelectorAll('.fila .seat.selected');
-        if (selectedSeats.length == cant && !(e.target.classList.contains("selected"))) {
+        if (selectedSeats.length == cant && !(e.target.classList.contains("selected")) && !(e.target.classList.contains("occupied"))) {
             $scope.seat_aux.classList.toggle('selected');
             asientos_seleccionados.splice(asientos_seleccionados.indexOf($scope.posicion_aux), 1);
         }
@@ -61,14 +61,14 @@ app.controller("compraController", function($scope) {
             e.target.classList.toggle('selected');
         }
         selectedSeats = document.querySelectorAll('.fila .seat.selected');
-        if (selectedSeats.length == cant) {
+        if (selectedSeats.length == cant && !(e.target.classList.contains("occupied"))) {
             $scope.seat_aux = e.target;
             $scope.posicion_aux = posicion;
         }
         console.log(e.target);
         if (e.target.classList.contains("selected")) {
             asientos_seleccionados.push(posicion);
-        } else {
+        } else if (!e.target.classList.contains("occupied")) {
             asientos_seleccionados.splice(asientos_seleccionados.indexOf(posicion), 1);
         }
         console.log(asientos_seleccionados);
