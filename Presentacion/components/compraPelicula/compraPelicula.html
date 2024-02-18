@@ -103,7 +103,7 @@
                     <div class="screen">PANTALLA</div>
                     <div class="asientos">
                         <div class="fila" ng-repeat="asiento_sala in asientos">
-                            <div class="seat" ng-repeat="asiento in asiento_sala"></div>
+                            <div class="seat" ng-class="asiento.estado" ng-repeat="asiento in asiento_sala"></div>
                         </div>
                     </div>
                 </div>

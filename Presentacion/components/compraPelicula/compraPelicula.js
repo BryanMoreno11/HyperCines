@@ -1,4 +1,50 @@
-//variables
+let id_funcion = 1;
+var app = angular.module("compra", []);
+app.controller("compraController", function($scope) {
+    //variables
+    $scope.asientos;
+    $scope.capacidad;
+    $scope.asientos_ocupados;
+    //Llamadas
+    getCapacidad().then(function(response) {
+        $scope.capacidad = response[0].capacidad_sala;
+        getAsientosOcupados().then(function(response) {
+            $scope.asientos_ocupados = response;
+            console.log($scope.asientos_ocupados);
+            generarAsientos($scope.capacidad);
+            $scope.$apply();
+        });
+    });
+    //Métodos
+    function generarAsientos(capacidad) {
+        let filas = 5;
+        let columnas = 6;
+        let asientos_sala = [];
+        if (capacidad == 60) {
+            filas = 6;
+            columnas = 10;
+        }
+        for (let i = 1; i <= filas; i++) {
+            asientos_sala[i] = [];
+            for (let j = 1; j <= columnas; j++) {
+                let asiento = {
+                    posicion: (i + "" + j),
+                    estado: "none"
+                };
+                if (!$scope.asientos_ocupados.message) {
+                    for (let asiento_ocupado of $scope.asientos_ocupados) {
+                        if (asiento_ocupado.posicion_asiento == asiento.posicion) {
+                            asiento.estado = "occupied";
+                        }
+                    }
+                }
+                asientos_sala[i].push(asiento);
+            }
+        }
+        $scope.asientos = asientos_sala;
+    }
+});
+//--------------------------------------Manipulación del DOM--------------------------------------
 const container = document.querySelector('.container');
 const btnSiguiente = document.getElementById('btn-next');
 const frmDetails = document.querySelector(".entrance-detail");
@@ -13,14 +59,8 @@ const frmPayMethods = document.querySelector(".pay-methods");
 let precioEntrada = document.getElementById('priceEntry').textContent;
 let ticketPrice = document.querySelector(".totallyEntry").textContent;
 let cant = 0;
-let id_funcion = 1;
 let capacidad;
-//-------------------------------Llamadas-----------------------------------------------
-getCapacidad().then(function(response) {
-    capacidad = response[0].capacidad_sala;
-    console.log(capacidad);
-});
-//-------------------------------Métodos-----------------------------------------------
+//Métodos------------------------------------------------------------------
 btnSiguiente.addEventListener("click", e => {
     window.alert("Ahora estas en   las entradas");
     //generarAsientos();
@@ -79,45 +119,15 @@ btnMinus.addEventListener("click", e => {
         cantAsientos.innerHTML = cant;
     }
 });
-//Lógica de los asientos sala--------------------
-var app = angular.module("compra", []);
-app.controller("compraController", function($scope) {
-    //variables
-    $scope.asientos;
-    $scope.capacidad;
-    //Llamadas
-    getCapacidad().then(function(response) {
-        $scope.capacidad = response[0].capacidad_sala;
-        console.log(capacidad);
-    });
-    generarAsientos($scope.capacidad);
-    //Métodos
-    function generarAsientos(capacidad) {
-        let filas = 5;
-        let columnas = 6;
-        let asientos_sala = [];
-        if (capacidad == 60) {
-            filas = 6;
-            columnas = 10;
-        }
-        for (let i = 1; i <= filas; i++) {
-            asientos_sala[i] = [];
-            for (let j = 1; j <= columnas; j++) {
-                asientos_sala[i].push(i + "" + j);
-            }
-        }
-        $scope.asientos = asientos_sala;
-    }
-});
-
-
-
-
-
-
-//-----------------------------------------Backend----------------------------------------------
+//--------------------------------------------Backend-------------------------------------------------
 async function getCapacidad() {
     const response = await fetch(`http://localhost:3000/api/reserva/capacidad/${id_funcion}`);
+    const data = await response.json();
+    return data;
+}
+
+async function getAsientosOcupados() {
+    const response = await fetch(`http://localhost:3000/api/reserva/asientos/${id_funcion}`);
     const data = await response.json();
     return data;
 }
