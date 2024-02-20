@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="detallePelicula">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar horario</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100;0,400;0,600;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="detallePelicula.css">
 </head>
 
-<body>
+<body ng-controller="detallePeliculaController">
     <header class="header">
         <div class="logo">
             <p>Hypercines</p>
@@ -24,16 +25,16 @@
     <div class="form-container">
         <section class="info-movie">
             <div class="img-movie">
-                <img src="https://cloudfront-us-east-1.images.arcpublishing.com/eluniverso/SXJNUZ2PL5HTBFJLZYDQEK3O74.jpg" alt="">
+                <img src="{{pelicula.imagen_miniatura}}" alt="">
             </div>
             <div class="movie-poster">
                 <div class="release">ESTRENO</div>
-                <img src="https://pics.filmaffinity.com/El_chico_y_la_garza-226243829-large.jpg" alt="">
+                <img src={{pelicula.imagen_portada}} alt="">
             </div>
             <div class="detail-movie">
-                <h1>EL JOVEN Y LA GARZA</h1>
-                <h2>Actores : Soma Santoki, Masaki Suda</h2>
-                <h2>Director : Hayao Miyazaki</h2>
+                <h1>{{pelicula.nombre_pelicula}}</h1>
+                <h2>Actores: {{pelicula.actores}}</h2>
+                <h2>Director: {{pelicula.directores}}</h2>
             </div>
             <div class="specifications-movie">
                 <div class="classifications">
@@ -58,71 +59,62 @@
                 <h1>SINOPSIS</h1>
             </div>
             <div class="sinopsis">
-                Mahito, un joven de 12 años, lucha por asentarse en una nueva ciudad tras la muerte de su madre. Sin embargo, cuando una garza parlante informa a Mahito de que su madre sigue viva, entra en una torre abandonada en su busqueda, lo que lo lleva a otro mundo.
-                El título de la película se basa en la novela de 1937, 'Kimitachi wa Dō Ikiru ka' escrita por Yoshino Genzaburō pero la película presenta una historia original que no guarda relación con la novela.
+                {{pelicula.sinopsis}}
             </div>
             <div class="trailer">
                 <div class="aux-trailer">
                     <h1>TRAILER</h1>
                 </div>
-                <iframe src="https://www.youtube.com/embed/X6bztJBWfn0" title="El Niño y la Garza | Tráiler Subtitulado" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
+                <iframe allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" class="DetailMovieTailer" type="text/html" src="https://www.youtube.com/embed/lZcKKUglVEk"
+                    frameborder="0"></iframe> </div>
             <section class="form-city">
                 <h1>Seleccione su ciudad y complejo:</h1>
                 <div class="paremeters-location">
                     <div class="city">
                         <h2>Ciudad</h2>
-                        <select name="ciudad">
-                            <option disabled="" selected>Selecciona una ciudad</option>
-                            <option value="">Machala</option>
-                            <option value="">Pasaje</option>
+                        <select name="ciudad" disabled>
+                            <option value="ciudad" selected>{{ciudad}}</option>
                         </select>
                     </div>
                     <div class="complejo">
                         <h2>Complejo</h2>
-                        <select name="ciudad">
-                            <option disabled="" selected>Selecciona un complejo</option>
-                            <option value="">Shopping</option>
-                            <option value="">Rio Centro</option>
+                        <select name="complejo" disabled>
+                            <option value="complejo" selected>{{complejo}}</option>
                         </select>
                     </div>
                     <div class="fechas">
                         <h2>Fecha</h2>
-                        <select name="fechas">
-                            <option disabled="" selected>Selecciona una fecha</option>
-                            <option value="">Lunes 01 de Enero</option>
-                            <option value="">Lunes 02 de Enero</option>
-                            </select>
+                        <select ng-model="selectedFecha" ng-change="changeFecha()" name="fecha">
+                            <option value="{{fecha.fecha}}" ng-selected="$first" ng-repeat="fecha in fechas">{{fecha.fecha_texto}}</option>
+                        </select>
                     </div>
                 </div>
             </section>
             <section class="functions">
-                <h2>Pasaje</h2>
+                <h2>{{ciudad}}</h2>
                 <div class="funcion-pequenia">
-                    <p>Pequenia</p>
+                    <p>Principal</p>
                     <div class="funciones">
-                        <div class="funcion">
-                            10:00
-                        </div>
-                        <div class="funcion">
-                            14:00
+                        <div class="funcion" ng-repeat="funcion in funcionesGeneral" ng-click="seleccionarFuncion(funcion)" ng-class="{'seleccionada':funcion.seleccionada}">
+                            {{funcion.hora}}
                         </div>
                     </div>
                 </div>
                 <div class="funcion-grande">
-                    <p>Grande</p>
+                    <p>VIP</p>
                     <div class="funciones">
-                        <div class="funcion">
-                            11:00
-                        </div>
-                        <div class="funcion">
-                            15:00
+                        <div class="funcion" ng-repeat="funcion in funcionesVIP" ng-click="seleccionarFuncion(funcion)" ng-class="{'seleccionada':funcion.seleccionada}">
+                            {{funcion.hora}}
                         </div>
                     </div>
                 </div>
             </section>
+            <div class="next-btn">
+                <button id='btn-next2' class="btn-next">Siguiente</button>
+            </div>
         </section>
     </div>
+    <script src="detallePelicula.js"></script>
 </body>
 
 </html>

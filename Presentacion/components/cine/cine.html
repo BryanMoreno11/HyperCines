@@ -33,7 +33,6 @@
         <select ng-model="ciudad" ng-change="changeCiudad()" name="ciudad" id="selectCiudad">
             <option value="{{ciudad.nombre}}" ng-repeat="ciudad in ciudades">{{ciudad.nombre}}</option>
         </select>
-
         <select name="complejo" id="selectComplejo" ng-model="complejo" ng-change="changeComplejo()">
             <option value="{{complejo.nombre_complejo}}" ng-repeat="complejo in complejos">{{complejo.nombre_complejo}}</option>
         </select>
@@ -49,7 +48,7 @@
                     <img ng-attr-id="{{'linkImagen1'+pelicula.id_pelicula}}" ng-attr-src="{{pelicula.imagen_portada}}" alt="">
                     <h1 ng-attr-id="{{'nombrePelicula1'+pelicula.id_pelicula}}">{{pelicula.nombre_pelicula}}</h1>
                     <script ng-attr-id="{{'precioEntrada1'+pelicula.id_pelicula}}" type="text/plain">10</script>
-                    <a href="#" class="btn-comprar" ng-click="getValores('nombrePelicula1'+pelicula.id_pelicula, 'precioEntrada1'+pelicula.id_pelicula, 'linkImagen1'+pelicula.id_pelicula)">Comprar</a>
+                    <a href="#" class="btn-comprar" ng-click="getValores('nombrePelicula1'+pelicula.id_pelicula, 'precioEntrada1'+pelicula.id_pelicula, 'linkImagen1'+pelicula.id_pelicula, pelicula.id_pelicula)">Comprar</a>
                 </div>
             </div>
         </div>

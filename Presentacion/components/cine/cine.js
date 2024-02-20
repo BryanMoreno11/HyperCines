@@ -12,10 +12,9 @@ app.controller("cineController", function($scope) {
         $scope.ciudad = $scope.ciudades[0].nombre;
         $scope.$apply();
         $scope.changeCiudad();
-
     });
     //métodos
-    $scope.getValores = function(nombrePelicula, precioEntrada, linkImagen) {
+    $scope.getValores = function(nombrePelicula, precioEntrada, linkImagen, idpelicula) {
         var nombrePelicula = document.getElementById(nombrePelicula).textContent;
         console.log(nombrePelicula + "xd");
         var precioEntrada = document.getElementById(precioEntrada).textContent;
@@ -24,7 +23,8 @@ app.controller("cineController", function($scope) {
         localStorage.setItem('nombrePelicula', nombrePelicula);
         localStorage.setItem('precioEntrada', precioEntrada);
         localStorage.setItem('linkImg', linkImg);
-        window.location.href = '../seleccion/selection.html';
+        console.log($scope.ciudad, $scope.complejo)
+        window.location.href = `../detallePelicula/detallePelicula.html?ciudad=${$scope.ciudad}&complejo=${$scope.complejo}&idpelicula=${idpelicula}`;
     }
     $scope.goToLogin = function() {
         window.location.href = '/components/login/login.html';
