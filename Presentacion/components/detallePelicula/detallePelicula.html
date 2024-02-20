@@ -25,7 +25,7 @@
     <div class="form-container">
         <section class="info-movie">
             <div class="img-movie">
-                <img src="https://cloudfront-us-east-1.images.arcpublishing.com/eluniverso/SXJNUZ2PL5HTBFJLZYDQEK3O74.jpg" alt="">
+                <img src="{{pelicula.imagen_miniatura}}" alt="">
             </div>
             <div class="movie-poster">
                 <div class="release">ESTRENO</div>
@@ -84,37 +84,34 @@
                     </div>
                     <div class="fechas">
                         <h2>Fecha</h2>
-                        <select ng-model="fecha" ng-change="changeFecha()" name="fecha">
-                            <option value="{{fecha.fecha}}" ng-repeat="fecha in fechas">{{fecha.fecha_texto}}</option>
+                        <select ng-model="selectedFecha" ng-change="changeFecha()" name="fecha">
+                            <option value="{{fecha.fecha}}" ng-selected="$first" ng-repeat="fecha in fechas">{{fecha.fecha_texto}}</option>
                         </select>
                     </div>
                 </div>
             </section>
             <section class="functions">
-                <h2>Pasaje</h2>
+                <h2>{{ciudad}}</h2>
                 <div class="funcion-pequenia">
-                    <p>Pequenia</p>
+                    <p>Principal</p>
                     <div class="funciones">
-                        <div class="funcion">
-                            10:00
-                        </div>
-                        <div class="funcion">
-                            14:00
+                        <div class="funcion" ng-repeat="funcion in funcionesGeneral" ng-click="seleccionarFuncion(funcion)" ng-class="{'seleccionada':funcion.seleccionada}">
+                            {{funcion.hora}}
                         </div>
                     </div>
                 </div>
                 <div class="funcion-grande">
-                    <p>Grande</p>
+                    <p>VIP</p>
                     <div class="funciones">
-                        <div class="funcion">
-                            11:00
-                        </div>
-                        <div class="funcion">
-                            15:00
+                        <div class="funcion" ng-repeat="funcion in funcionesVIP" ng-click="seleccionarFuncion(funcion)" ng-class="{'seleccionada':funcion.seleccionada}">
+                            {{funcion.hora}}
                         </div>
                     </div>
                 </div>
             </section>
+            <div class="next-btn">
+                <button id='btn-next2' class="btn-next">Siguiente</button>
+            </div>
         </section>
     </div>
     <script src="detallePelicula.js"></script>

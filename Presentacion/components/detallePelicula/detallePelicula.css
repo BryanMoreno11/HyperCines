@@ -288,11 +288,37 @@ body {
     margin-right: 25px;
 }
 
+.seleccionada {
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+}
+
 .functions>div>div>div:hover {
     border: 1px solid white;
     background-color: black;
     color: white;
+    cursor: pointer;
     border-radius: 5px;
     padding: 10px;
     margin-right: 25px;
+}
+
+.next-btn {
+    text-align: right;
+    margin-top: 5px;
+}
+
+.btn-next {
+    border: 1px solid white;
+    background-color: white;
+    font-family: 'Roboto Condensed', sans-serif;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.btn-next:hover {
+    background-color: black;
+    color: white;
 }
