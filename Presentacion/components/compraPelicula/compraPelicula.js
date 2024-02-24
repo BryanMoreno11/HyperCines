@@ -30,6 +30,7 @@ app.controller("compraController", function($scope) {
     $scope.asientos_ocupados;
     $scope.seat_aux;
     $scope.posicion_aux;
+    $scope.reserva_full;
     //Llamadas
     getFuncion().then(function(response) {
         $scope.funcion = response[0];
@@ -182,16 +183,47 @@ app.controller("compraController", function($scope) {
 
     document.getElementById("compra").addEventListener("submit", async e => {
         const data = Object.fromEntries(new FormData(e.target));
-        console.log(data);
-        console.log(data.anio);
-        console.log(new Date().getFullYear);
-        console.log(new Date().getMonth());
+        let id_reserva;
+        let reserva = {
+            id_usuario: id_usuario,
+            id_funcion: id_funcion,
+            cantidad: cant,
+            total: $scope.precio_total,
+            codigo_reserva: generarCodigoReserva(id_funcion, id_usuario)
+        }
         if (Number(data.anio) >= new Date().getFullYear() && Number(data.mes) >= new Date().getMonth()) {
-            console.log("xddd");
+            insertarReserva(reserva).then(function(response) {
+                console.log("El objeto es", response.responseData)
+                id_reserva = response.responseData.id_reserva;
+                console.log(id_reserva);
+                for (let asiento of asientos_seleccionados) {
+                    let detalle_reserva = {
+                        id_reserva: id_reserva,
+                        posicion_asiento: asiento
+                    }
+                    insertarDetalleReserva(detalle_reserva).then(function() {
+                        console.log(detalle_reserva);
+                    })
+
+
+                }
+                getReservaFull(id_reserva).then(function(response) {
+                    $scope.reserva_full = response[0];
+                    console.log($scope.reserva_full);
+                })
+                window.alert("Compra exitosa");
+            });
+
+
+
         }
     });
 
-
+    function generarCodigoReserva(id_funcion, id_usuario) {
+        let codigo_reserva = String((new Date()).getTime());
+        codigo_reserva = codigo_reserva.slice(-4);
+        return id_funcion + "" + id_usuario + "" + codigo_reserva;
+    }
 });
 
 //--------------------------------------------Backend-------------------------------------------------
@@ -209,6 +241,44 @@ async function getAsientosOcupados() {
 
 async function getFuncion() {
     const response = await fetch(`http://localhost:3000/api/funcion/todo/${id_funcion}`);
+    const data = await response.json();
+    return data;
+}
+
+async function insertarReserva(reserva) {
+    const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reserva)
+    };
+    try {
+        const response = await fetch('http://localhost:3000/api/reserva', options);
+        const responseData = await response.json();
+        return { ok: response.ok, responseData };
+
+    } catch (error) {
+        throw new Error('Error al llamar al backend');
+    }
+}
+
+async function insertarDetalleReserva(detalleReserva) {
+    const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(detalleReserva)
+    };
+    try {
+        const response = await fetch('http://localhost:3000/api/reserva/detalle', options);
+        const responseData = await response.json();
+        return { ok: response.ok, responseData };
+
+    } catch (error) {
+        throw new Error('Error al llamar al backend');
+    }
+}
+
+async function getReservaFull(id_reserva) {
+    const response = await fetch(`http://localhost:3000/api/reserva/full/${id_reserva}`);
     const data = await response.json();
     return data;
 }
