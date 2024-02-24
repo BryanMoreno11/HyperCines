@@ -13,6 +13,21 @@
 </head>
 
 <body ng-controller="compraController">
+    <header class="header">
+        <div class="menu-container">
+            <div class="logo">
+                <img id="img-header" src="/Presentacion/Imagenes/logoreal.png" alt="">
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li> <a href="../cine/cine.html">Inicio</a></li>
+                    <li> <a href="../estrenos/proxiestrenos.html">Proximos Estrenos</a></li>
+                    <li> <a href="#">Nosotros</a></li>
+                </ul>
+            </nav>
+            <a href='../login/login.component.html' ; class="btn-1"> Login</a>
+        </div>
+    </header>
     <div class="form-container">
         <section class="background-movie">
             <div class="img-movie">
@@ -74,7 +89,7 @@
                     </div>
                     <div class="price-amount">
                         <p id="priceEntry">x {{funcion.precio}}</p>
-                        <p class="totallyEntry">{{precio_total}}</p>
+                        <p class="totallyEntry">$ {{precio_total}}</p>
                     </div>
                 </div>
                 <div class="next-btn">
@@ -123,12 +138,15 @@
                 <button id="btn-volver-pay">Volver</button>
                 <div class="frm-pay-methods">
                     <div class="costumer-info">
-                        <p>Datos de quien retira las entradas:</p>
-                        <p>Nombre: Daniel Zambrano</p>
-                        <p>Cedula: 0701234567</p>
+                        <p id="titleCostumer">Datos de quien retira las entradas</p>
+                        <b>Nombre:</b>
+                        <p>Daniel Zambrano</p>
+                        <b>Cedula:</b>
+                        <p>0701234567</p>
                     </div>
                     <div class="information-view">
                         <div class="payment-info">
+                            <b>Ingrese su tarjeta de credito / debito:</b>
                             <div class="tarjetas">
                                 <p>Seleccionar tarjeta:</p>
                                 <select name="tarjetas" required>

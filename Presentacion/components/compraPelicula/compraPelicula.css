@@ -1,26 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+body {
+    background-color: black;
+    font-family: 'Roboto Condensed', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-container {
+    font-family: 'Bebas Neue', sans-serif;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar ul li {
+    list-style-type: none;
+    position: relative;
+    float: left;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    font-size: 22px;
+    padding: 20px;
+    color: #ffffff;
+    display: block;
+}
+
+.navbar ul li a:hover {
+    color: #ff2f28;
+}
+
+.btn-1 {
+    margin-right: 50px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 7px 20px;
+    background-color: #ff2f28;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+#img-header {
+    width: 190px;
+    margin-left: 50px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    color: white;
+    background-color: black;
+}
+
+
+/**/
+
 .form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.background-movie .img-movie img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.form-container .background-movie .img-movie {
+    width: 40vw;
+}
+
+.form-container .background-movie .img-movie img {
+    width: 1920px;
+    height: 1750px;
+    object-fit: fill;
     filter: brightness(0.2);
     position: absolute;
     top: 50%;
     left: 50%;
     z-index: -5;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -20%);
     min-height: 100%;
     min-width: 100%;
 }
 
 .aux-msg {
+    margin-top: 15px;
     color: white;
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: xx-large;
     text-align: center;
 }
@@ -31,6 +106,21 @@
     justify-content: center;
     font-family: 'Roboto Condensed', sans-serif;
     text-align: center;
+}
+
+.form-container .background-movie .img-movie img {
+    width: 80vw;
+    height: 1800px;
+    object-fit: cover;
+    filter: brightness(0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -5;
+    transform: translate(-50%, -30%);
+    min-height: 100%;
+    min-width: 100%;
+    overflow: visible;
 }
 
 .info-movie .movie-poster {
@@ -44,7 +134,7 @@
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     width: 100%;
-    height: 100%;
+    height: 102%;
 }
 
 .info-movie .detail-movie h1 {
@@ -101,7 +191,7 @@
 .movie-selected {
     display: flex;
     justify-items: center;
-    width: 60%;
+    width: 60vw;
     background-color: white;
     border-radius: 16px;
 }
@@ -273,7 +363,13 @@
     font-family: 'Roboto Condensed', sans-serif;
 }
 
+#titleCostumer {
+    font-size: 30px;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
 .frm-pay-methods .costumer-info {
+    border: 2px black;
     margin-right: 15px;
 }
 
@@ -287,6 +383,11 @@
 .payment-info>div input {
     padding: 10px;
     margin-left: 5px;
+}
+
+.tarjetas select {
+    padding: 10px;
+    padding-left: 55px;
 }
 
 .pay-methods button {
@@ -312,6 +413,10 @@
 }
 
 .pay-methods .information-view {
+    padding: 20px;
+    border-radius: 16px;
+    border: 2px solid black;
+    border: 2px solid black;
     justify-content: center;
 }
 
@@ -328,7 +433,7 @@
 .pay-methods .costumer-info {
     padding: 20px;
     border-radius: 16px;
-    border-bottom: 2px solid black;
+    border: 2px solid black;
 }
 
 .seat {
