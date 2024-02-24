@@ -129,7 +129,6 @@ app.controller("compraController", function($scope) {
 
     btnSiguiente.addEventListener("click", e => {
         if (cant <= $scope.funcion.asientos_disponibles) {
-            window.alert("Ahora estas en   las entradas");
             frmDetails.classList.remove("show");
             frmDetails.classList.add("hide");
             frmSeats.classList.remove("hide");
