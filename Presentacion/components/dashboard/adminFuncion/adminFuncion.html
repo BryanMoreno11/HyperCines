@@ -1,39 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="adminPelicula">
+<html lang="en" ng-app="adminFuncion">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="adminPelicula.css">
+    <link rel="stylesheet" href="adminFuncion.css">
 </head>
 
-<body ng-controller="adminPeliculaController">
+<body ng-controller="adminFuncionController">
     <!-- Botón de inserción -->
-    <button onclick="location.href='../editPelicula/editPelicula.html'" class="btn btn-primary">Insertar</button>
+    <button onclick="location.href='../../editFuncion/editFuncion.html'" class="btn btn-primary">Insertar</button>
 
     <div ng-view></div>
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Duración</th>
-                <th scope="col">Portada</th>
+                <th scope="col">Nombre Película</th>
+                <th scope="col">Fecha de la Función</th>
+                <th scope="col">Sala</th>
+                <th scope="col">Asientos Disponibles</th>
                 <th scope="col">Acciones</th>
-
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="pelicula in peliculas">
-                <td>{{pelicula.nombre_pelicula}}</td>
-                <td>{{pelicula.duracion}} min</td>
-                <td> <img src="{{pelicula.imagen_portada}}" alt=""></td>
+            <tr ng-repeat="funcion in funciones">
+                <td>{{funcion.nombre_pelicula}}</td>
+                <td>{{funcion.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{funcion.nombre_sala}}/{{funcion.nombre_complejo}}/{{funcion.nombre_ciudad}}</td>
+                <td>{{funcion.asientos_disponibles}}</td>
                 <td>
-                    <button ng-click="irEdit(pelicula.id_pelicula)">Editar</button>
-                    <button ng-click="borrarPelicula(pelicula.id_pelicula)">Eliminar</button>
+                    <button ng-click="irEdit(funcion.id_funcion)">Editar</button>
+                    <button ng-click="borrarFuncion(funcion.id_funcion)">Eliminar</button>
                 </td>
-
             </tr>
         </tbody>
     </table>
@@ -41,7 +41,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="adminPelicula.js"></script>
+    <script src="adminFuncion.js"></script>
 </body>
 
 </html>

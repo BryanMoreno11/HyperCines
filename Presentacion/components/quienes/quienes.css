@@ -8,9 +8,9 @@
 }
 
 body {
-    background-color: #ffffff;
+    background-color: #24262B;
     font-family: 'Bebas Neue', sans-serif;
-    color: #030303;
+    color: #ffffff;
 }
 
 .container {
@@ -25,6 +25,67 @@ body {
     background-size: cover;
     min-height: 10vh;
     align-items: center;
+}
+
+.container-carousel {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: #e0e0e0;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.66);
+    border-radius: 15px;
+    overflow: hidden;
+  
+}
+
+.carruseles {
+    width: 1000%;
+    height: 100%;
+    display: flex;
+
+}
+
+.slider-section {
+    width: calc(100% / 10);
+    height: 100%;
+}
+
+.slider-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.btn-left,
+.btn-right {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    font-size: 1.5rem;
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #ffffff81;
+    transform: translate(0,-50%);
+    transition: .5s ease;
+    user-select: none;
+}
+
+.btn-left:hover,
+.btn-right:hover {
+    background-color: #333333d4;
+    color: #fff;
+}
+
+.btn-left {
+    left: 10px;
+}
+
+.btn-right {
+    right: 10px;
 }
 
 .menu {
@@ -127,7 +188,7 @@ body {
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 body {
     line-height: 1.5;
-    font-family: 'Poppins', sans-serif;
+  
 }
 
 * {
@@ -151,7 +212,7 @@ ul {
 }
 
 .footer {
-    background-color: #24262b;
+    background-color: #323741;
     padding: 70px 0;
 }
 
@@ -235,12 +296,19 @@ ul {
 }
 
 .about {
-    background-color: #f9f9f9;
+    background-color: #24262B;
     padding: 50px;
     text-align: center;
-    border: 1px solid #ddd;
+    border: 1px solid #24262B;;;
     border-radius: 5px;
     margin-bottom: 20px;
+}
+
+#empresa {
+    background-color: #323741; /* Color de fondo para la sección empresa */
+}
+#vision {
+    background-color: #323741; /* Color de fondo para la sección empresa */
 }
 
 .section__title {
@@ -317,6 +385,7 @@ ul {
 .testimonial-content h3 {
     font-size: 1.2rem;
     margin-bottom: 10px;
+    color: #100f0f;
 }
 
 .testimonial-content p {
