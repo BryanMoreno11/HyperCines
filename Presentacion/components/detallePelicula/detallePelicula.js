@@ -2,6 +2,8 @@
 angular.module('miApp', [])
 var app = angular.module("detallePelicula", []);
 app.controller("detallePeliculaController", function($scope, $sce) {
+    $scope.usuario = localStorage.getItem("usuario");
+    console.log("el usuario es", $scope.usuario);
     $scope.pelicula;
     $scope.selectedFecha = "";
     $scope.fecha = "";
@@ -20,7 +22,17 @@ app.controller("detallePeliculaController", function($scope, $sce) {
 
     const btnnext = document.getElementById("btn-next2");
     btnnext.addEventListener("click", e => {
-        console.log($scope.id_funcion);
+        if ($scope.id_funcion && $scope.usuario) {
+            window.location.href = `../compraPelicula/compraPelicula.html?id_funcion=${$scope.id_funcion}&id_usuario=${$scope.usuario}`;
+        } else if ($scope.id_funcion && !$scope.usuario) {
+            Swal.fire({
+                title: "Error!",
+                text: "Debe primero iniciar sesión para comprar una entrada",
+                icon: "error"
+            }).then(function() {
+                window.location.href = `../login/login.component.html?id_funcion=${$scope.id_funcion}`;
+            });
+        }
     })
 
     $scope.seleccionarFuncion = function(funcion) {

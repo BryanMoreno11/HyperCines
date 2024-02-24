@@ -348,6 +348,10 @@
     background-color: #f19a05;
 }
 
+.seat.own {
+    background-color: #00214d;
+}
+
 .seat:nth-of-type(2) {
     margin-right: 18px;
 }
@@ -356,12 +360,12 @@
     margin-right: 18px;
 }
 
-.seat:not(.occupied):hover {
+.seat:not(.occupied):not(.own):hover {
     cursor: pointer;
     transform: scale(1.2);
 }
 
-.showcase .seat:not(.occupied):hover {
+.showcase .seat:not(.occupied):not(.own):hover {
     cursor: default;
     transform: scale(1);
 }
