@@ -16,7 +16,7 @@
     <div class="form-container">
         <section class="background-movie">
             <div class="img-movie">
-                <img src="https://cloudfront-us-east-1.images.arcpublishing.com/eluniverso/SXJNUZ2PL5HTBFJLZYDQEK3O74.jpg" alt="">
+                <img src="{{funcion.imagen_miniatura}}" alt="">
             </div>
         </section>
         <div class="aux-msg">
@@ -26,28 +26,28 @@
             <div class="movie-selected">
                 <div class="movie-poster">
                     <div class="release">ESTRENO</div>
-                    <img src="https://pics.filmaffinity.com/El_chico_y_la_garza-226243829-large.jpg" alt="">
+                    <img src="{{funcion.imagen_portada}}" alt="">
                 </div>
                 <div class="miscellaneous">
                     <div class="detail-movie">
-                        <h1>EL JOVEN Y LA GARZA</h1>
-                        <h2>Actores : Soma Santoki, Masaki Suda</h2>
-                        <h2>Director : Hayao Miyazaki</h2>
+                        <h1>{{funcion.nombre_pelicula}}</h1>
+                        <h2>Actores : {{funcion.actores}}</h2>
+                        <h2>Director : {{funcion.directores}}</h2>
                     </div>
                     <div class="specifications-movie">
                         <div class="classifications">
                             <i class='bx bx-child'></i>
-                            <p>+12</p>
+                            <p>{{funcion.nombre_clasificacion}}</p>
                             <div class="separador"></div>
                         </div>
                         <div class="duration">
                             <i class='bx bxs-time'></i>
-                            <p>2H</p>
+                            <p>{{funcion.duracion}} min</p>
                             <div class="separador"></div>
                         </div>
                         <div class="genre">
                             <i class='bx bxs-time'></i>
-                            <p>Anime</p>
+                            <p>{{funcion.nombre_genero}}</p>
                             <div class="separador"></div>
                         </div>
                     </div>
@@ -57,8 +57,8 @@
         <section class="function-choose">
             <div class="function-info">
                 <h1>DATOS DE LA FUNCIÓN</h1>
-                <p>DIA: Martes, 06 Febrero 2024</p>
-                <p>Hora: 22:00</p>
+                <p>DIA: {{funcion.fecha_funcion}}</p>
+                <p>Hora:{{funcion.hora_funcion}}</p>
             </div>
             <div class="separator-big"></div>
             <div class="entrance-detail show">
@@ -73,8 +73,8 @@
                         <button id="plus-seat">+</button>
                     </div>
                     <div class="price-amount">
-                        <p id="priceEntry">x $5.00</p>
-                        <p class="totallyEntry">$5.00</p>
+                        <p id="priceEntry">x {{funcion.precio}}</p>
+                        <p class="totallyEntry">{{precio_total}}</p>
                     </div>
                 </div>
                 <div class="next-btn">
@@ -97,6 +97,10 @@
                             <div class="seat occupied"></div>
                             <small>Ocupada</small>
                         </li>
+                        <li>
+                            <div class="seat own"></div>
+                            <small>Mis asientos</small>
+                        </li>
                     </ul>
                 </div>
                 <div class="container">
@@ -109,13 +113,13 @@
                 </div>
 
                 <p class="text">
-                    Haz seleccionado <span id="count">0</span> asientos por un precio de $ <span id="total">0</span>
+                    Haz seleccionado <span id="count">0</span> asientos por un precio de $ <span id="total">{{precio_total_asiento}}</span>
                 </p>
                 <div class="next-btn">
                     <button id="btn-next-seat">Siguiente</button>
                 </div>
             </div>
-            <div class="pay-methods hide">
+            <form class="pay-methods hide" id="compra">
                 <button id="btn-volver-pay">Volver</button>
                 <div class="frm-pay-methods">
                     <div class="costumer-info">
@@ -127,40 +131,41 @@
                         <div class="payment-info">
                             <div class="tarjetas">
                                 <p>Seleccionar tarjeta:</p>
-                                <select name="tarjetas">
-                                        <option disabled="" selected>Seleccionar</option>
+                                <select name="tarjetas" required>
+                                        <option value="" disabled="" selected>Seleccionar</option>
                                         <option value="VISA">VISA</option>
                                         <option value="MASTER CARD">MASTER CARD</option>
                                     </select>
                             </div>
                             <div class="cedula">
                                 <p>Cedula:</p>
-                                <input type="text"></input>
+                                <input type="text" required pattern="[0-9]+" minlength="10"></input>
                             </div>
                             <div class="code-card-back">
                                 <p>Código de seguridad:</p>
-                                <input type="text"></input>
+                                <input required pattern="\d{6}" type="text"></input>
                             </div>
                             <div class="card-year">
                                 <p>Anio</p>
-                                <input type="text"></input>
+                                <input name="anio" required pattern="\d{4}" type="text"></input>
                             </div>
                             <div class="card-month">
                                 <p>Mes</p>
-                                <input type="text"></input>
+                                <input name="mes" required pattern="(0[1-9]|1[0-2])" type="text"></input>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="next-btn">
-                    <button id="btn-next">Siguiente</button>
+                    <button type="submit" id="btn-next">Siguiente</butto>
                 </div>
-            </div>
+            </form>
     </div>
     </section>
     </div>
 
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="compraPelicula.js"></script>
 </body>

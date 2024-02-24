@@ -33,7 +33,7 @@ async function verificarUsuario(req, res) {
         const result = await client.query(query, values);
         client.release();
         if (result.rowCount > 0) {
-            res.status(200).json({ message: 'Inicio de sesión éxitoso' });
+            res.json(result.rows[0].id_usuario);
         } else {
             res.status(400).json({ message: 'Credenciales incorrectas' });
         }

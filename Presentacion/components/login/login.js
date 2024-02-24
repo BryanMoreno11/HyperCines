@@ -1,3 +1,10 @@
+//varuables
+let fecha = new Date();
+fecha.setMinutes(fecha.getMinutes() + 10);
+let id_usuario;
+let params = new URLSearchParams(document.location.search);
+const id_funcion = params.get('id_funcion');
+console.log(id_funcion);
 //Animacione
 const btnSignIn = document.getElementById("sign-in");
 const btnSignUp = document.getElementById("sign-up");
@@ -19,7 +26,6 @@ document.getElementById("registro").addEventListener("submit", async e => {
     const data = Object.fromEntries(new FormData(e.target));
     console.log(data);
     const response = await registrarUsuario(data);
-    console.log(response);
     if (response.ok) {
         Swal.fire({
             title: "Registro éxitoso",
@@ -39,11 +45,19 @@ document.getElementById("login").addEventListener("submit", async e => {
     const data = Object.fromEntries(new FormData(e.target));
     console.log(data);
     const response = await verificarUsuario(data);
-    console.log(response);
+    id_usuario = response.responseData;
     if (response.ok) {
+        localStorage.setItem("usuario", String(id_usuario));
         Swal.fire({
             title: "Acceso éxitoso",
             icon: "success"
+        }).then(function() {
+            if (id_funcion) {
+                window.location.href = `../compraPelicula/compraPelicula.html?id_funcion=${id_usuario}&id_usuario=${id_usuario}`;
+            } else {
+                window.location.href = `../cine/cine.html`;
+
+            }
         });
     } else {
         Swal.fire({
