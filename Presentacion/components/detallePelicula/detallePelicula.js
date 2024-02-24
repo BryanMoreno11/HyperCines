@@ -69,6 +69,13 @@ app.controller("detallePeliculaController", function($scope, $sce) {
         }
     }
 
+
+    async function enviarCorreoPrueba() {
+        const response = await fetch(`http://localhost:3000/api/correo/`);
+        const data = await response.json();
+        return data;
+    }
+
     async function cargarDetallesPelicula() {
         const response = await fetch(`http://localhost:3000/api/pelicula/${$scope.id_pelicula}`);
         const data = await response.json();

@@ -17,6 +17,7 @@ const clasificacionRoutes = require("./Enlace a Datos/routes/clasificacionRoutes
 const salaRoutes = require("./Enlace a Datos/routes/salaRoutes");
 const detalleReservaRoutes = require("./Enlace a Datos/routes/detalleReservaRoutes");
 const reservaRoutes = require("./Enlace a Datos/routes/reservaRoutes");
+const correoRoutes = require("./Enlace a Datos/routes/correoRoutes");
 app.use("/api", peliculaRoutes);
 app.use("/api", ciudadRoutes);
 app.use("/api", complejoRoutes);
@@ -28,5 +29,6 @@ app.use("/api", clasificacionRoutes);
 app.use("/api", salaRoutes);
 app.use("/api", detalleReservaRoutes);
 app.use("/api", reservaRoutes);
+app.use("/api", correoRoutes);
 app.listen("3000");
 console.log("server up localhost:3000");
