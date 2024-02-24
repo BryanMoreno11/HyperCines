@@ -191,7 +191,8 @@ app.controller("compraController", function($scope) {
             total: $scope.precio_total,
             codigo_reserva: generarCodigoReserva(id_funcion, id_usuario)
         }
-        if (Number(data.anio) >= new Date().getFullYear() && Number(data.mes) >= new Date().getMonth()) {
+        console.log(reserva);
+        if (Number(data.anio) >= new Date().getFullYear() && Number(data.mes) >= new Date().getMonth() + 1) {
             insertarReserva(reserva).then(function(response) {
                 console.log("El objeto es", response.responseData)
                 id_reserva = response.responseData.id_reserva;
@@ -203,19 +204,20 @@ app.controller("compraController", function($scope) {
                     }
                     insertarDetalleReserva(detalle_reserva).then(function() {
                         console.log(detalle_reserva);
-                    })
-
-
+                    });
                 }
-                getReservaFull(id_reserva).then(function(response) {
-                    $scope.reserva_full = response[0];
-                    console.log($scope.reserva_full);
-                })
-                window.alert("Compra exitosa");
+                console.log("la id de la reserva es", id_reserva);
+                setTimeout(function() {
+                    getReservaFull(id_reserva).then(function(response) {
+                        $scope.reserva_full = response[0];
+                        console.log($scope.reserva_full);
+                        console.log("la respuesta es", response);
+                        window.alert("Compra exitosa");
+
+                    });
+                }, 100);
+
             });
-
-
-
         }
     });
 

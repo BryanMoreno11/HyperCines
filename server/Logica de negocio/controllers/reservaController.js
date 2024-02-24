@@ -1,9 +1,9 @@
 const pool = require("../../Enlace a Datos/database");
 
 async function createReserva(req, res) {
-    const { id_usuario, id_funcion, cantidad, total } = req.body;
-    const query = 'INSERT INTO reserva (id_usuario, id_funcion, cantidad, total) VALUES ($1, $2, $3,$4) RETURNING id_reserva';
-    const values = [id_usuario, id_funcion, cantidad, total];
+    const { id_usuario, id_funcion, cantidad, total, codigo_reserva } = req.body;
+    const query = 'INSERT INTO reserva (id_usuario, id_funcion, cantidad, total, codigo_reserva) VALUES ($1, $2, $3,$4,$5) RETURNING id_reserva';
+    const values = [id_usuario, id_funcion, cantidad, total, codigo_reserva];
     try {
         const client = await pool.connect();
         const result = await client.query(query, values);

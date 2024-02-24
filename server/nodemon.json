@@ -1,5 +1,5 @@
 {
     "events": {
-        "crash": "rs"
+        "crash": "touch index.js"
     }
 }

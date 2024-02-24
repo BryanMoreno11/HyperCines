@@ -7,7 +7,7 @@ async function getReservas(req, res) {
         client.release();
         res.json(result.rows);
     } catch (err) {
-        res.status(500).json({ error: "Error en el servidor" });
+        res.status(500).json({ error: "Error en el servidor", message: err.message });
     }
 }
 
