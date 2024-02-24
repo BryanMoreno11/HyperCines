@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hipercine</title>
     <link rel="stylesheet" href="proxiestrenos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body ng-controller="proxiEstrenoController">
@@ -21,13 +23,53 @@
                 <ul>
                     <li> <a href="../cine/cine.html">Inicio</a></li>
                     <li> <a href="../estrenos/proxiestrenos.html">Proximos Estrenos</a></li>
-                    <li> <a href="#">Nosotros</a></li>
+                    <li> <a href="../quienes/quienes.html">Nosotros</a></li>
                 </ul>
 
             </nav>
             <a href='../login/login.component.html' ; class="btn-1"> Login</a>
         </div>
     </header>
+
+    <section>
+        <div class="container-carousel">
+            <div class="carruseles" id="slider">
+                <section class="slider-section">
+                    <img src="../../Imagenes/multiverso.jpg">
+                </section>
+                <section class="slider-section">
+                    <img src="../../Imagenes/toy.jpg">
+                </section>
+                <section class="slider-section">
+                    <img src="../../Imagenes/bg.jpg">
+                </section>
+                <section class="slider-section">
+                    <img src="../../Imagenes/multiverso.jpg">
+                </section>
+                <section class="slider-section">
+                    <img src="../../Imagenes/toy.jpg">
+                </section>
+                <section class="slider-section">
+                    <img src="../../Imagenes/bg.jpg">
+                </section>
+                <section class="slider-section">
+                    <img src="../../Imagenes/multiverso.jpg">
+                </section>
+                <section class="slider-section">
+                    <img src="../../Imagenes/toy.jpg">
+                </section>
+                <section class="slider-section">
+                    <img src="../../Imagenes/bg.jpg">
+                </section>
+                <section class="slider-section">
+                    <img src="../../Imagenes/toy.jpg">
+                </section>
+                
+            </div>
+            <div class="btn-left"><i class='bx bx-chevron-left'></i></div>
+            <div class="btn-right"><i class='bx bx-chevron-right'></i></div>
+        </div>
+    </section>
 
     <section class="movies container" id="movies-container" ng-repeat="mes in meses">
         <h2>{{mes}}</h2>
@@ -42,15 +84,47 @@
         </div>
     </section>
 
-    <footer class="footer container">
-        <h3>Hipercine</h3>
-        <ul>
-            <li><a href="../cine/cine.html">Inicio</a></li>
-            <li><a href="../estrenos/proxiestrenos.html">Proximos Estrenos</a></li>
-            <li><a href="../login/login.component.html">Inicio de Sesion</a></li>
-            <li><a href="#">Contacto</a></li>
-        </ul>
-    </footer>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>Cartelera</h4>
+                    <ul>
+                        <li><a href="#">Proximos Estrenos</a></li>
+                        <li><a href="#">Quienes Somos</a></li>
+                        <li><a href="#">Donde Estamos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Hipercines</h4>
+                    <ul>
+                        <li><a href="#">Terminos y Condiciones</a></li>
+                        <li><a href="#">Politicas y Privacidad</a></li>
+                        <li><a href="#">Politicas de Cookies</a></li>
+                        <li><a href="#">Servicios Publicitarios</a></li>
+                        <li><a href="#">Cumpleaños</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contactanos</h4>
+                    <ul>
+                        <li><a href="#">Escribenos</a></li>
+                        <li><a href="#">Trabaja con Nosotros</a></li>
+                        <li><a href="#">Testimonios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Redes Sociales</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="./proxiestrenos.js"></script>
