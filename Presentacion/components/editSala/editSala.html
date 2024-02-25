@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="editSala">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Sala</title>
+    <link rel="stylesheet" href="editSala.css">
+</head>
+
+<body ng-controller="editSalaController">
+    <div class="container">
+        <h1>Formulario de Sala</h1>
+        <form id="formulario">
+            <div class="form-group">
+                <label for="id_complejo">Complejo</label>
+                <select ng-model="sala.id_complejo" id="id_complejo" name="id_complejo" required>
+                    <option value="">Seleccione un Complejo</option>
+                    <option ng-repeat="complejo in complejos" value="{{complejo.id_complejo}}">{{complejo.nombre_complejo}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nombre">Nombre de la Sala</label>
+                <input ng-model="sala.nombre" type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="capacidad">Capacidad</label>
+                <select ng-model="sala.capacidad" id="capacidad" name="capacidad" required>
+                    <option value="">Seleccione una cantidad</option>
+                    <option value="30">30 Personas</option>
+                    <option value="60">60 Personas</option>
+                </select>
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="editSala.js"></script>
+</body>
+
+</html>
