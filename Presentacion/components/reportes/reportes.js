@@ -3,18 +3,33 @@ var bar = document.getElementById("myBarGraph").getContext("2d");
 var leftbar = document.getElementById("myLeftBarGraph").getContext("2d");
 var line = document.getElementById("mylineGraph").getContext("2d");
 var line2 = document.getElementById("myLineGraph2").getContext("2d");
-var radio = document.getElementById("myRadioGraph").getContext("2d");
 var donut = document.getElementById("myDonutGraph").getContext("2d");
-var polar = document.getElementById("myPolarGraph").getContext("2d");
 var circle = document.getElementById("myCircleGraph").getContext("2d");
 //Variables globales
 let recaudacion;
 let recaudacion_pelicula;
 let recaudacion_ciudad;
+let entradas_semana;
+let entradas_pelicula;
+let entradas_genero;
+let recaudacion_clasificacion;
+Chart.register(ChartDataLabels);
+Chart.defaults.set('plugins.datalabels', {
+    color: 'black',
+    align: 'end',
+    font: {
+        weight: 'bold'
+    }
+});
 //llamadas
 graficarRecaudacionSemanal();
 graficarRecaudacionPelicula();
-graficarRecaudacionCiudad();
+graficarEntradasPelicula();
+graficarEntradasSemana();
+graficarEntradasGenero();
+graficarRecaudacionClasificacion();
+console.log(recaudacionCiudad);
+
 //Funciones
 function generarColores(longitug) {
     var colors = [];
@@ -25,10 +40,35 @@ function generarColores(longitug) {
     }
     return colors;
 }
+
+function saveAsPDF() {
+    const jsPDF = window.jspdf.jsPDF;
+    let index = 1;
+    let pdf = new jsPDF({
+        orientation: 'landscape',
+        unit: 'px',
+        format: 'a4',
+        compress: true,
+    })
+    const canvas = document.querySelectorAll("canvas");
+    let pageWidth = 400;
+    let pageHeight = 400;
+    index = 1;
+    canvas.forEach((canva) => {
+        pdf.addImage(canva, 'PNG', 10, 10, pageWidth, pageHeight, `img${index}`, "FAST");
+        if (index < canvas.length) {
+            pdf.addPage();
+        }
+        index++;
+    });
+    pdf.save('Reporte.pdf');
+}
 //Gráficos
 async function graficarRecaudacionPelicula() {
     let label = [];
     await recaudacionPelicula();
+    console.log("pelis", recaudacion_pelicula);
+
     let colores = generarColores(Object.keys(recaudacion_pelicula).length);
     console.log("los colores", colores)
     console.log(label);
@@ -37,21 +77,16 @@ async function graficarRecaudacionPelicula() {
         data: {
             labels: Object.keys(recaudacion_pelicula),
             datasets: [{
-                label: "Recaudación por película",
+                label: "Recaudación Semanal por Película",
                 data: Object.values(recaudacion_pelicula),
                 backgroundColor: colores,
                 borderColor: colores,
                 borderWidth: 2
             }, ]
         },
+
         options: {
             tooltips: {
-                callbacks: {
-                    label: function(tooltipItem, data) {
-                        var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                        return 'Valor: ' + value;
-                    }
-                },
                 cornerRadius: 0,
                 caretSize: 0,
                 xPadding: 16,
@@ -62,7 +97,11 @@ async function graficarRecaudacionPelicula() {
             },
             plugins: {
                 datalabels: {
-                    display: true
+                    display: true,
+                    formatter: function(value, context) {
+                        // Formatear el valor como moneda
+                        return '$' + value.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                    }
 
                 }
             },
@@ -75,22 +114,25 @@ async function graficarRecaudacionPelicula() {
             },
 
             leyend: {
-                display: true
+                display: true,
+
             },
         }
     });
+
 }
 
-async function graficarRecaudacionCiudad() {
-    await recaudacionCiudad();
+async function graficarEntradasPelicula() {
+    await entradasPelicula();
+    let colores = generarColores(Object.keys(entradas_pelicula).length);
     var myLeftBarGraph = new Chart(leftbar, {
         type: "bar",
         data: {
-            labels: Object.keys(recaudacion_ciudad),
+            labels: Object.keys(entradas_pelicula),
             datasets: [{
-                label: "Recaudación por ciudad",
-                data: Object.values(recaudacion_ciudad),
-                backgroundColor: "rgba(0, 99, 132, 0.6)",
+                label: "Ventas de Boletos por Película en la Última Semana",
+                data: Object.values(entradas_pelicula),
+                backgroundColor: colores,
                 borderWidth: 0
             }]
         },
@@ -100,24 +142,9 @@ async function graficarRecaudacionCiudad() {
             scales: {
                 yAxes: [{
                     ticks: {
-                        fontSize: 10,
-                        stepSize: 5,
-                        min: 0,
-                        beginAtZero: true,
-                    }
-                }],
-                xAxes: [{
-                    barPercentage: .8,
-                    maxBarThickness: 50,
-                    ticks: {
-                        fontSize: 10,
+                        beginAtZero: true
                     }
                 }]
-            },
-            elements: {
-                rectangle: {
-                    borderSkipped: "left"
-                }
             },
             responsive: true,
             title: {
@@ -126,7 +153,8 @@ async function graficarRecaudacionCiudad() {
             },
             plugins: {
                 datalabels: {
-                    display: false
+                    display: true,
+
                 }
             }
         }
@@ -149,7 +177,7 @@ async function graficarRecaudacionSemanal() {
         data: {
             xLabels: Object.keys(recaudacion),
             datasets: [{
-                label: "Recaudación",
+                label: "Recaudación semanal",
                 data: Object.values(recaudacion),
                 fill: true,
                 lineTension: 0.4,
@@ -186,20 +214,28 @@ async function graficarRecaudacionSemanal() {
             },
             plugins: {
                 datalabels: {
-                    display: false
-                }
+                    display: true,
+                    align: "45",
+                    formatter: function(value, context) {
+                        // Formatear el valor como moneda
+                        return '$' + value.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                    }
+                },
             }
         }
     });
 }
 
-var mylineGraph = new Chart(line, {
-    type: "line",
-    data: {
-        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"],
-        datasets: [{
-                label: "Ventas 2018",
-                data: [45, 59, 68, 45, 45, 35, 41],
+
+async function graficarEntradasSemana() {
+    await entradasSemana();
+    var mylineGraph = new Chart(line, {
+        type: "line",
+        data: {
+            labels: Object.keys(entradas_semana),
+            datasets: [{
+                label: "Venta de boletos en la última semana",
+                data: Object.values(entradas_semana),
                 fill: true,
                 borderColor: "rgba(55, 130, 220, .65)",
                 backgroundColor: "rgba(55, 130, 220, 0.1)",
@@ -207,250 +243,167 @@ var mylineGraph = new Chart(line, {
                 pointBorderWidth: 2,
                 borderDash: [5, 5],
                 pointStyle: "rectRounded"
+            }, ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Gráfico de ventas - Ejemplo de Título"
             },
-            {
-                label: "Ventas 2019",
-                data: [65, 61, 80, 81, 51, 55, 56],
+            plugins: {
+                datalabels: {
+                    display: true
+                }
+            }
+        }
+    });
+}
+
+
+async function graficarRecaudacionClasificacion() {
+    await recaudacionClasificacion();
+    var myDonutGraph = new Chart(donut, {
+        //type: "pie",
+        type: "doughnut",
+        data: {
+            labels: Object.keys(recaudacion_clasificacion),
+            datasets: [{
+                label: "Compras",
+                data: Object.values(recaudacion_clasificacion),
                 fill: false,
-                borderColor: "rgba(245, 35, 56, .65)",
-                lineTension: 0,
-                pointBorderWidth: 2,
-                pointStyle: "rectRounded"
-            }
-        ]
-    },
-    options: {
-        title: {
-            display: true,
-            text: "Gráfico de ventas - Ejemplo de Título"
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(255, 206, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(255, 159, 64, 0.2)"
+                ],
+                borderColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    "rgba(153, 102, 255, 1)",
+                    "rgba(255, 159, 64, 1)"
+                ],
+                lineTension: 0.1
+            }]
         },
-        plugins: {
-            datalabels: {
-                display: false
-            }
-        }
-    }
-});
-
-
-
-var myRadioGraph = new Chart(radio, {
-    type: "radar",
-    data: {
-        labels: [
-            "Ventas",
-            "Exportaciones",
-            "Nuevos Clientes",
-            "Contrataciones",
-            "RR.HH.",
-            "Almaceneces",
-            "Importaciones"
-        ],
-        datasets: [{
-                label: "2018",
-                data: [15, 39, 55, 35, 41, 15, 20],
-                fill: true,
-                backgroundColor: "rgba(54, 162, 235, 0.2)",
-                borderColor: "rgb(54, 162, 235)",
-                pointBackgroundColor: "rgb(54, 162, 235)",
-                pointBorderColor: "#fff",
-                pointHoverBackgroundColor: "#fff",
-                pointHoverBorderColor: "rgb(54, 162, 235)"
+        options: {
+            legend: {
+                display: true,
+                position: "top",
+                labels: {
+                    boxWidth: 10,
+                    fontColor: "black"
+                }
             },
-            {
-                label: "2020",
-                data: [67, 59, 90, 81, 50, 55, 40],
-                fill: true,
-                backgroundColor: "rgba(255, 99, 132, 0.2)",
-                borderColor: "rgb(255, 99, 132)",
-                pointBackgroundColor: "rgb(255, 99, 132)",
-                pointBorderColor: "#fff",
-                pointHoverBackgroundColor: "#fff",
-                pointHoverBorderColor: "rgb(255, 99, 132)"
-            }
-        ]
-    },
-    options: {
-        elements: {
-            line: {
-                tension: 0,
-                borderWidth: 3
-            }
-        },
-        plugins: {
-            datalabels: {
-                display: false
-            }
-        }
-    }
-});
-
-var myDonutGraph = new Chart(donut, {
-    //type: "pie",
-    type: "doughnut",
-    data: {
-        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
-        datasets: [{
-            label: "Compras",
-            data: [45, 48, 90, 20, 16, 24],
-            fill: false,
-            backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(255, 206, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-                "rgba(153, 102, 255, 0.2)",
-                "rgba(255, 159, 64, 0.2)"
-            ],
-            borderColor: [
-                "rgba(255, 99, 132, 1)",
-                "rgba(54, 162, 235, 1)",
-                "rgba(255, 206, 86, 1)",
-                "rgba(75, 192, 192, 1)",
-                "rgba(153, 102, 255, 1)",
-                "rgba(255, 159, 64, 1)"
-            ],
-            lineTension: 0.1
-        }]
-    },
-    options: {
-        legend: {
-            display: true,
-            position: "top",
-            labels: {
-                boxWidth: 10,
-                fontColor: "#444444"
-            }
-        },
-        title: {
-            display: true,
-            text: "Gráfico de ventas - Enero a Junio"
-        },
-        plugins: {
-            datalabels: {
-                formatter: (value, ctx) => {
-
-                    let sum = 0;
-                    let dataArr = ctx.chart.data.datasets[0].data;
-                    dataArr.map(data => {
-                        sum += data;
-                    });
-                    let percentage = (value * 100 / sum).toFixed(2) + "%";
-                    return percentage;
-
-
+            title: {
+                display: true,
+                text: "Gráfico de ventas - Enero a Junio"
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Porcentaje de ingresos por clasificación'
                 },
-                color: '#fff',
+                datalabels: {
+                    formatter: (value, ctx) => {
+
+                        let sum = 0;
+                        let dataArr = ctx.chart.data.datasets[0].data;
+                        dataArr.map(data => {
+                            sum += data;
+                        });
+                        let percentage = (value * 100 / sum).toFixed(2) + "%";
+                        return percentage;
+
+
+                    },
+                    color: 'black',
+                }
             }
         }
-    }
-});
+    });
 
-var myPolarGraph = new Chart(polar, {
-    type: "polarArea",
-    data: {
-        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo"],
-        datasets: [{
-            label: "Compras",
-            data: [8, 16, 17, 3, 14],
-            fill: false,
-            backgroundColor: [
-                "rgba(255, 99, 132, .5)",
-                "rgba(54, 162, 235, .5)",
-                "rgba(255, 206, 86, .5)",
-                "rgba(75, 192, 192, .5)",
-                "rgba(153, 102, 255, .5)"
-            ],
-            borderColor: [
-                "rgba(255, 99, 132, .5)",
-                "rgba(54, 162, 235, .5)",
-                "rgba(255, 206, 86, .5)",
-                "rgba(75, 192, 192, .5)",
-                "rgba(153, 102, 255, .5)"
-            ],
-            lineTension: 0.1
-        }]
-    },
-    options: {
-        legend: {
-            display: true,
-            position: "top",
-            labels: {
-                boxWidth: 10,
-                fontColor: "#444444"
-            }
+
+
+}
+
+
+
+
+
+
+
+
+
+async function graficarEntradasGenero() {
+    await entradasGenero();
+    var myCircleGraph = new Chart(circle, {
+        type: "pie",
+        data: {
+            labels: Object.keys(entradas_genero),
+            datasets: [{
+                label: "Entradas",
+                data: Object.values(entradas_genero),
+                borderWidth: 0,
+                backgroundColor: [
+                    "rgba(255, 99, 132, .6)",
+                    "rgba(54, 162, 235, .6)",
+                    "rgba(255, 206, 86, .6)",
+                    "rgba(75, 192, 192, .6)",
+                    "rgba(153, 102, 255, .6)"
+                ],
+                borderColor: [
+                    "rgba(255, 99, 132, .5)",
+                    "rgba(54, 162, 235, .5)",
+                    "rgba(255, 206, 86, .5)",
+                    "rgba(75, 192, 192, .5)",
+                    "rgba(153, 102, 255, .5)"
+                ],
+                lineTension: 0.1
+            }]
         },
-        plugins: {
-            datalabels: {
-                formatter: (value, ctx) => {
-
-                    let sum = 0;
-                    let dataArr = ctx.chart.data.datasets[0].data;
-                    dataArr.map(data => {
-                        sum += data;
-                    });
-                    let percentage = (value * 100 / sum).toFixed(2) + "%";
-                    return percentage;
+        options: {
+            legend: {
+                display: true,
+                position: "top",
+                labels: {
+                    boxWidth: 10,
+                    fontColor: "#444444"
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Porcentaje de entradas por genero película'
                 },
-                color: '#fff',
+                datalabels: {
+                    formatter: (value, ctx) => {
+
+                        let sum = 0;
+                        let dataArr = ctx.chart.data.datasets[0].data;
+                        dataArr.map(data => {
+                            sum += data;
+                        });
+                        let percentage = (value * 100 / sum).toFixed(2) + "%";
+                        return percentage;
+
+
+                    },
+                    color: 'black',
+                }
             }
         }
-    }
-});
+    });
 
-var myCircleGraph = new Chart(circle, {
-    type: "pie",
-    data: {
-        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo"],
-        datasets: [{
-            label: "Compras",
-            data: [11, 28, 45, 20, 120],
-            borderWidth: 0,
-            backgroundColor: [
-                "rgba(255, 99, 132, .6)",
-                "rgba(54, 162, 235, .6)",
-                "rgba(255, 206, 86, .6)",
-                "rgba(75, 192, 192, .6)",
-                "rgba(153, 102, 255, .6)"
-            ],
-            borderColor: [
-                "rgba(255, 99, 132, .5)",
-                "rgba(54, 162, 235, .5)",
-                "rgba(255, 206, 86, .5)",
-                "rgba(75, 192, 192, .5)",
-                "rgba(153, 102, 255, .5)"
-            ],
-            lineTension: 0.1
-        }]
-    },
-    options: {
-        legend: {
-            display: true,
-            position: "top",
-            labels: {
-                boxWidth: 10,
-                fontColor: "#444444"
-            }
-        },
-        plugins: {
-            datalabels: {
-                formatter: (value, ctx) => {
-
-                    let sum = 0;
-                    let dataArr = ctx.chart.data.datasets[0].data;
-                    dataArr.map(data => {
-                        sum += data;
-                    });
-                    let percentage = (value * 100 / sum).toFixed(2) + "%";
-                    return percentage;
+}
 
 
-                },
-                color: '#fff',
-            }
-        }
-    }
-});
+
+
 //Conexión con el Backend
 async function recaudacionSemanal() {
     await fetch('http://localhost:3000/api/dashboard/recaudacion')
@@ -470,5 +423,28 @@ async function recaudacionCiudad() {
     await fetch('http://localhost:3000/api/dashboard/recaudacion/ciudad')
         .then(response => response.json())
         .then(response => recaudacion_ciudad = response);
+}
 
+async function entradasSemana() {
+    await fetch('http://localhost:3000/api/dashboard/entradas')
+        .then(response => response.json())
+        .then(response => entradas_semana = response);
+}
+
+async function entradasPelicula() {
+    await fetch('http://localhost:3000/api/dashboard/entradas/pelicula')
+        .then(response => response.json())
+        .then(response => entradas_pelicula = response);
+}
+
+async function entradasGenero() {
+    await fetch('http://localhost:3000/api/dashboard/entradas/genero')
+        .then(response => response.json())
+        .then(response => entradas_genero = response);
+}
+
+async function recaudacionClasificacion() {
+    await fetch('http://localhost:3000/api/dashboard/recaudacion/clasificacion')
+        .then(response => response.json())
+        .then(response => recaudacion_clasificacion = response);
 }
