@@ -1,7 +1,5 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,32 +7,36 @@
     list-style: none;
 }
 
-  body{
+body {
     background-color: #24262B;
     font-family: 'Bebas Neue', sans-serif;
     color: #ffffff;
-  }
-  
-  .container{
+}
+
+.container {
     max-width: 1200px;
     margin: 0 auto;
-  }
+}
 
-  .header{
-    background-image: url(../../Imagenes/toy.jpg);
+#img-header {
+    width: 190px;
+}
+
+.header {
+    background-color: black;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 70vh;
+    min-height: 14vh;
     align-items: center;
-  }
+}
 
-  .header {
-    background-image: url(../../Imagenes/telon-fondo-textura-muro-hormigon-solido.jpg);
+.header {
+    background-color: black;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 9vh;
+    min-height: 14vh;
     align-items: center;
 }
 
@@ -46,14 +48,12 @@
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.66);
     border-radius: 15px;
     overflow: hidden;
-  
 }
 
 .carruseles {
     width: 1000%;
     height: 100%;
     display: flex;
-
 }
 
 .slider-section {
@@ -80,7 +80,7 @@
     font-weight: 600;
     cursor: pointer;
     color: #ffffff81;
-    transform: translate(0,-50%);
+    transform: translate(0, -50%);
     transition: .5s ease;
     user-select: none;
 }
@@ -99,7 +99,7 @@
     right: 10px;
 }
 
-  .menu{
+.menu {
     position: absolute;
     top: 0;
     left: 0;
@@ -107,83 +107,83 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
+}
 
-  .logo{
+.logo {
     font-size: 35px;
     color: #ffffff;
-  }
+}
 
-  .menu .navbar ul li{
+.menu .navbar ul li {
     position: relative;
     float: left;
-  }
+}
 
-  .menu .navbar ul li a{
+.menu .navbar ul li a {
     font-size: 22px;
     padding: 20px;
     color: #ffffff;
     display: block;
-  }
+}
 
-  .menu .navbar ul li a:hover{
-    color: #ff2f28;
-  }
+.menu .navbar ul li a:hover {
+    color: #f1c40f;
+}
 
-  #menu{
+#menu {
     display: none;
-  }
+}
 
-  .menu-icono{
+.menu-icono {
     width: 25px;
-  }
+}
 
-  .menu label{
+.menu label {
     cursor: pointer;
     display: none;
-  }
+}
 
-  .header-content{
+.header-content {
     display: flex;
     width: 100%;
-  }
+}
 
-  .header-1{
+.header-1 {
     display: flex;
     flex-direction: column;
     width: 50%;
     align-self: flex-end;
-  }
+}
 
-  .header-1 img{
+.header-1 img {
     width: 300px;
-  }
+}
 
-  .header-2{
+.header-2 {
     width: 50%;
     margin-top: 80px;
     text-align: end;
-  }
+}
 
-  .header-2 h1{
+.header-2 h1 {
     color: #ffffff72;
     font-size: 80px;
     line-height: 80px;
-  }
+}
 
-  .header-2 img{
+.header-2 img {
     width: 70px;
-  }
+}
 
-  .btn-1{
+.btn-1 {
     display: inline-block;
     padding: 7px 20px;
-    background-color: #ff2f28;
-    color: #ffffff;
+    background-color: #ffc404;
+    color: black;
     font-size: 20px;
-  }
+}
 
-  .btn-2{
+.btn-2 {
     width: 110px;
     display: inline-block;
     padding: 7px 20px;
@@ -191,46 +191,49 @@
     font-size: 20px;
     margin-top: 30px;
     color: #ffffff;
-  }
+}
 
-  /*todo lo de arriba se uso para la parte del header*/
-  
-  .movies{
+
+/*todo lo de arriba se uso para la parte del header*/
+
+.movies {
     padding: 50px 0 0 0;
     display: flex;
     flex-direction: column;
-  }
+}
 
-  h2{
+h2 {
+    font-weight: lighter;
     font-size: 35px;
     margin-bottom: 20px;
-  }
+}
 
-  hr{
-    border: 1px solid #ff2f28;
+hr {
+    border: 1px solid #f1c40f;
     width: 50%;
     margin-bottom: 40px;
-  }
+}
 
-  .box-container-1,
-  .box-container-2,
-  .box-container-3{
+.box-container-1,
+.box-container-2,
+.box-container-3 {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 40px;
-  }
- /*todo lo del box se hace para acomodar las peliculas*/
-  .box-1,
-  .box-2,
-  .box-3{
+}
+
+
+/*todo lo del box se hace para acomodar las peliculas*/
+
+.box-1,
+.box-2,
+.box-3 {
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease;
-  }
+}
 
-  
-
-  .load-more{
+.load-more {
     margin-top: 40px;
     display: inline-block;
     padding: 10px 25px;
@@ -238,175 +241,190 @@
     border: 1px solid #ff2f28;
     color: #ff2f28;
     font-size: 16px;
-    cursor:pointer;
+    cursor: pointer;
     align-self: flex-end;
-  }
+}
 
-  .load-more:hover{
+.load-more:hover {
     background-color: #ff2f28;
     color: #ffffff;
-  }
+}
 
-  .content {
+.content {
     position: relative;
     width: 100%;
     height: 100%;
-    box-shadow: 0 0 50px 5px rgba(0, 0, 0, 0.7); /* Añade un sombreado oscuro en todo el contorno */
+    box-shadow: 0 0 50px 5px rgba(0, 0, 0, 0.7);
+    /* Añade un sombreado oscuro en todo el contorno */
 }
 
 .content img {
+    border: 2px solid #f1c40f;
     display: block;
     width: 100%;
-    height: auto;
-    border-radius: 20px; /* Añade esquinas redondeadas a las imágenes dentro de .box */
+    height: 350px;
+    border-radius: 20px;
+    /* Añade esquinas redondeadas a las imágenes dentro de .box */
 }
 
-  .content h3{
+.content h3 {
     font-size: 20px;
     margin-bottom: 10px;
+}
 
-  }
-
-  .content{
+.content {
     color: #030303;
     font-size: 20px;
     text-align: center;
-  }
+}
 
 .box-1:hover,
 .box-2:hover,
 .box-3:hover {
-  transform: scale(1.05); /* Ajusta el valor para el ancho aumentado al pasar el ratón */
+    transform: scale(1.05);
+    /* Ajusta el valor para el ancho aumentado al pasar el ratón */
 }
 
-  /*todo esto es para hacer el footer que va en la parte de abajo*/
+
+/*todo esto es para hacer el footer que va en la parte de abajo*/
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-body{
-	line-height: 1.5;
-	
-}
-*{
-	margin:0;
-	padding:0;
-	box-sizing: border-box;
-}
-.container{
-	max-width: 1170px;
-	margin:auto;
-}
-.row{
-	display: flex;
-	flex-wrap: wrap;
-}
-ul{
-	list-style: none;
+body {
+    line-height: 1.5;
 }
 
-.footer{
-	background-color: #323741;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1170px;
+    margin: auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul {
+    list-style: none;
+}
+
+.footer {
+    background-color: #323741;
     margin-top: 70px;
     padding: 70px 0;
 }
-.footer-col{
-   width: 25%;
-   padding: 0 15px;
+
+.footer-col {
+    width: 25%;
+    padding: 0 15px;
 }
-.footer-col h4{
-	font-size: 18px;
-	color: #ffffff;
-	text-transform: capitalize;
-	margin-bottom: 35px;
-	font-weight: 500;
-	position: relative;
+
+.footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
 }
-.footer-col h4::before{
-	content: '';
-	position: absolute;
-	left:0;
-	bottom: -10px;
-	background-color: #e91e63;
-	height: 2px;
-	box-sizing: border-box;
-	width: 50px;
+
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #e91e63;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
 }
-.footer-col ul li:not(:last-child){
-	margin-bottom: 10px;
+
+.footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
 }
-.footer-col ul li a{
-	font-size: 16px;
-	text-transform: capitalize;
-	color: #ffffff;
-	text-decoration: none;
-	font-weight: 300;
-	color: #bbbbbb;
-	display: block;
-	transition: all 0.3s ease;
+
+.footer-col ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbbbbb;
+    display: block;
+    transition: all 0.3s ease;
 }
-.footer-col ul li a:hover{
-	color: #ffffff;
-	padding-left: 8px;
+
+.footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px;
 }
-.footer-col .social-links a{
-	display: inline-block;
-	height: 40px;
-	width: 40px;
-	background-color: rgba(255,255,255,0.2);
-	margin:0 10px 10px 0;
-	text-align: center;
-	line-height: 40px;
-	border-radius: 50%;
-	color: #ffffff;
-	transition: all 0.5s ease;
+
+.footer-col .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
 }
-.footer-col .social-links a:hover{
-	color: #24262b;
-	background-color: #ffffff;
+
+.footer-col .social-links a:hover {
+    color: #24262b;
+    background-color: #ffffff;
 }
+
 
 /*responsive*/
-@media(max-width: 767px){
-  .footer-col{
-    width: 50%;
-    margin-bottom: 30px;
-}
+
+@media(max-width: 767px) {
+    .footer-col {
+        width: 50%;
+        margin-bottom: 30px;
+    }
 }
 
-@media(max-width: 574px){
-  .footer-col{
-    width: 100%;
+@media(max-width: 574px) {
+    .footer-col {
+        width: 100%;
+    }
 }
-}
-  
-  .btn-comprar {
+
+.btn-comprar {
     display: inline-block;
-    width: 100%; 
-    padding: 10px 0; 
-    background-color: #ffffff; 
-    color: #3498db; 
+    width: 100%;
+    padding: 10px 0;
+    background-color: #ffffff;
+    color: #3498db;
     text-decoration: none;
     font-size: 16px;
-    border: 2px solid #3498db; 
+    border: 2px solid #3498db;
     border-radius: 5px;
     margin-top: 10px;
 }
 
 .btn-comprar:hover {
-    background-color: #f1c40f; 
-    color: #ffffff; 
-    border: 2px solid #f1c40f; 
+    background-color: #f1c40f;
+    color: #ffffff;
+    border: 2px solid #f1c40f;
 }
 
-  @media (max-width:991px){
-    .menu{
+@media (max-width:991px) {
+    .menu {
         padding: 20px;
     }
-
-    .menu label{
+    .menu label {
         display: initial;
     }
-
-    .menu .navbar{
+    .menu .navbar {
         position: absolute;
         top: 100%;
         left: 0;
@@ -414,50 +432,39 @@ ul{
         background-color: #030303;
         display: none;
     }
-
-    .menu .navbar ul li{
+    .menu .navbar ul li {
         width: 100%;
     }
-
-    .btn-1{
+    .btn-1 {
         display: none;
     }
-
-    #menu:checked ~ .navbar{
+    #menu:checked~.navbar {
         display: initial;
     }
-
-    .header-content{
+    .header-content {
         flex-direction: column;
         padding: 180px 30px 30px 30px;
     }
-
-    .header-1{
+    .header-1 {
         width: 100%;
         align-items: center;
     }
-
-    .header-2{
+    .header-2 {
         width: 100%;
         text-align: center;
     }
-
-    .movies{
-        padding: 30px; /* 80px se puede modificar las imagenes de las peliculas en celular*/
-
+    .movies {
+        padding: 30px;
+        /* 80px se puede modificar las imagenes de las peliculas en celular*/
     }
-    
-    .footer{
+    .footer {
         margin-top: 30px;
         padding: 30px;
         flex-direction: column;
         text-align: center;
     }
-
-    .footer ul{
+    .footer ul {
         margin-top: 15px;
         justify-content: center;
     }
-
-
-  }
+}

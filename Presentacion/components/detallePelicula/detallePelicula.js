@@ -20,6 +20,11 @@ app.controller("detallePeliculaController", function($scope, $sce) {
     $scope.ciudad = $scope.params.get('ciudad');
     $scope.complejo = $scope.params.get('complejo');
 
+    const btnback = document.getElementById("btn-next3");
+    btnback.addEventListener("click", e => {
+        window.location.href = `../cine/cine.html`;
+    })
+
     const btnnext = document.getElementById("btn-next2");
     btnnext.addEventListener("click", e => {
         if ($scope.id_funcion && $scope.usuario) {

@@ -13,7 +13,9 @@
 <body ng-controller="cineController">
     <header class="header">
         <div class="menu container">
-            <a href="#" class="logo">Hipercine</a>
+            <div class="logo">
+                <img id="img-header" src="/Presentacion/Imagenes/logoblanco.png" alt="">
+            </div>
             <input type="checkbox" id="menu" />
             <label for="menu">
         <img src="../../Imagenes/menu.png" class="menu-icono" alt="menu">
@@ -26,7 +28,7 @@
                 </ul>
 
             </nav>
-            <a href='../login/login.component.html' ; class="btn-1"> Login</a>
+            <a href='../login/login.component.html' ; class="btn-1">Login</a>
         </div>
     </header>
 
@@ -34,45 +36,52 @@
         <div class="container-carousel">
             <div class="carruseles" id="slider">
                 <section class="slider-section">
-                    <img src="../../Imagenes/multiverso.jpg">
+                    <img src="../../Imagenes/pel1sli.png">
                 </section>
                 <section class="slider-section">
-                    <img src="../../Imagenes/toy.jpg">
+                    <img src="../../Imagenes/slider2pel.png">
                 </section>
                 <section class="slider-section">
-                    <img src="../../Imagenes/bg.jpg">
+                    <img src="../../Imagenes/slider3pel.png">
                 </section>
                 <section class="slider-section">
-                    <img src="../../Imagenes/multiverso.jpg">
+                    <img src="../../Imagenes/slider4pel.png">
                 </section>
                 <section class="slider-section">
-                    <img src="../../Imagenes/toy.jpg">
+                    <img src="../../Imagenes/pel1sli.png">
                 </section>
                 <section class="slider-section">
-                    <img src="../../Imagenes/bg.jpg">
+                    <img src="../../Imagenes/slider2pel.png">
                 </section>
                 <section class="slider-section">
-                    <img src="../../Imagenes/multiverso.jpg">
+                    <img src="../../Imagenes/slider3pel.png">
                 </section>
                 <section class="slider-section">
-                    <img src="../../Imagenes/toy.jpg">
+                    <img src="../../Imagenes/slider4pel.png">
                 </section>
                 <section class="slider-section">
-                    <img src="../../Imagenes/bg.jpg">
+                    <img src="../../Imagenes/pel1sli.png">
                 </section>
                 <section class="slider-section">
-                    <img src="../../Imagenes/toy.jpg">
+                    <img src="../../Imagenes/slider2pel.png">
                 </section>
-                
+
             </div>
             <div class="btn-left"><i class='bx bx-chevron-left'></i></div>
             <div class="btn-right"><i class='bx bx-chevron-right'></i></div>
         </div>
     </section>
 
+    <section class="ads">
+        <div class="ad-images">
+            <img id="img-ad1" src="/Presentacion/Imagenes/cartel1.png" alt="">
+            <img id="img-ad2" src="/Presentacion/Imagenes/cartel2.png" alt="">
+        </div>
+    </section>
+
     <section class="combobox">
         <h2>Ciudad y Complejo</h2>
-       
+
         <select ng-model="ciudad" ng-change="changeCiudad()" name="ciudad" id="selectCiudad">
             <option value="{{ciudad.nombre}}" ng-repeat="ciudad in ciudades">{{ciudad.nombre}}</option>
         </select>
@@ -82,7 +91,7 @@
 
     </section>
 
-  
+
 
     <section class="movies container">
         <h2>Peliculas de Estreno</h2>
@@ -92,7 +101,9 @@
                 <div class="release">Estreno</div>
                 <div class="content">
                     <img ng-attr-id="{{'linkImagen1'+pelicula.id_pelicula}}" ng-attr-src="{{pelicula.imagen_portada}}" alt="">
-                    <h1 ng-attr-id="{{'nombrePelicula1'+pelicula.id_pelicula}}">{{pelicula.nombre_pelicula}}</h1>
+                    <div class="title-movie">
+                        <h1 ng-attr-id="{{'nombrePelicula1'+pelicula.id_pelicula}}">{{pelicula.nombre_pelicula}}</h1>
+                    </div>
                     <script ng-attr-id="{{'precioEntrada1'+pelicula.id_pelicula}}" type="text/plain">10</script>
                     <a href="#" class="btn-comprar" ng-click="getValores('nombrePelicula1'+pelicula.id_pelicula, 'precioEntrada1'+pelicula.id_pelicula, 'linkImagen1'+pelicula.id_pelicula, pelicula.id_pelicula)">Comprar</a>
                 </div>
@@ -140,7 +151,7 @@
                 </div>
             </div>
         </div>
-   </footer>
+    </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="cine.js"></script>

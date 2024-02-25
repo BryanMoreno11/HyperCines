@@ -10,6 +10,12 @@ const btnSignIn = document.getElementById("sign-in");
 const btnSignUp = document.getElementById("sign-up");
 const formRegister = document.querySelector(".register");
 const formLogin = document.querySelector(".login");
+const btnVolver = document.getElementById("back-in");
+
+btnVolver.addEventListener("click", e => {
+    window.location.href = `../cine/cine.html`;
+})
+
 
 btnSignIn.addEventListener("click", e => {
     formRegister.classList.add("hide");

@@ -13,17 +13,21 @@ body {
     color: #ffffff;
 }
 
+#img-header {
+    width: 190px;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .header {
-    background-image: url(../../Imagenes/telon-fondo-textura-muro-hormigon-solido.jpg);
+    background-color: black;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 10vh;
+    min-height: 14vh;
     align-items: center;
 }
 
@@ -35,14 +39,12 @@ body {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.66);
     border-radius: 15px;
     overflow: hidden;
-  
 }
 
 .carruseles {
     width: 1000%;
     height: 100%;
     display: flex;
-
 }
 
 .slider-section {
@@ -69,7 +71,7 @@ body {
     font-weight: 600;
     cursor: pointer;
     color: #ffffff81;
-    transform: translate(0,-50%);
+    transform: translate(0, -50%);
     transition: .5s ease;
     user-select: none;
 }
@@ -116,7 +118,7 @@ body {
 }
 
 .menu .navbar ul li a:hover {
-    color: #ff2f28;
+    color: #f1c40f;
 }
 
 #menu {
@@ -167,8 +169,8 @@ body {
 .btn-1 {
     display: inline-block;
     padding: 7px 20px;
-    background-color: #ff2f28;
-    color: #ffffff;
+    background-color: #ffc404;
+    color: black;
     font-size: 20px;
 }
 
@@ -188,7 +190,6 @@ body {
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 body {
     line-height: 1.5;
-  
 }
 
 * {
@@ -299,19 +300,32 @@ ul {
     background-color: #24262B;
     padding: 50px;
     text-align: center;
-    border: 1px solid #24262B;;;
+    border: 1px solid #24262B;
+    ;
+    ;
     border-radius: 5px;
     margin-bottom: 20px;
 }
 
 #empresa {
-    background-color: #323741; /* Color de fondo para la sección empresa */
+    background-color: #323741;
+    /* Color de fondo para la sección empresa */
 }
+
 #vision {
-    background-color: #323741; /* Color de fondo para la sección empresa */
+    background-color: #323741;
+    /* Color de fondo para la sección empresa */
+}
+
+.about__image_mis {
+    width: 550px;
+    margin-left: 30px;
+    border: 2px solid #f1c40f;
+    border-radius: 16px;
 }
 
 .section__title {
+    font-weight: 100;
     font-size: 2rem;
     margin-bottom: 20px;
 }
@@ -329,15 +343,22 @@ ul {
 }
 
 .about__content {
+    font-family: Arial, Helvetica, sans-serif;
     display: flex;
+    font-weight: 100;
     justify-content: flex-end;
     align-items: center;
+}
+
+.about__content p {
+    margin: 10px;
 }
 
 .about__image {
     width: 550px;
     margin-right: 30px;
-    border-radius: 5px;
+    border: 2px solid #f1c40f;
+    border-radius: 16px;
 }
 
 

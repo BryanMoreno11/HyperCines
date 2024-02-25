@@ -6,6 +6,8 @@ const numImages = sliderSections.length; // Número total de imágenes
 let counter = 0; // Iniciar desde 0 para mostrar la primera imagen al principio
 const widthImg = 100 / numImages;
 let intervalID;
+const textUser = document.querySelector(".btn-1");
+verificarUsuario();
 
 btnLeft.addEventListener("click", e => {
     clearInterval(intervalID);
@@ -39,4 +41,12 @@ function moveToLeft() {
     const operacion = widthImg * counter;
     slider.style.transform = `translate(-${operacion}%)`;
     slider.style.transition = "transform ease .6s"; // Solo transición de transformación
+}
+
+function verificarUsuario() {
+    const user = localStorage.getItem("usuario");
+    if (user) {
+        textUser.textContent = "Esta logueado";
+        textUser.classList.add("logueado");
+    }
 }

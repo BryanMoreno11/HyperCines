@@ -1,5 +1,5 @@
 var app = angular.module("cine", []);
-app.controller("cineController", function($scope) {
+app.controller("cineController", function($scope, $timeout) {
     //variables
     $scope.ciudades = [];
     $scope.ciudad = "";
@@ -54,7 +54,6 @@ app.controller("cineController", function($scope) {
             $scope.peliculas = [];
         }
     }
-
 });
 //Conexión con el Backend   
 async function cargarCiudades() {
@@ -81,10 +80,13 @@ const btnLeft = document.querySelector(".btn-left");
 const btnRight = document.querySelector(".btn-right");
 const slider = document.querySelector("#slider");
 const sliderSections = document.querySelectorAll(".slider-section");
+const textUser = document.querySelector(".btn-1");
 const numImages = sliderSections.length; // Número total de imágenes
 let counter = 0; // Iniciar desde 0 para mostrar la primera imagen al principio
 const widthImg = 100 / numImages;
 let intervalID;
+
+verificarUsuario();
 
 btnLeft.addEventListener("click", e => {
     clearInterval(intervalID);
@@ -118,4 +120,12 @@ function moveToLeft() {
     const operacion = widthImg * counter;
     slider.style.transform = `translate(-${operacion}%)`;
     slider.style.transition = "transform ease .6s"; // Solo transición de transformación
+}
+
+function verificarUsuario() {
+    const user = localStorage.getItem("usuario");
+    if (user) {
+        textUser.textContent = "Esta logueado";
+        textUser.classList.add("logueado");
+    }
 }

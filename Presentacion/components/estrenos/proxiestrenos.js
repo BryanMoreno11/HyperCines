@@ -9,6 +9,8 @@ app.controller("proxiEstrenoController", function($scope) {
     });
 
 });
+const textUser = document.querySelector(".btn-1");
+verificarUsuario();
 //métodos    
 async function cargarPeliculasEstreno() {
     const response = await fetch('http://localhost:3000/api/peliculas/proximo');
@@ -33,7 +35,7 @@ btnLeft.addEventListener("click", e => {
 
 btnRight.addEventListener("click", e => {
     clearInterval(intervalID);
-    moveToRight();
+    moveToRight();;
 });
 
 intervalID = setInterval(() => {
@@ -58,4 +60,14 @@ function moveToLeft() {
     const operacion = widthImg * counter;
     slider.style.transform = `translate(-${operacion}%)`;
     slider.style.transition = "transform ease .6s"; // Solo transición de transformación
+}
+
+
+
+function verificarUsuario() {
+    const user = localStorage.getItem("usuario");
+    if (user) {
+        textUser.textContent = "Esta logueado";
+        textUser.classList.add("logueado");
+    }
 }
