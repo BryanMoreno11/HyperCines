@@ -101,6 +101,7 @@ header{
     display: block;
     position: relative;
     transition: color 300ms;
+    text-decoration: none;
 }
 
 .options__menu a:hover{
@@ -161,4 +162,5 @@ a.selected{
         left: -80px;
     }
 }
+
 

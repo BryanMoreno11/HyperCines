@@ -101,6 +101,7 @@ header{
     display: block;
     position: relative;
     transition: color 300ms;
+    text-decoration: none;
 }
 
 .options__menu a:hover{
@@ -112,6 +113,7 @@ header{
     display: flex;
     align-items: center;
     position: relative;
+    border-bottom: none;
 }
 
 .options__menu .option i{

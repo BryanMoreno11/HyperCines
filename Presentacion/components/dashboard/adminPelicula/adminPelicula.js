@@ -101,3 +101,5 @@ async function eliminarPelicula(id_pelicula) {
             }
         }
     });
+
+ 
