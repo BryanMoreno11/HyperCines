@@ -209,6 +209,32 @@ app.controller("compraController", function($scope) {
                 setTimeout(function() {
                     getReservaFull(id_reserva).then(function(response) {
                         $scope.reserva_full = response[0];
+                        let params = {
+                            asientos: $scope.reserva_full.asientos,
+                            cantidad: $scope.reserva_full.cantidad,
+                            cedula: $scope.reserva_full.cedula,
+                            ciudad: $scope.reserva_full.ciudad,
+                            clasificacion: $scope.reserva_full.clasificacion,
+                            cliente_nombre_apellido: $scope.reserva_full.cliente_nombre_apellido,
+                            codigo_reserva: $scope.reserva_full.codigo_reserva,
+                            complejo: $scope.reserva_full.complejo,
+                            correo: $scope.reserva_full.correo,
+                            duracion: $scope.reserva_full.duracion,
+                            fecha_funcion: $scope.reserva_full.fecha_funcion,
+                            fecha_reserva: $scope.reserva_full.fecha_reserva,
+                            hora_funcion: $scope.reserva_full.hora_funcion,
+                            id_funcion: $scope.reserva_full.id_funcion,
+                            id_reserva: $scope.reserva_full.id_reserva,
+                            id_usuario: $scope.reserva_full.id_usuario,
+                            nombre_pelicula: $scope.reserva_full.nombre_pelicula,
+                            precio_entrada: $scope.reserva_full.precio_entrada,
+                            sala: $scope.reserva_full.sala,
+                            telefono: $scope.reserva_full.telefono,
+                            total: $scope.reserva_full.total,
+                        }
+                        enviarCorreoPrueba(params).then(function(response) {
+                            console.log("El correo se envio");
+                        })
                         console.log($scope.reserva_full);
                         console.log("la respuesta es", response);
                         window.alert("Compra exitosa");
@@ -220,6 +246,7 @@ app.controller("compraController", function($scope) {
         }
     });
 
+
     function generarCodigoReserva(id_funcion, id_usuario) {
         let codigo_reserva = String((new Date()).getTime());
         codigo_reserva = codigo_reserva.slice(-4);
@@ -228,6 +255,24 @@ app.controller("compraController", function($scope) {
 });
 
 //--------------------------------------------Backend-------------------------------------------------
+
+async function enviarCorreoPrueba(paramms) {
+    const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(paramms)
+    };
+    try {
+        const response = await fetch('http://localhost:3000/api/correo/', options);
+        const responseData = await response.json();
+        console.log(responseData);
+        return { ok: response.ok, responseData };
+    } catch (error) {
+        console.log(error);
+        throw new Error('Error al llamar al backend');
+    }
+}
+
 async function getCapacidad() {
     const response = await fetch(`http://localhost:3000/api/reserva/capacidad/${id_funcion}`);
     const data = await response.json();
