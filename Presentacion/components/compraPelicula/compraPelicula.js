@@ -31,12 +31,18 @@ app.controller("compraController", function($scope) {
     $scope.seat_aux;
     $scope.posicion_aux;
     $scope.reserva_full;
+    $scope.usuario;
     //Llamadas
     getFuncion().then(function(response) {
         $scope.funcion = response[0];
         $scope.precio_total = $scope.funcion.precio;
         console.log($scope.funcion);
-    })
+    });
+
+    getUsuario(id_usuario).then(function(response) {
+        $scope.usuario = response;
+        console.log("el usuario es", $scope.usuario);
+    });
 
     getCapacidad().then(function(response) {
         $scope.capacidad = response[0].capacidad_sala;
@@ -173,7 +179,6 @@ app.controller("compraController", function($scope) {
     });
 
     btnVolverPay.addEventListener("click", e => {
-        window.alert("Ahora estas volviando a  las entradas");
         frmPayMethods.classList.remove("show");
         frmPayMethods.classList.add("hide");
         frmSeats.classList.remove("hide");
@@ -235,13 +240,25 @@ app.controller("compraController", function($scope) {
                         enviarCorreoPrueba(params).then(function(response) {
                             console.log(response);
                         })
+                        Swal.fire({
+                            title: "Compra éxitosa",
+                            icon: "success",
+                            text: "Se acaba de enviar un pdf a su correo con el código y datos de compra"
+                        }).then(function() {
+                            window.location.href = "../cine/cine.html"
+                        });
                         console.log($scope.reserva_full);
                         console.log("la respuesta es", response);
-                        window.alert("Compra exitosa");
 
                     });
                 }, 100);
 
+            });
+        } else {
+            Swal.fire({
+                title: "Error!",
+                text: `Ingrese una tarjeta de crédito válida`,
+                icon: "error"
             });
         }
     });
@@ -325,6 +342,12 @@ async function insertarDetalleReserva(detalleReserva) {
 
 async function getReservaFull(id_reserva) {
     const response = await fetch(`http://localhost:3000/api/reserva/full/${id_reserva}`);
+    const data = await response.json();
+    return data;
+}
+
+async function getUsuario(id_usuario) {
+    const response = await fetch(`http://localhost:3000/api/usuario/${id_usuario}`);
     const data = await response.json();
     return data;
 }

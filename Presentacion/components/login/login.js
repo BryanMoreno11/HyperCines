@@ -32,10 +32,21 @@ document.getElementById("registro").addEventListener("submit", async e => {
     const data = Object.fromEntries(new FormData(e.target));
     console.log(data);
     const response = await registrarUsuario(data);
+    console.log(response);
+    id_usuario = response.responseData.id_usuario;
+    console.log(id_usuario);
     if (response.ok) {
+        localStorage.setItem("usuario", String(id_usuario));
         Swal.fire({
             title: "Registro éxitoso",
             icon: "success"
+        }).then(function() {
+            if (id_funcion) {
+                window.location.href = `../compraPelicula/compraPelicula.html?id_funcion=${id_usuario}&id_usuario=${id_usuario}`;
+            } else {
+                window.location.href = `../cine/cine.html`;
+
+            }
         });
     } else {
         Swal.fire({

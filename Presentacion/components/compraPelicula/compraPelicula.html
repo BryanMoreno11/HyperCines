@@ -140,9 +140,9 @@
                     <div class="costumer-info">
                         <p id="titleCostumer">Datos de quien retira las entradas</p>
                         <b>Nombre:</b>
-                        <p>Daniel Zambrano</p>
+                        <p>{{usuario.nombre}} {{usuario.apellido}}</p>
                         <b>Cedula:</b>
-                        <p>0701234567</p>
+                        <p>{{usuario.cedula}}</p>
                     </div>
                     <div class="information-view">
                         <div class="payment-info">
@@ -155,13 +155,13 @@
                                         <option value="MASTER CARD">MASTER CARD</option>
                                     </select>
                             </div>
-                            <div class="cedula">
-                                <p>Cedula:</p>
-                                <input type="text" required pattern="[0-9]+" minlength="10"></input>
+                            <div class="tarjeta">
+                                <p>Número de tarjeta:</p>
+                                <input type="text" required></input>
                             </div>
                             <div class="code-card-back">
                                 <p>Código de seguridad:</p>
-                                <input required pattern="\d{6}" type="text"></input>
+                                <input required pattern="\d{3}" type="text"></input>
                             </div>
                             <div class="card-year">
                                 <p>Anio</p>
