@@ -16,6 +16,11 @@ btnVolver.addEventListener("click", e => {
     window.location.href = `../cine/cine.html`;
 })
 
+function volver() {
+    console.log("XD");
+    window.location.href = `../cine/cine.html`;
+
+}
 
 btnSignIn.addEventListener("click", e => {
     formRegister.classList.add("hide");
