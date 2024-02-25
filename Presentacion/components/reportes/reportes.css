@@ -1,0 +1,31 @@
+button {
+    background-color: #4CAF50;
+    /* Color de fondo */
+    border: none;
+    /* Quita el borde */
+    color: white;
+    /* Color del texto */
+    padding: 15px 32px;
+    /* Espacio interior */
+    text-align: center;
+    /* Alineación del texto */
+    text-decoration: none;
+    /* Quita la decoración de texto */
+    display: inline-block;
+    /* Hace que el botón se comporte como un elemento en línea */
+    font-size: 16px;
+    /* Tamaño del texto */
+    margin: 4px 2px;
+    /* Margen exterior */
+    cursor: pointer;
+    /* Cambia el cursor al pasar por encima */
+    border-radius: 10px;
+    /* Bordes redondeados */
+    transition-duration: 0.4s;
+    /* Duración de la transición */
+}
+
+button:hover {
+    background-color: #45a049;
+    /* Cambia el color de fondo al pasar el ratón */
+}
