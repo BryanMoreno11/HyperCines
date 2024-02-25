@@ -11,6 +11,8 @@
 </head>
 
 <body ng-controller="adminFuncionController" id="body">
+    <!-- Botón de inserción -->
+
     <header>
         <div class="icon__menu">
             <i class="fas fa-bars" id="btn_open"></i>
@@ -24,25 +26,25 @@
             <h4>Hypercines</h4>
         </div>
 
-        <div class="options__menu">	
+        <div class="options__menu">
 
-            <a href="../adminPelicula/adminPelicula.html" >
+            <a href="../adminPelicula/adminPelicula.html">
                 <div class="option">
-                    <i class="fas fa-home" title="Inicio"></i>
+                    <i class="fa fa-film" title="Inicio"></i>
                     <h4>Inicio</h4>
                 </div>
             </a>
 
-            <a href="../adminFuncion/adminFuncion.html">
+            <a href="../adminFuncion/adminFuncion.html" class="selected">
                 <div class="option">
-                    <i class="far fa-file" title="Portafolio"></i>
+                    <i class="fa fa-ticket" title="Portafolio"></i>
                     <h4>Portafolio</h4>
                 </div>
             </a>
-            
+
             <a href="#">
                 <div class="option">
-                    <i class="fas fa-video" title="Cursos"></i>
+                    <i class="fa fa-home" title="Cursos"></i>
                     <h4>Cursos</h4>
                 </div>
             </a>
@@ -72,7 +74,8 @@
 
     </div>
 
-    <!-- Botón de inserción -->
+
+
     <button onclick="location.href='../../editFuncion/editFuncion.html'" class="btn btn-primary">Insertar</button>
 
     <div ng-view></div>
