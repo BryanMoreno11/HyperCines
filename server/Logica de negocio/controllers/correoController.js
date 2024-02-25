@@ -1,6 +1,7 @@
 const pdfMake = require('pdfmake/build/pdfmake'); // Importa pdfmake
 const pdfFonts = require('pdfmake/build/vfs_fonts'); // Importa pdfmake
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+const nodeMailer = require('nodemailer');
 const { Resend } = require('resend');
 const resend = new Resend('re_WwuHKvU2_JTbUSKJMktJiGMT4je28fvRX');
 
@@ -124,19 +125,41 @@ async function enviarCorreoPrueba(req, res) {
         `;
     try {
         const pdfBuffer = await generatePdf(pdfDefinition);
-        await resend.emails.send({
-            from: 'onboarding@resend.dev',
+        let config = nodeMailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            auth: {
+                user: 'hypercinesec@gmail.com',
+                pass: 'kylk tyul ergl ezjs',
+            }
+        });
+        const opciones = {
+            from: 'HyperCines',
+            subject: 'Reservacion realizada correctamente',
             to: body.correo,
-            subject: 'Reserva Realizada',
+            text: 'Reservacion de prueba',
             html: htmlContent,
             attachments: [{
-                filename: 'invoice.pdf',
+                filename: 'reservacion.pdf',
                 content: pdfBuffer,
-            }, ],
-        });
-        res.status(200).send("Correo enviado correctamente");
+            }]
+        }
+        config.sendMail(opciones, function(error, result) {
+            if (error) {
+                console.log(error);
+                res.status(500).json({
+                    ok: false,
+                    msg: error,
+                })
+            } else {
+                resp.json({
+                    ok: true,
+                    msg: result,
+                })
+            }
+        })
     } catch (err) {
-        res.status(500).json({ error: "Error en el servidor" });
+        res.status(500).json({ error: "Error en el servidor del correo" });
     }
 }
 
