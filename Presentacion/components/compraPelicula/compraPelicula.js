@@ -233,7 +233,7 @@ app.controller("compraController", function($scope) {
                             total: $scope.reserva_full.total,
                         }
                         enviarCorreoPrueba(params).then(function(response) {
-                            console.log("El correo se envio");
+                            console.log(response);
                         })
                         console.log($scope.reserva_full);
                         console.log("la respuesta es", response);
