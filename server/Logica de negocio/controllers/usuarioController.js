@@ -38,7 +38,7 @@ async function verificarUsuario(req, res) {
             res.status(400).json({ message: 'Credenciales incorrectas' });
         }
     } catch (err) {
-        res.status(500).json({ error: "Eror en el servidor" });
+        res.status(500).json({ error: "Error en el servidor" });
     }
 }
 
@@ -70,8 +70,72 @@ async function getUsuarios(req, res) {
     }
 }
 
+async function getUsuario(req, res){
+    const usuarioId = req.params.id;
+    const query = 'SELECT * FROM usuario WHERE id_usuario = $1'
+
+    try{
+        const client = await pool.connect();
+        const result = await client.query(query, [usuarioId]);
+        client.release();
+        
+        if(result.rowCount > 0){
+            res.status(200).json(result.rows[0]);
+        }else {
+            res.status(404).json({ message: 'Cliente no encontrado'});
+        }
+
+    } catch(err){
+        res.status(500).json({ error: "Error en el servidor"})
+    }
+
+}
+
+async function deleteUsuario(req, res) {
+    const usuarioId = req.params.id;
+    const query = 'DELETE FROM usuario WHERE id_usuario = $1';
+    
+    try {
+        const client = await pool.connect();
+        const result = await client.query(query, [usuarioId]);
+        client.release();
+        
+        if (result.rowCount > 0) {
+            res.status(200).json({ message: 'Usuario eliminado correctamente' });
+        } else {
+            res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: "Error en el servidor" });
+    }
+}
+
+async function updateUsuario(req, res) {
+    const usuarioId = req.params.id;
+    const { nombre, apellido, cedula, telefono, correo, password, direccion } = req.body;
+    const query = 'UPDATE usuario SET nombre = $1, apellido = $2, cedula = $3, telefono = $4, correo = $5, password = $6, direccion = $7 WHERE id_usuario = $8';
+    const values = [nombre, apellido, cedula, telefono, correo, password, direccion, usuarioId];
+    
+    try {
+        const client = await pool.connect();
+        const result = await client.query(query, values);
+        client.release();
+        
+        if (result.rowCount > 0) {
+            res.status(200).json({ message: 'Usuario actualizado correctamente' });
+        } else {
+            res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+}
+
 module.exports = {
     createUsuario,
     getUsuarios,
-    verificarUsuario
+    getUsuario,
+    updateUsuario,
+    verificarUsuario,
+    deleteUsuario
 }

@@ -3,7 +3,7 @@ const pool = require("../../Enlace a Datos/database");
 async function getComplejos(req, res) {
     try {
         const client = await pool.connect();
-        const result = await client.query('select * from vista_complejo_ciudad');
+        const result = await client.query('SELECT * FROM  vista_complejo_con_ciudad');
         client.release();
         res.json(result.rows);
     } catch (err) {
@@ -13,7 +13,7 @@ async function getComplejos(req, res) {
 
 async function getComplejo(req, res) {
     const { id } = req.params;
-    const query = 'SELECT * FROM  vista_complejo_ciudad where id_complejo=$1'
+    const query = 'SELECT * FROM  vista_complejo_con_ciudad where id_complejo=$1'
     const values = [id];
     try {
         const client = await pool.connect();
@@ -88,7 +88,7 @@ async function updateComplejo(req, res) {
 
 async function deleteComplejo(req, res) {
     const { id } = req.params;
-    const query = 'DELETE FROM ciudad where id_complejo=$1'
+    const query = 'DELETE FROM complejo where id_complejo=$1'
     const values = [id];
     try {
         const client = await pool.connect();
