@@ -341,7 +341,7 @@ async function insertarDetalleReserva(detalleReserva) {
 
 async function getReservaFull(id_reserva) {
     try {
-        const response = await fetch(`https://backend-hypercine.onrender.com/api/reserva/full/${id_reserva}`);
+        const response = await fetch(`http://localhost:3000/api/reserva/full/${id_reserva}`);
         const data = await response.json();
         console.log("los datos");
         console.log(data);
