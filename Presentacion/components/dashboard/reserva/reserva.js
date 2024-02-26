@@ -46,7 +46,7 @@ app.controller("reservaController", function($scope) {
 });
 //Conexión con el Backend   
 async function cargarReservas() {
-    const response = await fetch(`http://localhost:3000/api/reservas/full`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/reservas/full`);
     const data = await response.json();
     return data;
 }

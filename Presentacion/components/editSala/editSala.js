@@ -6,7 +6,7 @@ app.controller("editSalaController", function($scope) {
     $scope.complejos;
     $scope.sala;
     let modificar
-    console.log($scope.id_sala );
+    console.log($scope.id_sala);
     cargarComplejos().then(function(response) {
         $scope.complejos = response;
         $scope.$apply();
@@ -59,13 +59,13 @@ app.controller("editSalaController", function($scope) {
 })
 
 async function cargarSala(id_sala) {
-    const response = await fetch(`http://localhost:3000/api/sala/${id_sala}`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/sala/${id_sala}`);
     const data = await response.json();
     return data;
 }
 
 async function cargarComplejos() {
-    const response = await fetch(`http://localhost:3000/api/complejos`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/complejos`);
     const data = await response.json();
     return data;
 }
@@ -77,7 +77,7 @@ async function modificarSala(data, id_sala) {
         body: JSON.stringify(data)
     };
     try {
-        const response = await fetch(`http://localhost:3000/api/sala/${id_sala}`, options);
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/sala/${id_sala}`, options);
         const responseData = await response.json();
         console.log("el ususario luego de modificar", responseData);
 
@@ -94,7 +94,7 @@ async function insertarSala(data) {
         body: JSON.stringify(data)
     };
     try {
-        const response = await fetch(`http://localhost:3000/api/sala`, options);
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/sala`, options);
         const responseData = await response.json();
         console.log("el ususario luego de insertar", responseData);
         return { ok: response.ok, responseData };

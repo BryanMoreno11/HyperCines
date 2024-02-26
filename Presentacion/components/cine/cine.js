@@ -98,13 +98,13 @@ app.controller("cineController", function($scope, $timeout) {
 });
 //Conexión con el Backend   
 async function cargarCiudades() {
-    const response = await fetch('http://localhost:3000/api/ciudades');
+    const response = await fetch('https://backend-hypercine.onrender.com/api/ciudades');
     const data = await response.json();
     return data;
 }
 
 async function cargarComplejos(ciudad) {
-    const response = await fetch(`http://localhost:3000/api/complejos/${ciudad}`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/complejos/${ciudad}`);
     const data = await response.json();
     console.log(data);
     return data;
@@ -112,14 +112,14 @@ async function cargarComplejos(ciudad) {
 }
 
 async function cargarPeliculasFuncion(ciudad, complejo) {
-    const response = await fetch(`http://localhost:3000/api/peliculas/cartelera/${ciudad}/${complejo}`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/peliculas/cartelera/${ciudad}/${complejo}`);
     const data = await response.json();
     console.log(data);
     return data;
 }
 
 async function getUsuario(id_usuario) {
-    const response = await fetch(`http://localhost:3000/api/usuario/${id_usuario}`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/usuario/${id_usuario}`);
     const data = await response.json();
     return data;
 }

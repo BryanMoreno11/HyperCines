@@ -48,7 +48,7 @@ app.controller("adminPeliculaController", function($scope) {
 });
 //Conexión con el Backend   
 async function cargarPeliculas() {
-    const response = await fetch(`http://localhost:3000/api/peliculas`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/peliculas`);
     const data = await response.json();
     return data;
 }
@@ -58,7 +58,7 @@ async function eliminarPelicula(id_pelicula) {
         method: 'DELETE'
     };
     try {
-        const response = await fetch(`http://localhost:3000/api/pelicula/${id_pelicula}`, options);
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/pelicula/${id_pelicula}`, options);
         const responseData = await response.json();
         return { ok: response.ok, responseData };
 
@@ -70,36 +70,34 @@ async function eliminarPelicula(id_pelicula) {
 
 
 
-    // Ejecutar función en el evento click
-    document.getElementById("btn_open").addEventListener("click", open_close_menu);
+// Ejecutar función en el evento click
+document.getElementById("btn_open").addEventListener("click", open_close_menu);
 
-    // Declaramos variables
-    var side_menu = document.getElementById("menu_side");
-    var body = document.getElementById("body");
+// Declaramos variables
+var side_menu = document.getElementById("menu_side");
+var body = document.getElementById("body");
 
-    // Evento para mostrar y ocultar menú
-    function open_close_menu() {
-        body.classList.toggle("body_move");
-        side_menu.classList.toggle("menu__side_move");
-    }
+// Evento para mostrar y ocultar menú
+function open_close_menu() {
+    body.classList.toggle("body_move");
+    side_menu.classList.toggle("menu__side_move");
+}
 
-    // Si el ancho de la página es menor a 760px, ocultará el menú al recargar la página
-    if (window.innerWidth < 760) {
-        body.classList.add("body_move");
-        side_menu.classList.add("menu__side_move");
-    }
+// Si el ancho de la página es menor a 760px, ocultará el menú al recargar la página
+if (window.innerWidth < 760) {
+    body.classList.add("body_move");
+    side_menu.classList.add("menu__side_move");
+}
 
-    // Haciendo el menú responsive (adaptable)
-    window.addEventListener("resize", function () {
-        if (window.innerWidth > 760) {
-            body.classList.remove("body_move");
-            side_menu.classList.remove("menu__side_move");
-        } else {
-            // Si el menú está abierto y el ancho de la página es menor a 760px, mantener el menú abierto
-            if (body.classList.contains("body_move")) {
-                side_menu.classList.add("menu__side_move");
-            }
+// Haciendo el menú responsive (adaptable)
+window.addEventListener("resize", function() {
+    if (window.innerWidth > 760) {
+        body.classList.remove("body_move");
+        side_menu.classList.remove("menu__side_move");
+    } else {
+        // Si el menú está abierto y el ancho de la página es menor a 760px, mantener el menú abierto
+        if (body.classList.contains("body_move")) {
+            side_menu.classList.add("menu__side_move");
         }
-    });
-
- 
+    }
+});

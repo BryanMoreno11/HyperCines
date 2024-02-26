@@ -53,13 +53,13 @@ app.controller("proxiEstrenoController", function($scope) {
 });
 //métodos    
 async function cargarPeliculasEstreno() {
-    const response = await fetch('http://localhost:3000/api/peliculas/proximo');
+    const response = await fetch('https://backend-hypercine.onrender.com/api/peliculas/proximo');
     const data = await response.json();
     return data;
 }
 
 async function getUsuario(id_usuario) {
-    const response = await fetch(`http://localhost:3000/api/usuario/${id_usuario}`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/usuario/${id_usuario}`);
     const data = await response.json();
     return data;
 }

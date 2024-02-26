@@ -52,11 +52,11 @@ app.controller("adminSalaController", function($scope) {
 
 // Conexión con el Backend   
 async function cargarSalas() {
-    const response = await fetch(`http://localhost:3000/api/salas`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/salas`);
     const data = await response.json();
 
     const complejoIds = data.map(sala => sala.id_complejo);
-    const complejosResponse = await fetch(`http://localhost:3000/api/complejos?ids=${complejoIds.join(',')}`);
+    const complejosResponse = await fetch(`https://backend-hypercine.onrender.com/api/complejos?ids=${complejoIds.join(',')}`);
     const complejosData = await complejosResponse.json();
 
     // Asignar nombres de complejo a cada sala
@@ -74,7 +74,7 @@ async function eliminarSala(id_sala) {
         method: 'DELETE'
     };
     try {
-        const response = await fetch(`http://localhost:3000/api/sala/${id_sala}`, options);
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/sala/${id_sala}`, options);
         const responseData = await response.json();
         return { ok: response.ok, responseData };
     } catch (error) {

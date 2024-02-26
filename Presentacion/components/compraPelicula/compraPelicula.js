@@ -279,7 +279,7 @@ async function enviarCorreoPrueba(paramms) {
         body: JSON.stringify(paramms)
     };
     try {
-        const response = await fetch('http://localhost:3000/api/correo/', options);
+        const response = await fetch('https://backend-hypercine.onrender.com/api/correo/', options);
         const responseData = await response.json();
         console.log(responseData);
         return { ok: response.ok, responseData };
@@ -290,19 +290,19 @@ async function enviarCorreoPrueba(paramms) {
 }
 
 async function getCapacidad() {
-    const response = await fetch(`http://localhost:3000/api/reserva/capacidad/${id_funcion}`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/reserva/capacidad/${id_funcion}`);
     const data = await response.json();
     return data;
 }
 
 async function getAsientosOcupados() {
-    const response = await fetch(`http://localhost:3000/api/reserva/asientos/${id_funcion}`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/reserva/asientos/${id_funcion}`);
     const data = await response.json();
     return data;
 }
 
 async function getFuncion() {
-    const response = await fetch(`http://localhost:3000/api/funcion/todo/${id_funcion}`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/funcion/todo/${id_funcion}`);
     const data = await response.json();
     return data;
 }
@@ -314,7 +314,7 @@ async function insertarReserva(reserva) {
         body: JSON.stringify(reserva)
     };
     try {
-        const response = await fetch('http://localhost:3000/api/reserva', options);
+        const response = await fetch('https://backend-hypercine.onrender.com/api/reserva', options);
         const responseData = await response.json();
         return { ok: response.ok, responseData };
 
@@ -330,7 +330,7 @@ async function insertarDetalleReserva(detalleReserva) {
         body: JSON.stringify(detalleReserva)
     };
     try {
-        const response = await fetch('http://localhost:3000/api/reserva/detalle', options);
+        const response = await fetch('https://backend-hypercine.onrender.com/api/reserva/detalle', options);
         const responseData = await response.json();
         return { ok: response.ok, responseData };
 
@@ -340,13 +340,20 @@ async function insertarDetalleReserva(detalleReserva) {
 }
 
 async function getReservaFull(id_reserva) {
-    const response = await fetch(`http://localhost:3000/api/reserva/full/${id_reserva}`);
-    const data = await response.json();
-    return data;
+    try {
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/reserva/full/${id_reserva}`);
+        const data = await response.json();
+        console.log("los datos");
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error('Error en la llamada a la API:', error);
+        throw error; // Esto propagará el error hacia arriba para que puedas manejarlo en tu código principal
+    }
 }
 
 async function getUsuario(id_usuario) {
-    const response = await fetch(`http://localhost:3000/api/usuario/${id_usuario}`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/usuario/${id_usuario}`);
     const data = await response.json();
     return data;
 }

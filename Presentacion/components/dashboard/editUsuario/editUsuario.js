@@ -4,7 +4,7 @@ app.controller("editUsuarioController", function($scope) {
     $scope.params = new URLSearchParams(document.location.search);
     $scope.id_usuario = $scope.params.get('id_usuario');
     console.log($scope.id_usuario)
-    // Variables
+        // Variables
     $scope.modificar = false;
     $scope.usuario;
 
@@ -50,7 +50,7 @@ app.controller("editUsuarioController", function($scope) {
 
 
 async function cargarUsuario(id_usuario) {
-    const response = await fetch(`http://localhost:3000/api/usuario/${id_usuario}`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/usuario/${id_usuario}`);
     const data = await response.json();
     return data;
 }
@@ -62,7 +62,7 @@ async function modificarUsuario(data, id_usuario) {
         body: JSON.stringify(data)
     };
     try {
-        const response = await fetch(`http://localhost:3000/api/usuario/${id_usuario}`, options);
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/usuario/${id_usuario}`, options);
         const responseData = await response.json();
         console.log("El usuario después de modificar", responseData);
         return { ok: response.ok, responseData };
@@ -78,7 +78,7 @@ async function insertarUsuario(data) {
         body: JSON.stringify(data)
     };
     try {
-        const response = await fetch(`http://localhost:3000/api/usuario`, options);
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/usuario`, options);
         const responseData = await response.json();
         console.log("El usuario después de insertar", responseData);
         return { ok: response.ok, responseData };

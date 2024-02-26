@@ -55,7 +55,7 @@ app.controller("adminFuncionController", function($scope) {
 });
 //Conexión con el Backend   
 async function cargarFunciones() {
-    const response = await fetch(`http://localhost:3000/api/funciones`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/funciones`);
     const data = await response.json();
     return data;
 }
@@ -65,7 +65,7 @@ async function eliminarFuncion(id_funcion) {
         method: 'DELETE'
     };
     try {
-        const response = await fetch(`http://localhost:3000/api/funcion/${id_funcion}`, options);
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/funcion/${id_funcion}`, options);
         const responseData = await response.json();
         return { ok: response.ok, responseData };
 

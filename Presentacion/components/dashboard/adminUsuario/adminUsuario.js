@@ -49,7 +49,7 @@ app.controller("adminUsuarioController", function($scope) {
 
 // Conexión con el Backend
 async function cargarUsuarios() {
-    const response = await fetch(`http://localhost:3000/api/usuarios`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/usuarios`);
     const data = await response.json();
     return data;
 }
@@ -59,7 +59,7 @@ async function eliminarUsuario(id_usuario) {
         method: 'DELETE'
     };
     try {
-        const response = await fetch(`http://localhost:3000/api/usuario/${id_usuario}`, options);
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/usuario/${id_usuario}`, options);
         const responseData = await response.json();
         return { ok: response.ok, responseData };
 

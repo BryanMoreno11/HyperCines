@@ -86,19 +86,19 @@ app.controller("editFuncionController", function($scope) {
 
 // Conexión con el backend
 async function cargarPeliculas() {
-    const response = await fetch(`http://localhost:3000/api/peliculas`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/peliculas`);
     const data = await response.json();
     return data;
 }
 
 async function cargarSalas() {
-    const response = await fetch(`http://localhost:3000/api/salas`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/salas`);
     const data = await response.json();
     return data;
 }
 
 async function cargarFuncion(id_funcion) {
-    const response = await fetch(`http://localhost:3000/api/funcion/${id_funcion}`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/funcion/${id_funcion}`);
     const data = await response.json();
     return data;
 }
@@ -110,7 +110,7 @@ async function modificarFuncion(data, id_funcion) {
         body: JSON.stringify(data)
     };
     try {
-        const response = await fetch(`http://localhost:3000/api/funcion/${id_funcion}`, options);
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/funcion/${id_funcion}`, options);
         const responseData = await response.json();
         console.log("El usuario después de modificar", responseData);
         return { ok: response.ok, responseData };
@@ -126,7 +126,7 @@ async function insertarFuncion(data) {
         body: JSON.stringify(data)
     };
     try {
-        const response = await fetch(`http://localhost:3000/api/funcion`, options);
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/funcion`, options);
         const responseData = await response.json();
         console.log("El usuario después de insertar", responseData);
         return { ok: response.ok, responseData };

@@ -88,25 +88,25 @@ app.controller("detallePeliculaController", function($scope, $sce) {
 
 
     async function enviarCorreoPrueba() {
-        const response = await fetch(`http://localhost:3000/api/correo/`);
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/correo/`);
         const data = await response.json();
         return data;
     }
 
     async function cargarDetallesPelicula() {
-        const response = await fetch(`http://localhost:3000/api/pelicula/${$scope.id_pelicula}`);
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/pelicula/${$scope.id_pelicula}`);
         const data = await response.json();
         return data;
     }
 
     async function cargarFechasPelicula() {
-        const response = await fetch(`http://localhost:3000/api/funcion/${$scope.id_pelicula}/${$scope.ciudad}/${$scope.complejo}`)
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/funcion/${$scope.id_pelicula}/${$scope.ciudad}/${$scope.complejo}`)
         const data = await response.json();
         return data;
     }
 
     async function cargarHorasFuncion() {
-        const response = await fetch(`http://localhost:3000/api/funcion/${$scope.id_pelicula}/${$scope.ciudad}/${$scope.complejo}/${$scope.selectedFecha}`)
+        const response = await fetch(`https://backend-hypercine.onrender.com/api/funcion/${$scope.id_pelicula}/${$scope.ciudad}/${$scope.complejo}/${$scope.selectedFecha}`)
         const data = await response.json();
         return data;
     }

@@ -98,7 +98,7 @@ async function registrarUsuario(data) {
         body: JSON.stringify(data)
     };
     try {
-        const response = await fetch('http://localhost:3000/api/usuario', options);
+        const response = await fetch('https://backend-hypercine.onrender.com/api/usuario', options);
         const responseData = await response.json();
         return { ok: response.ok, responseData };
 
@@ -114,7 +114,7 @@ async function verificarUsuario(data) {
         body: JSON.stringify(data)
     };
     try {
-        const response = await fetch('http://localhost:3000/api/usuario/verificar', options);
+        const response = await fetch('https://backend-hypercine.onrender.com/api/usuario/verificar', options);
         const responseData = await response.json();
         return { ok: response.ok, responseData };
 

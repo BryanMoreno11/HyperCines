@@ -406,45 +406,45 @@ async function graficarEntradasGenero() {
 
 //Conexión con el Backend
 async function recaudacionSemanal() {
-    await fetch('http://localhost:3000/api/dashboard/recaudacion')
+    await fetch('https://backend-hypercine.onrender.com/api/dashboard/recaudacion')
         .then(response => response.json())
         .then(response => recaudacion = response);
 
 }
 
 async function recaudacionPelicula() {
-    await fetch('http://localhost:3000/api/dashboard/recaudacion/pelicula')
+    await fetch('https://backend-hypercine.onrender.com/api/dashboard/recaudacion/pelicula')
         .then(response => response.json())
         .then(response => recaudacion_pelicula = response);
 
 }
 
 async function recaudacionCiudad() {
-    await fetch('http://localhost:3000/api/dashboard/recaudacion/ciudad')
+    await fetch('https://backend-hypercine.onrender.com/api/dashboard/recaudacion/ciudad')
         .then(response => response.json())
         .then(response => recaudacion_ciudad = response);
 }
 
 async function entradasSemana() {
-    await fetch('http://localhost:3000/api/dashboard/entradas')
+    await fetch('https://backend-hypercine.onrender.com/api/dashboard/entradas')
         .then(response => response.json())
         .then(response => entradas_semana = response);
 }
 
 async function entradasPelicula() {
-    await fetch('http://localhost:3000/api/dashboard/entradas/pelicula')
+    await fetch('https://backend-hypercine.onrender.com/api/dashboard/entradas/pelicula')
         .then(response => response.json())
         .then(response => entradas_pelicula = response);
 }
 
 async function entradasGenero() {
-    await fetch('http://localhost:3000/api/dashboard/entradas/genero')
+    await fetch('https://backend-hypercine.onrender.com/api/dashboard/entradas/genero')
         .then(response => response.json())
         .then(response => entradas_genero = response);
 }
 
 async function recaudacionClasificacion() {
-    await fetch('http://localhost:3000/api/dashboard/recaudacion/clasificacion')
+    await fetch('https://backend-hypercine.onrender.com/api/dashboard/recaudacion/clasificacion')
         .then(response => response.json())
         .then(response => recaudacion_clasificacion = response);
 }
