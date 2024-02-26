@@ -36,7 +36,7 @@ close.addEventListener("click", function(e) {
     localStorage.removeItem("usuario");
     menuOptions.style.display = 'none';
     verificarUsuario();
-    window.location.href = "http://127.0.0.1:5500/Presentacion/components/cine/cine.html"
+    window.location.href = "/../index.html";
 });
 
 

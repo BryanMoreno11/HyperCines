@@ -68,7 +68,7 @@ app.controller("cineController", function($scope, $timeout) {
         window.location.href = `../detallePelicula/detallePelicula.html?ciudad=${$scope.ciudad}&complejo=${$scope.complejo}&idpelicula=${idpelicula}`;
     }
     $scope.goToLogin = function() {
-        window.location.href = '/components/login/login.html';
+        window.location.href = 'index.html';
     }
 
     $scope.changeCiudad = function() {
