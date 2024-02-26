@@ -10,10 +10,73 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body id="body">
+
+    <header>
+        <div class="icon__menu">
+            <i class="fas fa-bars" id="btn_open"></i>
+        </div>
+    </header>
+
+    <div class="menu__side" id="menu_side">
+
+        <div class="name__page">
+            <i class="fa fa-video-camera"></i>
+            <h4>Hypercines</h4>
+        </div>
+
+        <div class="options__menu">
+
+            <a href="../adminPelicula/adminPelicula.html">
+                <div class="option">
+                    <i class="fa fa-film" title="Peliculas"></i>
+                    <h4>Peliculas</h4>
+                </div>
+            </a>
+
+            <a href="../adminFuncion/adminFuncion.html">
+                <div class="option">
+                    <i class="fa fa-ticket" title="Funciones"></i>
+                    <h4>Funciones</h4>
+                </div>
+            </a>
+
+            <a href="../adminSala/adminSala.html">
+                <div class="option">
+                    <i class="fa fa-home" title="Salas"></i>
+                    <h4>Salas</h4>
+                </div>
+            </a>
+
+            <a href="../reserva/reserva.html">
+                <div class="option">
+                    <i class="far fa-sticky-note" title="Reservas"></i>
+                    <h4>Reservas</h4>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="option">
+                    <i class="fa fa-user" title="Usuarios"></i>
+                    <h4>Usuarios</h4>
+                </div>
+            </a>
+
+            <a href="../reportes/reportes.html" class="selected">
+                <div class="option">
+                    <i class="fa fa-area-chart" title="Estadísticos"></i>
+                    <h4>Estadísticos</h4>
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+
+
     <button onclick="saveAsPDF()">Guardar como PDF</button>
 
     <div class="container pt-3" id="content">

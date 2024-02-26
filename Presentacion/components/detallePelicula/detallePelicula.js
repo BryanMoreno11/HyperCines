@@ -60,7 +60,7 @@ app.controller("detallePeliculaController", function($scope, $sce) {
         $scope.$apply();
         $scope.trustedUrl = $sce.trustAsResourceUrl($scope.pelicula.trailer);
         $scope.$apply();
-        console.log($scope.trustedUrl);
+        console.log($scope.pelicula.trailer);
     });
 
     cargarFechasPelicula().then(function(response) {
