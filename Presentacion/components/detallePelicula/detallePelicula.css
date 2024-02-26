@@ -341,19 +341,44 @@ body {
 }
 
 .paremeters-location .city select {
-    font-weight: bold;
-    width: 10vw;
-    padding: 15px;
-    border-radius: 0px;
+    display: inline-block;
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #f1c40f;
+    border-radius: 16px;
+    margin: 0 10px 0 0;
+    color: #f1c40f;
+    background-color: #28242c;
     appearance: none;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .paremeters-location .complejo select {
-    font-weight: bold;
-    width: 10vw;
-    padding: 15px;
-    border-radius: 0px;
+    display: inline-block;
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #f1c40f;
+    border-radius: 16px;
+    margin: 0 10px 0 0;
+    color: #f1c40f;
+    background-color: #28242c;
     appearance: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.paremeters-location .fechas select {
+    display: inline-block;
+    width: 200px;
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #f1c40f;
+    border-radius: 16px;
+    margin: 0 10px 0 0;
+    color: #f1c40f;
+    background-color: #28242c;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .paremeters-location>*>select[disabled] {

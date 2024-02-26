@@ -19,7 +19,7 @@ app.controller("detallePeliculaController", function($scope, $sce) {
     $scope.id_pelicula = $scope.params.get('idpelicula');
     $scope.ciudad = $scope.params.get('ciudad');
     $scope.complejo = $scope.params.get('complejo');
-
+    $scope.trustedUrl = "";
     const btnback = document.getElementById("btn-next3");
     btnback.addEventListener("click", e => {
         window.location.href = `../cine/cine.html`;
@@ -57,11 +57,11 @@ app.controller("detallePeliculaController", function($scope, $sce) {
 
     cargarDetallesPelicula().then(function(response) {
         $scope.pelicula = response[0];
-        $scope.$apply();
-        $scope.trustedUrl = $sce.trustAsResourceUrl($scope.pelicula.trailer);
-        $scope.$apply();
+        $scope.trustedUrl = $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + $scope.pelicula.trailer);
         console.log($scope.pelicula.trailer);
+        $scope.$apply();
     });
+
 
     cargarFechasPelicula().then(function(response) {
         $scope.fechas = response;

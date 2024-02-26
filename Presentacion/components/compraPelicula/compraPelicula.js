@@ -165,7 +165,6 @@ app.controller("compraController", function($scope) {
     });
 
     btnVolver.addEventListener("click", e => {
-        window.alert("volvio a la pantalla princial");
         frmDetails.classList.remove("hide");
         frmDetails.classList.add("show");
         frmSeats.classList.remove("show");
