@@ -47,7 +47,7 @@ document.getElementById("registro").addEventListener("submit", async e => {
             icon: "success"
         }).then(function() {
             if (id_funcion) {
-                window.location.href = `../compraPelicula/compraPelicula.html?id_funcion=${id_usuario}&id_usuario=${id_usuario}`;
+                window.location.href = `../compraPelicula/compraPelicula.html?id_funcion=${id_funcion}&id_usuario=${id_usuario}`;
             } else {
                 window.location.href = `../cine/cine.html`;
 
@@ -75,7 +75,7 @@ document.getElementById("login").addEventListener("submit", async e => {
             icon: "success"
         }).then(function() {
             if (id_funcion) {
-                window.location.href = `../compraPelicula/compraPelicula.html?id_funcion=${id_usuario}&id_usuario=${id_usuario}`;
+                window.location.href = `../compraPelicula/compraPelicula.html?id_funcion=${id_funcion}&id_usuario=${id_usuario}`;
             } else {
                 window.location.href = `../cine/cine.html`;
 

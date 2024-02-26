@@ -20,6 +20,7 @@ app.controller("editFuncionController", function($scope) {
 
     cargarSalas().then(function(response) {
         $scope.salas = response;
+        console.log($scope.salas);
         $scope.$apply();
     });
 
@@ -92,7 +93,7 @@ async function cargarPeliculas() {
 }
 
 async function cargarSalas() {
-    const response = await fetch(`http://localhost:3000/api/salas`);
+    const response = await fetch(`http://localhost:3000/api/salas/filtro`);
     const data = await response.json();
     return data;
 }

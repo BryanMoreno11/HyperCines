@@ -1,7 +1,8 @@
 const { Router } = require('express');
 const router = new Router();
-var { createSala, getSalas, deleteSala, updateSala, getSala } = require('../../Logica de negocio/controllers/salaController');
+var { createSala, getSalas, deleteSala, updateSala, getSala, getSalasFiltro } = require('../../Logica de negocio/controllers/salaController');
 router.get("/salas", getSalas);
+router.get("/salas/filtro", getSalasFiltro);
 router.get("/sala/:id", getSala);
 router.post('/sala', createSala);
 router.put('/sala/:id', updateSala);
