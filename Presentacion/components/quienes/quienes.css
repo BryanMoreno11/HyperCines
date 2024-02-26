@@ -7,6 +7,9 @@
     list-style: none;
 }
 
+
+/*header inicio*/
+
 body {
     background-color: #24262B;
     font-family: 'Bebas Neue', sans-serif;
@@ -17,9 +20,13 @@ body {
     width: 190px;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
+.header {
+    background-color: black;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 14vh;
+    align-items: center;
 }
 
 .header {
@@ -183,6 +190,44 @@ body {
     margin-top: 30px;
     color: #ffffff;
 }
+
+
+/*Estilos para el logout*/
+
+#close:hover {
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+
+/*hasta aqui*/
+
+
+/*todo lo de arriba se uso para la parte del header*/
 
 
 /*todo esto es para hacer el footer que va en la parte de abajo*/

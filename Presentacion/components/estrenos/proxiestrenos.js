@@ -1,3 +1,45 @@
+//Navbar
+const textUser = document.querySelector(".btn-1");
+const close = document.getElementById('close');
+var menuOptions = document.getElementById('menu-options');
+let usuario;
+verificarUsuario();
+
+function verificarUsuario() {
+    const user = localStorage.getItem("usuario");
+    if (user) {
+        getUsuario(user).then(function(response) {
+            console.log("la respuesta es", response)
+            textUser.textContent = response.nombre + " " + response.apellido;
+            textUser.classList.add("logueado");
+        })
+
+    } else {
+        textUser.textContent = "Iniciar Sesión";
+    }
+}
+
+textUser.addEventListener("click", function(e) {
+    const user = localStorage.getItem("usuario");
+    if (user) {
+        console.log("hay");
+        e.preventDefault();
+        if (menuOptions.style.display === 'block') {
+            menuOptions.style.display = 'none';
+        } else {
+            menuOptions.style.display = 'block';
+        }
+    }
+});
+
+close.addEventListener("click", function(e) {
+    localStorage.removeItem("usuario");
+    menuOptions.style.display = 'none';
+    verificarUsuario();
+    window.location.href = "http://127.0.0.1:5500/Presentacion/components/cine/cine.html"
+});
+
+
 var app = angular.module("proxiEstreno", []);
 app.controller("proxiEstrenoController", function($scope) {
     $scope.peliculasEstreno = [];
@@ -9,11 +51,15 @@ app.controller("proxiEstrenoController", function($scope) {
     });
 
 });
-const textUser = document.querySelector(".btn-1");
-verificarUsuario();
 //métodos    
 async function cargarPeliculasEstreno() {
     const response = await fetch('http://localhost:3000/api/peliculas/proximo');
+    const data = await response.json();
+    return data;
+}
+
+async function getUsuario(id_usuario) {
+    const response = await fetch(`http://localhost:3000/api/usuario/${id_usuario}`);
     const data = await response.json();
     return data;
 }
@@ -60,14 +106,4 @@ function moveToLeft() {
     const operacion = widthImg * counter;
     slider.style.transform = `translate(-${operacion}%)`;
     slider.style.transition = "transform ease .6s"; // Solo transición de transformación
-}
-
-
-
-function verificarUsuario() {
-    const user = localStorage.getItem("usuario");
-    if (user) {
-        textUser.textContent = "Esta logueado";
-        textUser.classList.add("logueado");
-    }
 }
