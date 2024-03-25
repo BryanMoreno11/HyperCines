@@ -92,7 +92,7 @@ async function cargarPeliculas() {
 }
 
 async function cargarSalas() {
-    const response = await fetch(`https://backend-hypercine.onrender.com/api/salas`);
+    const response = await fetch(`https://backend-hypercine.onrender.com/api/salas/filtro`);
     const data = await response.json();
     return data;
 }
