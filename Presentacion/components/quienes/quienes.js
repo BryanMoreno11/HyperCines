@@ -40,8 +40,8 @@ close.addEventListener("click", function(e) {
 });
 
 
-var app = angular.module("proxiEstreno", []);
-app.controller("proxiEstrenoController", function($scope) {
+var app = angular.module("quienes", []);
+app.controller("quienesController", function($scope) {
     $scope.peliculasEstreno = [];
     $scope.meses = [];
     $scope.usuario;
@@ -53,11 +53,7 @@ app.controller("proxiEstrenoController", function($scope) {
             $scope.$apply();
         })
     }
-    cargarPeliculasEstreno().then(function(response) {
-        $scope.peliculasEstreno = response;
-        $scope.meses = Object.keys(response);
-        $scope.$apply();
-    });
+
 
 });
 const btnLeft = document.querySelector(".btn-left");
