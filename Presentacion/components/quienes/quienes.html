@@ -35,6 +35,7 @@
             <div class="dropdown">
                 <a href='../login/login.component.html' class="btn-1">Login</a>
                 <div id="menu-options" class="dropdown-content">
+                    <a href="../dashboard/adminPelicula/adminPelicula.html" ng-if="usuario.rol=='admin'">Panel de administración</a>
                     <a id="close">Cerrar sesión</a>
                 </div>
             </div>

@@ -3,10 +3,11 @@ const textUser = document.querySelector(".btn-1");
 const close = document.getElementById('close');
 var menuOptions = document.getElementById('menu-options');
 let usuario;
+let user;
 verificarUsuario();
 
 function verificarUsuario() {
-    const user = localStorage.getItem("usuario");
+    user = localStorage.getItem("usuario");
     if (user) {
         getUsuario(user).then(function(response) {
             console.log("la respuesta es", response)
@@ -15,12 +16,12 @@ function verificarUsuario() {
         })
 
     } else {
+
         textUser.textContent = "Iniciar Sesión";
     }
 }
 
 textUser.addEventListener("click", function(e) {
-    const user = localStorage.getItem("usuario");
     if (user) {
         console.log("hay");
         e.preventDefault();
@@ -47,7 +48,14 @@ app.controller("cineController", function($scope, $timeout) {
     $scope.complejos = [];
     $scope.complejo = "";
     $scope.peliculas = [];
+    $scope.usuario;
     //llamadas
+    if (user) {
+        getUsuario(user).then(function(response) {
+            $scope.usuario = response
+            console.log("El usuario guardado es", response)
+        })
+    }
     cargarCiudades().then(function(response) {
         $scope.ciudades = response;
         $scope.ciudad = $scope.ciudades[0].nombre;
