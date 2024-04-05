@@ -52,8 +52,10 @@ app.controller("cineController", function($scope, $timeout) {
     //llamadas
     if (user) {
         getUsuario(user).then(function(response) {
-            $scope.usuario = response
+            $scope.usuario = response;
             console.log("El usuario guardado es", response)
+            $scope.$apply();
+
         })
     }
     cargarCiudades().then(function(response) {

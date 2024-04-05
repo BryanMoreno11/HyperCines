@@ -20,6 +20,7 @@ app.controller("editFuncionController", function($scope) {
 
     cargarSalas().then(function(response) {
         $scope.salas = response;
+        console.log($scope.salas);
         $scope.$apply();
     });
 

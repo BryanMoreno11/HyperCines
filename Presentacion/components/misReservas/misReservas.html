@@ -6,79 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="reserva.css">
+    <link rel="stylesheet" href="misReservas.css">
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
 </head>
 
 <body ng-controller="reservaController" id="body">
 
-    <header>
-        <div class="icon__menu">
-            <i class="fas fa-bars" id="btn_open"></i>
-        </div>
-    </header>
 
-    <div class="menu__side" id="menu_side">
 
-        <a class="name__page" href="../../cine/cine.html" style="color: inherit;text-decoration: none;">
-            <i class="fa fa-video-camera"></i>
-            <h4>Hypercines</h4>
-        </a>
 
-        <div class="options__menu">
-
-            <a href="../adminPelicula/adminPelicula.html">
-                <div class="option">
-                    <i class="fa fa-film" title="Peliculas"></i>
-                    <h4>Peliculas</h4>
-                </div>
-            </a>
-
-            <a href="../adminFuncion/adminFuncion.html">
-                <div class="option">
-                    <i class="fa fa-ticket" title="Funciones"></i>
-                    <h4>Funciones</h4>
-                </div>
-            </a>
-
-            <a href="../adminSala/adminSala.html">
-                <div class="option">
-                    <i class="fa fa-home" title="Salas"></i>
-                    <h4>Salas</h4>
-                </div>
-            </a>
-
-            <a href="../reserva/reserva.html" class="selected">
-                <div class="option">
-                    <i class="far fa-sticky-note" title="Reservas"></i>
-                    <h4>Reservas</h4>
-                </div>
-            </a>
-
-            <a href="../adminUsuario/adminUsuario.html">
-                <div class="option">
-                    <i class="fa fa-user" title="Usuarios"></i>
-                    <h4>Usuarios</h4>
-                </div>
-            </a>
-
-            <a href="../reportes/reportes.html">
-                <div class="option">
-                    <i class="fa fa-area-chart" title="Estadísticos"></i>
-                    <h4>Estadísticos</h4>
-                </div>
-            </a>
-
-            <a href="../../cine/cine.html">
-                <div class="option">
-                    <i class="fa fa-times-circle" title="Salir"></i>
-                    <h4>Salir</h4>
-                </div>
-            </a>
-
-        </div>
-
-    </div>
 
 
     <div></div>
@@ -86,20 +22,18 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Usuario</th>
                 <th scope="col">Código reserva</th>
                 <th scope="col">Fecha Función</th>
                 <th scope="col">Película</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="reserva in reservas | busqueda:searchText">
-                <td>{{reserva.cedula}}</td>
+            <tr ng-if="reservas.length>0" ng-repeat="reserva in reservas | busqueda:searchText">
                 <td>{{reserva.codigo_reserva}} </td>
                 <td>{{reserva.fecha_funcion }} {{reserva.hora_funcion }}</td>
                 <td>{{reserva.nombre_pelicula}} </td>
                 <td>
-                    <button class="btn btn-success" ng-click="abrirModal(reserva)">Ver</button>
+                    <button class="btn btn-primary" ng-click="abrirModal(reserva)">Ver</button>
                 </td>
             </tr>
         </tbody>
@@ -124,7 +58,7 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="reserva.js"></script>
+    <script src="misReservas.js"></script>
 </body>
 
 </html>

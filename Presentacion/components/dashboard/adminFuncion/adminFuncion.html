@@ -21,10 +21,10 @@
 
     <div class="menu__side" id="menu_side">
 
-        <div class="name__page">
+        <a class="name__page" href="../../cine/cine.html" style="color: inherit;text-decoration: none;">
             <i class="fa fa-video-camera"></i>
             <h4>Hypercines</h4>
-        </div>
+        </a>
 
         <div class="options__menu">
 
@@ -102,8 +102,8 @@
                 <td>{{funcion.nombre_sala}}/{{funcion.nombre_complejo}}/{{funcion.nombre_ciudad}}</td>
                 <td>{{funcion.asientos_disponibles}}</td>
                 <td>
-                    <button ng-click="irEdit(funcion.id_funcion)">Editar</button>
-                    <button ng-click="borrarFuncion(funcion.id_funcion)">Eliminar</button>
+                    <button class="btn btn-warning" ng-click="irEdit(funcion.id_funcion)">Editar</button>
+                    <button class="btn btn-danger" ng-click="borrarFuncion(funcion.id_funcion)">Eliminar</button>
                 </td>
             </tr>
         </tbody>

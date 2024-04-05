@@ -49,8 +49,8 @@ app.controller("quienesController", function($scope) {
     if (user) {
         getUsuario(user).then(function(response) {
             $scope.usuario = response;
-            console.log("El usuario guardado es", response);
             $scope.$apply();
+            console.log("El usuario guardado es", response)
         })
     }
 

@@ -68,6 +68,12 @@ async function cargarUsuario(id_usuario) {
     return data;
 }
 
+async function cargarUsuario(id_usuario) {
+    const response = await fetch(`http://localhost:3000/api/usuario/${id_usuario}`);
+    const data = await response.json();
+    return data;
+}
+
 async function eliminarUsuario(id_usuario) {
     const options = {
         method: 'DELETE'
