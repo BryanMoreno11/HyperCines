@@ -75,9 +75,11 @@
 
 
 
-    <button onclick="location.href='../editFuncion/editFuncion.html'" class="btn btn-primary">Insertar</button>
+    <button style="margin-bottom: 15px;" onclick="location.href='../editFuncion/editFuncion.html'" class="btn btn-primary">Insertar</button>
 
     <div ng-view></div>
+    <input class="form-control" type="text" ng-model="searchText" placeholder="Buscar..." style="width: 90%;">
+
     <table class="table">
         <thead>
             <tr>
@@ -89,7 +91,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="funcion in funciones">
+            <tr ng-repeat="funcion in funciones| busqueda:searchText">
                 <td>{{funcion.nombre_pelicula}}</td>
                 <td>{{funcion.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
                 <td>{{funcion.nombre_sala}}/{{funcion.nombre_complejo}}/{{funcion.nombre_ciudad}}</td>

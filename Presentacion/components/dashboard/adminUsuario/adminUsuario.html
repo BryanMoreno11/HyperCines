@@ -74,9 +74,11 @@
     </div>
 
     <!-- Botón de inserción -->
-    <button onclick="location.href='../editUsuario/editUsuario.html'" class="btn btn-primary">Insertar</button>
+    <button style="margin-bottom: 15px;" onclick="location.href='../editUsuario/editUsuario.html'" class="btn btn-primary">Insertar</button>
 
     <div ng-view></div>
+    <input class="form-control" type="text" ng-model="searchText" placeholder="Buscar..." style="width: 90%;">
+
     <table class="table">
         <thead>
             <tr>
@@ -90,7 +92,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="usuario in usuarios">
+            <tr ng-repeat="usuario in usuarios |busqueda:searchText">
                 <td>{{usuario.nombre}}</td>
                 <td>{{usuario.apellido}}</td>
                 <td>{{usuario.cedula}}</td>

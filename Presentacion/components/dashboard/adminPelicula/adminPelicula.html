@@ -74,9 +74,10 @@
     </div>
 
 
-    <button onclick="location.href='../editPelicula/editPelicula.html'" class="btn btn-primary">Insertar</button>
+    <button style="margin-bottom: 15px;" onclick="location.href='../editPelicula/editPelicula.html'" class="btn btn-primary">Insertar</button>
 
     <div ng-view></div>
+    <input class="form-control" type="text" ng-model="searchText" placeholder="Buscar..." style="width: 90%;">
     <table class="table">
         <thead>
             <tr>
@@ -88,7 +89,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="pelicula in peliculas">
+            <tr ng-repeat="pelicula in peliculas | busqueda:searchText">
                 <td>{{pelicula.nombre_pelicula}}</td>
                 <td>{{pelicula.duracion}} min</td>
                 <td> <img src="{{pelicula.imagen_portada}}" alt=""></td>

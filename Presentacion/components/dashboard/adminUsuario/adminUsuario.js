@@ -1,4 +1,22 @@
-var app = angular.module("adminUsuario", []);
+var app = angular.module("adminUsuario", []).filter("busqueda", function() {
+    return function(usuarios, searchText) {
+        let result = [];
+        if (!usuarios || !searchText) {
+            return usuarios;
+        }
+        for (let usuario of usuarios) {
+            let texto = `${usuario.nombre} ${usuario.apellido} ${usuario.cedula} ${usuario.rol}`.toLowerCase();
+            searchText = searchText.toLowerCase();
+            if (texto.indexOf(searchText) > -1) {
+                result.push(usuario);
+            }
+        }
+        if (result.length == 0) {
+            return usuarios;
+        }
+        return result;
+    };
+});
 app.controller("adminUsuarioController", function($scope) {
     //variables
     $scope.usuarios = [];

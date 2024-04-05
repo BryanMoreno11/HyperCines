@@ -1,4 +1,22 @@
-var app = angular.module("adminPelicula", []);
+var app = angular.module("adminPelicula", []).filter("busqueda", function() {
+    return function(peliculas, searchText) {
+        let result = [];
+        if (!peliculas || !searchText) {
+            return peliculas;
+        }
+        for (let pelicula of peliculas) {
+            let texto = `${pelicula.nombre_pelicula}`.toLowerCase();
+            searchText = searchText.toLowerCase();
+            if (texto.indexOf(searchText) > -1) {
+                result.push(pelicula);
+            }
+        }
+        if (result.length == 0) {
+            return peliculas;
+        }
+        return result;
+    };
+});
 app.controller("adminPeliculaController", function($scope) {
     //variables
     $scope.peliculas = [];
@@ -70,36 +88,34 @@ async function eliminarPelicula(id_pelicula) {
 
 
 
-    // Ejecutar función en el evento click
-    document.getElementById("btn_open").addEventListener("click", open_close_menu);
+// Ejecutar función en el evento click
+document.getElementById("btn_open").addEventListener("click", open_close_menu);
 
-    // Declaramos variables
-    var side_menu = document.getElementById("menu_side");
-    var body = document.getElementById("body");
+// Declaramos variables
+var side_menu = document.getElementById("menu_side");
+var body = document.getElementById("body");
 
-    // Evento para mostrar y ocultar menú
-    function open_close_menu() {
-        body.classList.toggle("body_move");
-        side_menu.classList.toggle("menu__side_move");
-    }
+// Evento para mostrar y ocultar menú
+function open_close_menu() {
+    body.classList.toggle("body_move");
+    side_menu.classList.toggle("menu__side_move");
+}
 
-    // Si el ancho de la página es menor a 760px, ocultará el menú al recargar la página
-    if (window.innerWidth < 760) {
-        body.classList.add("body_move");
-        side_menu.classList.add("menu__side_move");
-    }
+// Si el ancho de la página es menor a 760px, ocultará el menú al recargar la página
+if (window.innerWidth < 760) {
+    body.classList.add("body_move");
+    side_menu.classList.add("menu__side_move");
+}
 
-    // Haciendo el menú responsive (adaptable)
-    window.addEventListener("resize", function () {
-        if (window.innerWidth > 760) {
-            body.classList.remove("body_move");
-            side_menu.classList.remove("menu__side_move");
-        } else {
-            // Si el menú está abierto y el ancho de la página es menor a 760px, mantener el menú abierto
-            if (body.classList.contains("body_move")) {
-                side_menu.classList.add("menu__side_move");
-            }
+// Haciendo el menú responsive (adaptable)
+window.addEventListener("resize", function() {
+    if (window.innerWidth > 760) {
+        body.classList.remove("body_move");
+        side_menu.classList.remove("menu__side_move");
+    } else {
+        // Si el menú está abierto y el ancho de la página es menor a 760px, mantener el menú abierto
+        if (body.classList.contains("body_move")) {
+            side_menu.classList.add("menu__side_move");
         }
-    });
-
- 
+    }
+});
