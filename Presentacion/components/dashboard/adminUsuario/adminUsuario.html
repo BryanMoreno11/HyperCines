@@ -84,9 +84,8 @@
                 <th scope="col">Apellido</th>
                 <th scope="col">Cedula</th>
                 <th scope="col">Telefono</th>
-                <th scope="col">Direccion</th>
                 <th scope="col">Correo</th>
-                <th scope="col">Contraseña</th>
+                <th scope="col">Rol</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
@@ -96,12 +95,11 @@
                 <td>{{usuario.apellido}}</td>
                 <td>{{usuario.cedula}}</td>
                 <td>{{usuario.telefono}}</td>
-                <td>{{usuario.direccion}}</td>
                 <td>{{usuario.correo}}</td>
-                <td>{{usuario.password}}</td>
+                <td>{{usuario.rol}}</td>
                 <td>
-                    <button ng-click="irEdit(usuario.id_usuario)">Editar</button>
-                    <button ng-click="borrarUsuario(usuario.id_usuario)">Eliminar</button>
+                    <button ng-if="usuario_actual.correo!=usuario.correo" ng-click="irEdit(usuario.id_usuario)">Editar</button>
+                    <button ng-if="usuario_actual.correo!= usuario.correo" ng-click="borrarUsuario(usuario.id_usuario)">Eliminar</button>
                 </td>
             </tr>
         </tbody>
