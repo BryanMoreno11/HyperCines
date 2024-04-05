@@ -9,7 +9,7 @@ var app = angular.module("adminReserva", []).filter("busqueda", function() {
         }
         for (let reserva of reservas) {
             console.log("el nombre de la reserva", reserva.nombre_pelicula)
-            let texto = `${reserva.nombre_pelicula}`.toLowerCase();
+            let texto = `${reserva.nombre_pelicula} ${reserva.codigo_reserva}`.toLowerCase();
             searchText = searchText.toLowerCase();
             if (texto.indexOf(searchText) > -1) {
                 console.log("XD");
