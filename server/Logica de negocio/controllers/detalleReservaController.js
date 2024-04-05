@@ -32,6 +32,25 @@ async function getReserva(req, res) {
     }
 }
 
+async function getReservasUsuario(req, res) {
+    const { id } = req.params;
+    const query = "select * from vista_reserva_full where id_usuario=$1 ORDER BY  TO_DATE(fecha_funcion,'DD-MM-YYYY') ASC"
+    const values = [id];
+    try {
+        const client = await pool.connect();
+        const result = await client.query(query, values);
+        client.release();
+        res.status(200);
+        if (result.rowCount > 0) {
+            res.json(result.rows);
+        } else {
+            res.status(500).json({ message: 'No existen reservas para ese usuario' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: "Error en el servidor" });
+    }
+}
+
 async function createDetalleReserva(req, res) {
     const { id_reserva, posicion_asiento } = req.body;
     const query = 'INSERT INTO detalle_reserva (id_reserva, posicion_asiento) VALUES ($1, $2)';
@@ -93,5 +112,6 @@ module.exports = {
     getReserva,
     getAsientosOcupados,
     getCapacidadSala,
-    createDetalleReserva
+    createDetalleReserva,
+    getReservasUsuario
 }
