@@ -1,4 +1,22 @@
-var app = angular.module("adminSala", []);
+var app = angular.module("adminSala", []).filter("busqueda", function() {
+    return function(salas, searchText) {
+        let result = [];
+        if (!salas || !searchText) {
+            return salas;
+        }
+        for (let sala of salas) {
+            let texto = `${sala.nombre} ${sala.nombreComplejo}`.toLowerCase();
+            searchText = searchText.toLowerCase();
+            if (texto.indexOf(searchText) > -1) {
+                result.push(sala);
+            }
+        }
+        if (result.length == 0) {
+            return salas;
+        }
+        return result;
+    };
+});
 
 app.controller("adminSalaController", function($scope) {
     // Variables

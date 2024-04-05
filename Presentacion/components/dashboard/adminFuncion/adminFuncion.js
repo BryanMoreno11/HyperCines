@@ -1,7 +1,26 @@
-var app = angular.module("adminFuncion", []);
+var app = angular.module("adminFuncion", []).filter("busqueda", function() {
+    return function(funciones, searchText) {
+        let result = [];
+        if (!funciones || !searchText) {
+            return funciones;
+        }
+        for (let funcion of funciones) {
+            let texto = `${funcion.nombre_pelicula} ${funcion.nombre_ciudad} ${funcion.nombre_complejo} ${funcion.nombre_sala}`.toLowerCase();
+            searchText = searchText.toLowerCase();
+            if (texto.indexOf(searchText) > -1) {
+                result.push(funcion);
+            }
+        }
+        if (result.length == 0) {
+            return funciones;
+        }
+        return result;
+    };
+});
 app.controller("adminFuncionController", function($scope) {
     //variables
     $scope.funciones = [];
+    $scope.searchText = "";
     //llamadas
     listarFunciones();
     //métodos

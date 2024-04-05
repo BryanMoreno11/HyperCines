@@ -1,4 +1,22 @@
-var app = angular.module("adminPelicula", []);
+var app = angular.module("adminPelicula", []).filter("busqueda", function() {
+    return function(peliculas, searchText) {
+        let result = [];
+        if (!peliculas || !searchText) {
+            return peliculas;
+        }
+        for (let pelicula of peliculas) {
+            let texto = `${pelicula.nombre_pelicula}`.toLowerCase();
+            searchText = searchText.toLowerCase();
+            if (texto.indexOf(searchText) > -1) {
+                result.push(pelicula);
+            }
+        }
+        if (result.length == 0) {
+            return peliculas;
+        }
+        return result;
+    };
+});
 app.controller("adminPeliculaController", function($scope) {
     //variables
     $scope.peliculas = [];

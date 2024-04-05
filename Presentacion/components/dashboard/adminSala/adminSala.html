@@ -29,14 +29,14 @@
 
             <a href="../adminPelicula/adminPelicula.html">
                 <div class="option">
-                    <i class="fa fa-film" title="Inicio"></i>
+                    <i class="fa fa-film" title="Películas"></i>
                     <h4>Peliculas</h4>
                 </div>
             </a>
 
             <a href="../adminFuncion/adminFuncion.html">
                 <div class="option">
-                    <i class="fa fa-ticket" title="Portafolio"></i>
+                    <i class="fa fa-ticket" title="Funciones"></i>
                     <h4>Funciones</h4>
                 </div>
             </a>
@@ -76,9 +76,10 @@
     </div>
 
     <!-- Botón de inserción -->
-    <button onclick="location.href='../editSala/editSala.html'" class="btn btn-primary">Insertar</button>
+    <button style="margin-bottom: 15px;" onclick="location.href='../editSala/editSala.html'" class="btn btn-primary">Insertar</button>
 
     <div ng-view></div>
+    <input class="form-control" type="text" ng-model="searchText" placeholder="Buscar..." style="width: 90%;">
     <table class="table">
         <thead>
             <tr>
@@ -90,7 +91,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="sala in salas">
+            <tr ng-repeat="sala in salas | busqueda:searchText">
                 <td>{{sala.nombre}}</td>
                 <td>{{sala.nombreComplejo}}</td>
                 <!-- Mostrar el nombre del complejo en lugar del id_complejo -->
