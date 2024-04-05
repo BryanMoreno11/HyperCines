@@ -2,6 +2,15 @@ var app = angular.module("adminUsuario", []);
 app.controller("adminUsuarioController", function($scope) {
     //variables
     $scope.usuarios = [];
+    $scope.usuario_actual;
+    $scope.id_usuario_actual = localStorage.getItem("usuario");
+    if ($scope.id_usuario_actual) {
+        cargarUsuario($scope.id_usuario_actual).then(function(response) {
+            $scope.usuario_actual = response;
+            console.log("El usuario actual es ", $scope.usuario_actual);
+            $scope.$apply();
+        })
+    }
     //llamadas
     listarUsuarios();
     //métodos
@@ -50,6 +59,11 @@ app.controller("adminUsuarioController", function($scope) {
 // Conexión con el Backend
 async function cargarUsuarios() {
     const response = await fetch(`https://backend-hypercine.onrender.com/api/usuarios`);
+    const data = await response.json();
+    return data;
+}
+async function cargarUsuario(id_usuario) {
+    const response = await fetch(`http://localhost:3000/api/usuario/${id_usuario}`);
     const data = await response.json();
     return data;
 }

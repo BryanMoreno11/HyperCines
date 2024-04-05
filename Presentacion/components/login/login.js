@@ -36,6 +36,7 @@ document.getElementById("registro").addEventListener("submit", async e => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
     console.log(data);
+    data.rol = "usuario";
     const response = await registrarUsuario(data);
     console.log(response);
     id_usuario = response.responseData.id_usuario;

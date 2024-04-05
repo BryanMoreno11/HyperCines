@@ -1,9 +1,9 @@
 const pool = require('./../../Enlace a Datos/database');
 
 async function createUsuario(req, res) {
-    const { nombre, apellido, cedula, telefono, correo, password, direccion } = req.body;
-    const query = 'INSERT INTO usuario (nombre, apellido, cedula, telefono, correo, password, direccion ) VALUES ($1, $2,$3,$4,$5,$6,$7) RETURNING id_usuario';
-    const values = [nombre, apellido, cedula, telefono, correo, password, direccion];
+    const { nombre, apellido, cedula, telefono, correo, password, direccion, rol } = req.body;
+    const query = 'INSERT INTO usuario (nombre, apellido, cedula, telefono, correo, password, direccion,rol ) VALUES ($1, $2,$3,$4,$5,$6,$7,$8) RETURNING id_usuario';
+    const values = [nombre, apellido, cedula, telefono, correo, password, direccion, rol];
     if (await correoRepetido(correo) == false) {
         try {
             const client = await pool.connect();
@@ -113,9 +113,9 @@ async function deleteUsuario(req, res) {
 
 async function updateUsuario(req, res) {
     const usuarioId = req.params.id;
-    const { nombre, apellido, cedula, telefono, correo, password, direccion } = req.body;
-    const query = 'UPDATE usuario SET nombre = $1, apellido = $2, cedula = $3, telefono = $4, correo = $5, password = $6, direccion = $7 WHERE id_usuario = $8';
-    const values = [nombre, apellido, cedula, telefono, correo, password, direccion, usuarioId];
+    const { nombre, apellido, cedula, telefono, correo, password, direccion, rol } = req.body;
+    const query = 'UPDATE usuario SET nombre = $1, apellido = $2, cedula = $3, telefono = $4, correo = $5, password = $6, direccion = $7, rol=$8 WHERE id_usuario = $9';
+    const values = [nombre, apellido, cedula, telefono, correo, password, direccion, rol, usuarioId];
 
     try {
         const client = await pool.connect();
